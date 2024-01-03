@@ -32,6 +32,19 @@ namespace dotnetapp.Controllers
             return View(order);
         }
 
-        
+        public IActionResult ViewCart()
+        {
+            var cartItems = _context.Orders
+                .Where(o => o.IsCart) // Assuming there's a property like IsCart to differentiate cart items
+                .Include(o => o.Items) // Include related items
+                .FirstOrDefault();
+
+            if (cartItems == null)
+            {
+                return NotFound(); // Handle the case where the cart is empty or not found
+            }
+
+            return View("CartView", cartItems); // Pass cartItems to the CartView.cshtml
+        }
     }
 }
