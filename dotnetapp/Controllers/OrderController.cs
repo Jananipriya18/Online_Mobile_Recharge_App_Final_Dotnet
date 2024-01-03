@@ -30,5 +30,39 @@ namespace dotnetapp.Controllers
             }
             return View(order);
         }
+        [HttpPost]
+public IActionResult AddToOrder(int menuItemId)
+{
+    var menuItem = _context.MenuItems.FirstOrDefault(m => m.MenuId == menuItemId);
+    if (menuItem != null)
+    {
+        var userId = GetCurrentUserId(); // Method to get the current logged-in user's ID
+        var currentOrder = _context.Orders.FirstOrDefault(o => o.User.Id == userId && !o.IsCompleted);
+
+        if (currentOrder == null)
+        {
+            currentOrder = new Order
+            {
+                OrderDate = DateTime.Now,
+                OrderItems = new List<OrderItem>(),
+                User = _context.Users.Find(userId) // Assuming there's a User entity in your context
+            };
+            _context.Orders.Add(currentOrder);
+        }
+
+        var newOrderItem = new OrderItem
+        {
+            MenuItemId = menuItemId,
+            Order = currentOrder
+            // Other properties as needed
+        };
+
+        _context.OrderItems.Add(newOrderItem);
+        _context.SaveChanges();
     }
+
+    return RedirectToAction("Index", "Order"); // Redirect to Order Index after adding
 }
+
+
+}}

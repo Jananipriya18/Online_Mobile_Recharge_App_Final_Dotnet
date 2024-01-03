@@ -1,8 +1,9 @@
-public class OrderItem
+namespace dotnetapp.Models
 {
-    public int OrderItemId { get; set; }
-    public int MenuItemId { get; set; }
-    // Other properties as needed
-
-    public Order Order { get; set; }
+    public class OrderItem
+    {
+        public int OrderItemId { get; set; }
+        public int MenuItemId { get; set; }
+        public Order Order { get; set; }
+    }
 }
