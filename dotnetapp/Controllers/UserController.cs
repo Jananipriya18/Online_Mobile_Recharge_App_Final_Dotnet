@@ -1,27 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
+using dotnetapp.Data;
 using dotnetapp.Models;
+using System.Linq;
 
 namespace dotnetapp.Controllers
 {
     public class UserController : Controller
     {
-        // Mocked user data for demonstration purposes (replace with actual data retrieval logic)
-        private User GetMockUserData()
+        private readonly ApplicationDbContext _context;
+
+        public UserController(ApplicationDbContext context)
         {
-            return new User
-            {
-                UserId = 1,
-                Username = "exampleuser",
-                Email = "user@example.com"
-                // Add more properties as per your User model
-            };
+            _context = context;
         }
 
         // Action method to view user profile
         public IActionResult Profile()
         {
             var user = GetMockUserData(); // Replace with your logic to retrieve user data
-            
+
             if (user == null)
             {
                 return NotFound(); // Handle case where user is not found
@@ -34,7 +31,7 @@ namespace dotnetapp.Controllers
         public IActionResult Settings()
         {
             var user = GetMockUserData(); // Replace with your logic to retrieve user data
-            
+
             if (user == null)
             {
                 return NotFound(); // Handle case where user is not found
@@ -47,11 +44,27 @@ namespace dotnetapp.Controllers
         [HttpPost]
         public IActionResult UpdateSettings(User updatedUser)
         {
-            // Logic to update user settings in your database
-            // The 'updatedUser' parameter contains the modified user data from the form
+            var existingUser = _context.Users.FirstOrDefault(u => u.UserId == updatedUser.UserId);
 
-            // For demonstration, redirect to profile after settings update
-            return RedirectToAction("Profile");
+            if (existingUser == null)
+            {
+                return NotFound(); // Handle case where user is not found
+            }
+
+            // Update the user properties with the new values
+            existingUser.Username = updatedUser.Username;
+            existingUser.Email = updatedUser.Email;
+            // Update other user properties as needed
+
+            _context.SaveChanges(); // Save changes to the database
+
+            return RedirectToAction("Profile"); // Redirect to profile after settings update
+        }
+
+        // Mocked user data for demonstration purposes (replace with actual data retrieval logic)
+        private User GetMockUserData()
+        {
+            return _context.Users.FirstOrDefault(); // Replace with your logic to retrieve user data
         }
     }
 }
