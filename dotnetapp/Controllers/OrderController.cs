@@ -1,11 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Models;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore; 
 
 namespace dotnetapp.Controllers
 {
     public class OrderController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public OrderController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         // Mocked data for demonstration (replace this with database access)
         private static List<Order> orders = new List<Order>
         {
@@ -28,17 +35,36 @@ namespace dotnetapp.Controllers
             return View(order);
         }
 
-       [HttpPost]
+        [HttpPost]
     public IActionResult AddToOrder(int menuItemId)
     {
         // Retrieve the menu item based on menuItemId
-        var menuItem = _menuService.GetMenuItemById(menuItemId);
+        var menuItem = _context.Menus.FirstOrDefault(m => m.MenuId == menuItemId);
 
-        // Create an order or retrieve an existing order for the user
-        var order = _orderService.GetOrCreateOrderForCurrentUser();
+        // Retrieve or create an order for the current user
+        var userId = GetCurrentUserId(); // Implement this method to get the current user's ID
+        var order = _context.Orders.FirstOrDefault(o => o.UserId == userId && o.Status == OrderStatus.InProgress);
+
+        if (order == null)
+        {
+            order = new Order
+            {
+                UserId = userId,
+                Status = OrderStatus.InProgress,
+                OrderDate = DateTime.Now // Adjust the date as needed
+            };
+            _context.Orders.Add(order);
+        }
 
         // Add the menu item to the order
-        _orderService.AddMenuItemToOrder(order, menuItem);
+        var orderItem = new OrderItem
+        {
+            Order = order,
+            MenuItem = menuItem,
+            Quantity = 1 // You can add a quantity if needed
+        };
+        _context.OrderItems.Add(orderItem);
+        _context.SaveChanges();
 
         // Redirect back to the menu or a different view if needed
         return RedirectToAction("Index", "Menu");
@@ -46,17 +72,24 @@ namespace dotnetapp.Controllers
 
     public IActionResult ViewCart()
     {
-        // Retrieve the current user's cart or active order
-        var order = _orderService.GetActiveOrderForCurrentUser();
+        var userId = GetCurrentUserId(); // Implement this method to get the current user's ID
 
-        // Get the ordered items in the cart
-        var orderedItems = _orderService.GetOrderedItems(order);
+        // Retrieve the user's in-progress order and its items
+        var order = _context.Orders
+            .Include(o => o.OrderItems)
+            .ThenInclude(oi => oi.MenuItem)
+            .FirstOrDefault(o => o.UserId == userId && o.Status == OrderStatus.InProgress);
 
-        // Display the cart or ordered items view
-        return View(orderedItems);
+        if (order == null)
+        {
+            // If no in-progress order exists, show an empty cart or a message
+            return View("EmptyCart");
+        }
+
+        // Show the cart view with ordered items
+        return View(order.OrderItems);
+    }
     }
 }
-    }
-
 
 
