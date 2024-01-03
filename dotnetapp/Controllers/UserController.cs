@@ -1,20 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
-using FoodOrderingApp.Models;
-using FoodOrderingApp.Services;
+using dotnetapp.Models;
+using System.Collections.Generic;
 
-namespace FoodOrderingApp.Controllers
+namespace dotnetapp.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserService _userService;
-
-        public UserController(UserService userService)
+        // Mocked data for demonstration (replace this with database access)
+        private static List<User> users = new List<User>
         {
-            _userService = userService;
+            new User { UserId = 1, Username = "user1", Email = "user1@example.com" },
+            new User { UserId = 2, Username = "user2", Email = "user2@example.com" }
+        };
+
+        public IActionResult Index()
+        {
+            return View(users);
         }
 
-        // Actions for User CRUD operations
-        // Example actions: Index, Create, Edit, Delete, Details, etc.
-        // Implement these actions based on your application's requirements
+        public IActionResult Details(int id)
+        {
+            var user = users.FirstOrDefault(u => u.UserId == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        // Other CRUD actions: Create, Edit, Delete
+        // Implement these actions based on your needs
     }
 }

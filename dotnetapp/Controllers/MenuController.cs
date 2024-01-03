@@ -1,20 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
-using FoodOrderingApp.Models;
-using FoodOrderingApp.Services;
+using dotnetapp.Models;
+using System.Collections.Generic;
 
-namespace FoodOrderingApp.Controllers
+namespace dotnetapp.Controllers
 {
     public class MenuController : Controller
     {
-        private readonly MenuService _menuService;
-
-        public MenuController(MenuService menuService)
+        // Mocked data for demonstration (replace this with database access)
+        private static List<Menu> menus = new List<Menu>
         {
-            _menuService = menuService;
+            new Menu { MenuId = 1, Name = "Burger", Price = 5.99M },
+            new Menu { MenuId = 2, Name = "Pizza", Price = 8.99M }
+        };
+
+        public IActionResult Index()
+        {
+            return View(menus);
         }
 
-        // Actions for Menu CRUD operations
-        // Example actions: Index, Create, Edit, Delete, Details, etc.
-        // Implement these actions based on your application's requirements
+        public IActionResult Details(int id)
+        {
+            var menu = menus.FirstOrDefault(m => m.MenuId == id);
+            if (menu == null)
+            {
+                return NotFound();
+            }
+            return View(menu);
+        }
+
+        // Other CRUD actions: Create, Edit, Delete
+        // Implement these actions based on your needs
     }
 }
+ 

@@ -1,0 +1,25 @@
+@model IEnumerable<dotnetapp.Models.Menu>
+
+<h2>Menu</h2>
+
+<div class="row">
+    @foreach (var menuItem in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@menuItem.Name</h5>
+                    <p class="card-text">Price: $@menuItem.Price</p>
+                    <form asp-action="AddToOrder" asp-controller="Order" method="post">
+                        <input type="hidden" name="menuItemId" value="@menuItem.MenuId" />
+                        <button type="submit" class="btn btn-primary">Add to Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    <a href="@Url.Action("ViewCart", "Order")" class="btn btn-success">View Cart</a>
+</div>
