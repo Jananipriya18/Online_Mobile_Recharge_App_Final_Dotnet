@@ -1,15 +1,32 @@
-<!-- using dotnetapp.Data; 
-namespace dotnetapp.Models{
+@model dotnetapp.Models.Order
+
 <h1>Edit Order</h1>
 <form asp-action="Edit">
     <input type="hidden" asp-for="Id" />
     <div>
-        <label asp-for="CustomerName">Customer Name:</label>
-        <input asp-for="CustomerName" />
-        <span asp-validation-for="CustomerName"></span>
+        <label asp-for="Date">Date:</label>
+        <input asp-for="Date" type="date" />
+        <span asp-validation-for="Date"></span>
     </div>
     <div>
-        <button type="submit">Update Order</button>
+        <label asp-for="OrderID">Order ID:</label>
+        <input asp-for="OrderID" />
+        <span asp-validation-for="OrderID"></span>
     </div>
+    <div>
+        <label asp-for="FoodName">Food Name:</label>
+        <input asp-for="FoodName" />
+        <span asp-validation-for="FoodName"></span>
+    </div>
+    <div>
+        <label asp-for="Price">Price:</label>
+        <input asp-for="Price" />
+        <span asp-validation-for="Price"></span>
+    </div>
+    <div>
+        <label asp-for="rating">Rating:</label>
+        <input asp-for="rating" />
+        <span asp-validation-for="rating"></span>
+    </div>
+    <button type="submit">Update Order</button>
 </form>
-} --> 

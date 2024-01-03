@@ -1,22 +1,25 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using dotnetapp.Models;
+using dotnetapp.Data;
 
-namespace YourNamespace.Controllers
+namespace dotnetapp.Controllers
 {
     public class OrderController : Controller
     {
-        // Mock database for demonstration purposes
-        private static List<Order> orders = new List<Order>
-        {
-            new Order { Id = 1, CustomerName = "John Doe", FoodItem = "Burger", Price = 10.99m, OrderDate = DateTime.UtcNow },
-            new Order { Id = 2, CustomerName = "Alice Smith", FoodItem = "Pizza", Price = 15.50m, OrderDate = DateTime.UtcNow }
-        };
+        private readonly ApplicationDbContext _context;
 
-        public IActionResult Index()
+        public OrderController(ApplicationDbContext context)
         {
-            return View(orders);
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Orders.ToListAsync());
         }
 
         public IActionResult Create()
@@ -25,17 +28,26 @@ namespace YourNamespace.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Order order)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Order order)
         {
-            order.Id = orders.Count > 0 ? orders.Max(o => o.Id) + 1 : 1;
-            order.OrderDate = DateTime.UtcNow;
-            orders.Add(order);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(order);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var order = orders.FirstOrDefault(o => o.Id == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
                 return NotFound();
@@ -44,39 +56,70 @@ namespace YourNamespace.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Order order)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Order order)
         {
-            var existingOrder = orders.FirstOrDefault(o => o.Id == order.Id);
-            if (existingOrder == null)
+            if (id != order.Id)
             {
                 return NotFound();
             }
-            existingOrder.CustomerName = order.CustomerName;
-            existingOrder.FoodItem = order.FoodItem;
-            existingOrder.Price = order.Price;
-            return RedirectToAction("Index");
-        }
 
-        public IActionResult Delete(int id)
-        {
-            var order = orders.FirstOrDefault(o => o.Id == id);
-            if (order == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                try
+                {
+                    _context.Update(order);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!OrderExists(order.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
             return View(order);
         }
 
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var order = orders.FirstOrDefault(o => o.Id == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
                 return NotFound();
             }
-            orders.Remove(order);
-            return RedirectToAction("Index");
+
+            return View(order);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order != null)
+            {
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool OrderExists(int id)
+        {
+            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }

@@ -5,10 +5,11 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Customer Name</th>
-            <th>Food Item</th>
+            <th>Date</th>
+            <th>OrderID</th>
+            <th>FoodName</th>
             <th>Price</th>
-            <th>Order Date</th>
+            <th>Rating</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -17,10 +18,11 @@
         {
             <tr>
                 <td>@order.Id</td>
-                <td>@order.CustomerName</td>
-                <td>@order.FoodItem</td>
+                <td>@order.Date.ToShortDateString()</td>
+                <td>@order.OrderID</td>
+                <td>@order.FoodName</td>
                 <td>@order.Price</td>
-                <td>@order.OrderDate.ToShortDateString()</td>
+                <td>@order.rating</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@order.Id">Edit</a> |
                     <a asp-action="Delete" asp-route-id="@order.Id">Delete</a>
