@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using dotnetapp.Models;
+using dotnetapp.Data;
 
 #nullable disable
 
 namespace dotnetapp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240102155134_initial setup")]
+    [Migration("20240103025141_initial setup")]
     partial class initialsetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,7 @@ namespace dotnetapp.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("MenuItem");
+                    b.ToTable("Menus");
                 });
 
             modelBuilder.Entity("dotnetapp.Models.Order", b =>

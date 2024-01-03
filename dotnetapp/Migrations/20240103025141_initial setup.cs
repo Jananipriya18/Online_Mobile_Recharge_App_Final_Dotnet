@@ -45,7 +45,7 @@ namespace dotnetapp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MenuItem",
+                name: "Menus",
                 columns: table => new
                 {
                     MenuId = table.Column<int>(type: "int", nullable: false)
@@ -56,17 +56,17 @@ namespace dotnetapp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MenuItem", x => x.MenuId);
+                    table.PrimaryKey("PK_Menus", x => x.MenuId);
                     table.ForeignKey(
-                        name: "FK_MenuItem_Orders_OrderId",
+                        name: "FK_Menus_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "OrderId");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MenuItem_OrderId",
-                table: "MenuItem",
+                name: "IX_Menus_OrderId",
+                table: "Menus",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
@@ -78,7 +78,7 @@ namespace dotnetapp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MenuItem");
+                name: "Menus");
 
             migrationBuilder.DropTable(
                 name: "Orders");
