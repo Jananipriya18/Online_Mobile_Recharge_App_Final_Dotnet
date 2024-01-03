@@ -9,7 +9,7 @@ namespace dotnetapp.Models
         {
         }
         public DbSet<Order>Orders{ get; set; }
-        public DbSet<Menu>MenuItem{ get; set; }
+        public DbSet<Menu>Menus{ get; set; }
         public DbSet<User>Users{ get; set; }
     }
 }

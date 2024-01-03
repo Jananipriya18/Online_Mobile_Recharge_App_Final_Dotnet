@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using dotnetapp.Models;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore; 
 
 namespace dotnetapp.Controllers
 {
@@ -13,21 +14,16 @@ namespace dotnetapp.Controllers
         {
             _context = context;
         }
-        // Mocked data for demonstration (replace this with database access)
-        private static List<Order> orders = new List<Order>
-        {
-            new Order { OrderId = 1, OrderDate = DateTime.Now },
-            new Order { OrderId = 2, OrderDate = DateTime.Now.AddDays(-1) }
-        };
 
         public IActionResult Index()
         {
+            var orders = _context.Orders.ToList();
             return View(orders);
         }
 
         public IActionResult Details(int id)
         {
-            var order = orders.FirstOrDefault(o => o.OrderId == id);
+            var order = _context.Orders.FirstOrDefault(o => o.OrderId == id);
             if (order == null)
             {
                 return NotFound();
@@ -36,60 +32,61 @@ namespace dotnetapp.Controllers
         }
 
         [HttpPost]
-    public IActionResult AddToOrder(int menuItemId)
-    {
-        // Retrieve the menu item based on menuItemId
-        var menuItem = _context.Menus.FirstOrDefault(m => m.MenuId == menuItemId);
-
-        // Retrieve or create an order for the current user
-        var userId = GetCurrentUserId(); // Implement this method to get the current user's ID
-        var order = _context.Orders.FirstOrDefault(o => o.UserId == userId && o.Status == OrderStatus.InProgress);
-
-        if (order == null)
+        public IActionResult AddToOrder(int menuItemId)
         {
-            order = new Order
+            var menuItem = _context.Menus.FirstOrDefault(m => m.MenuId == menuItemId);
+            if (menuItem == null)
             {
-                UserId = userId,
-                Status = OrderStatus.InProgress,
-                OrderDate = DateTime.Now // Adjust the date as needed
+                return NotFound();
+            }
+
+            var userId = GetCurrentUserId();
+
+            var order = _context.Orders.FirstOrDefault(o => o.UserId == userId && o.Status == OrderStatus.InProgress);
+            if (order == null)
+            {
+                order = new Order
+                {
+                    UserId = userId,
+                    Status = OrderStatus.InProgress, // Define OrderStatus enum
+                    OrderDate = DateTime.Now
+                };
+                _context.Orders.Add(order);
+            }
+
+            var orderItem = new OrderItem
+            {
+                Order = order,
+                MenuItem = menuItem,
+                Quantity = 1
             };
-            _context.Orders.Add(order);
+            _context.OrderItems.Add(orderItem);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Menu");
         }
 
-        // Add the menu item to the order
-        var orderItem = new OrderItem
+        public IActionResult ViewCart()
         {
-            Order = order,
-            MenuItem = menuItem,
-            Quantity = 1 // You can add a quantity if needed
-        };
-        _context.OrderItems.Add(orderItem);
-        _context.SaveChanges();
+            var userId = GetCurrentUserId();
 
-        // Redirect back to the menu or a different view if needed
-        return RedirectToAction("Index", "Menu");
-    }
+            var order = _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.MenuItem)
+                .FirstOrDefault(o => o.UserId == userId && o.Status == OrderStatus.InProgress);
 
-    public IActionResult ViewCart()
-    {
-        var userId = GetCurrentUserId(); // Implement this method to get the current user's ID
+            if (order == null)
+            {
+                return View("EmptyCart");
+            }
 
-        // Retrieve the user's in-progress order and its items
-        var order = _context.Orders
-            .Include(o => o.OrderItems)
-            .ThenInclude(oi => oi.MenuItem)
-            .FirstOrDefault(o => o.UserId == userId && o.Status == OrderStatus.InProgress);
-
-        if (order == null)
-        {
-            // If no in-progress order exists, show an empty cart or a message
-            return View("EmptyCart");
+            return View(order.OrderItems);
         }
 
-        // Show the cart view with ordered items
-        return View(order.OrderItems);
-    }
+        private int GetCurrentUserId()
+        {
+            // Implement your logic to retrieve the current user's ID
+            return 0; // Placeholder - Replace with your logic to get the user ID
+        }
     }
 }
-
-
