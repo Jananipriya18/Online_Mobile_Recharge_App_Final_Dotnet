@@ -40,7 +40,7 @@ using System.Threading.Tasks;
 
 namespace dotnetapp.Models
 {
-    public class Order
+    public class FoodOrder
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }

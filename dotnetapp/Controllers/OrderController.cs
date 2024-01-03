@@ -8,18 +8,18 @@ using dotnetapp.Data;
 
 namespace dotnetapp.Controllers
 {
-    public class OrderController : Controller
+    public class FoodOrderController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public OrderController(ApplicationDbContext context)
+        public FoodOrderController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Orders.ToListAsync());
+            return View(await _context.FoodOrders.ToListAsync());
         }
 
         public IActionResult Create()
@@ -29,15 +29,15 @@ namespace dotnetapp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Order order)
+        public async Task<IActionResult> Create(FoodOrder foodOrder)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(order);
+                _context.Add(foodOrder);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(order);
+            return View(foodOrder);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -47,19 +47,19 @@ namespace dotnetapp.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
+            var foodOrder = await _context.FoodOrders.FindAsync(id);
+            if (foodOrder == null)
             {
                 return NotFound();
             }
-            return View(order);
+            return View(foodOrder);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Order order)
+        public async Task<IActionResult> Edit(int id, FoodOrder foodOrder)
         {
-            if (id != order.Id)
+            if (id != foodOrder.Id)
             {
                 return NotFound();
             }
@@ -68,12 +68,12 @@ namespace dotnetapp.Controllers
             {
                 try
                 {
-                    _context.Update(order);
+                    _context.Update(foodOrder);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderExists(order.Id))
+                    if (!FoodOrderExists(foodOrder.Id))
                     {
                         return NotFound();
                     }
@@ -84,7 +84,7 @@ namespace dotnetapp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(order);
+            return View(foodOrder);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -94,32 +94,32 @@ namespace dotnetapp.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
+            var foodOrder = await _context.FoodOrders.FirstOrDefaultAsync(m => m.Id == id);
+            if (foodOrder == null)
             {
                 return NotFound();
             }
 
-            return View(order);
+            return View(foodOrder);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Orders.FindAsync(id);
-            if (order != null)
+            var foodOrder = await _context.FoodOrders.FindAsync(id);
+            if (foodOrder != null)
             {
-                _context.Orders.Remove(order);
+                _context.FoodOrders.Remove(foodOrder);
                 await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrderExists(int id)
+        private bool FoodOrderExists(int id)
         {
-            return _context.Orders.Any(e => e.Id == id);
+            return _context.FoodOrders.Any(e => e.Id == id);
         }
     }
 }

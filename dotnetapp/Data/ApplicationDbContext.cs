@@ -13,6 +13,6 @@ namespace dotnetapp.Data
             : base(options)
         {
         }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<FoodOrder> FoodOrders { get; set; }
     }
 }

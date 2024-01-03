@@ -1,31 +1,22 @@
-@model dotnetapp.Models.Order
+@model dotnetapp.Models.FoodOrder
 
-<h1>Create Order</h1>
+<h1>Create Food Order</h1>
+
 <form asp-action="Create">
-    <div>
-        <label asp-for="Date">Date:</label>
-        <input asp-for="Date" type="date" />
-        <span asp-validation-for="Date"></span>
+    <div class="form-group">
+        <label asp-for="FoodName"></label>
+        <input asp-for="FoodName" class="form-control" />
+        <span asp-validation-for="FoodName" class="text-danger"></span>
     </div>
-    <div>
-        <label asp-for="OrderID">Order ID:</label>
-        <input asp-for="OrderID" />
-        <span asp-validation-for="OrderID"></span>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
     </div>
-    <div>
-        <label asp-for="FoodName">Food Name:</label>
-        <input asp-for="FoodName" />
-        <span asp-validation-for="FoodName"></span>
+    <div class="form-group">
+        <label asp-for="OrderDate"></label>
+        <input asp-for="OrderDate" class="form-control" />
+        <span asp-validation-for="OrderDate" class="text-danger"></span>
     </div>
-    <div>
-        <label asp-for="Price">Price:</label>
-        <input asp-for="Price" />
-        <span asp-validation-for="Price"></span>
-    </div>
-    <div>
-        <label asp-for="rating">Rating:</label>
-        <input asp-for="rating" />
-        <span asp-validation-for="rating"></span>
-    </div>
-    <button type="submit">Create Order</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 </form>
