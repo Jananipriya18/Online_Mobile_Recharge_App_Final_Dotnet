@@ -31,29 +31,5 @@ namespace dotnetapp.Controllers
             }
             return View(order);
         }
-
-        // [HttpPost]
-        // public IActionResult AddToOrder(int menuItemId)
-        // {
-        //     var menuItem = _context.Menu.FirstOrDefault(m => m.MenuId == menuItemId);
-
-        //     if (menuItem != null)
-        //     {
-        //         var order = _context.Orders.Include(o => o.Items).FirstOrDefault();
-        //         if (order == null)
-        //         {
-        //             order = new Order { OrderDate = DateTime.Now };
-        //             _context.Orders.Add(order);
-        //         }
-
-        //         order.Items.Add(menuItem);
-        //         _context.SaveChanges();
-
-        //         return RedirectToAction("Index", "Home"); // Redirect to wherever you want after adding to the order
-        //     }
-
-        //     // Handle the case where the menu item is not found
-        //     return RedirectToAction("MenuNotFound", "Error"); // Redirect to an error page or handle accordingly
-        // }
     }
 }

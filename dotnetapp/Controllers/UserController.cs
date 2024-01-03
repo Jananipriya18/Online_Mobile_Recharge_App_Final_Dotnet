@@ -1,35 +1,57 @@
 using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Models;
-using System.Collections.Generic;
-using dotnetapp.Data; 
 
 namespace dotnetapp.Controllers
 {
     public class UserController : Controller
     {
-        // Mocked data for demonstration (replace this with database access)
-        private static List<User> users = new List<User>
+        // Mocked user data for demonstration purposes (replace with actual data retrieval logic)
+        private User GetMockUserData()
         {
-            new User { UserId = 1, Username = "user1", Email = "user1@example.com" },
-            new User { UserId = 2, Username = "user2", Email = "user2@example.com" }
-        };
-
-        public IActionResult Index()
-        {
-            return View(users);
+            return new User
+            {
+                UserId = 1,
+                Username = "exampleuser",
+                Email = "user@example.com"
+                // Add more properties as per your User model
+            };
         }
 
-        public IActionResult Details(int id)
+        // Action method to view user profile
+        public IActionResult Profile()
         {
-            var user = users.FirstOrDefault(u => u.UserId == id);
+            var user = GetMockUserData(); // Replace with your logic to retrieve user data
+            
             if (user == null)
             {
-                return NotFound();
+                return NotFound(); // Handle case where user is not found
             }
-            return View(user);
+
+            return View(user); // Pass the user object to the Profile view
         }
 
-        // Other CRUD actions: Create, Edit, Delete
-        // Implement these actions based on your needs
+        // Action method to render the settings view
+        public IActionResult Settings()
+        {
+            var user = GetMockUserData(); // Replace with your logic to retrieve user data
+            
+            if (user == null)
+            {
+                return NotFound(); // Handle case where user is not found
+            }
+
+            return View(user); // Pass the user object to the Settings view
+        }
+
+        // Action method to handle settings update
+        [HttpPost]
+        public IActionResult UpdateSettings(User updatedUser)
+        {
+            // Logic to update user settings in your database
+            // The 'updatedUser' parameter contains the modified user data from the form
+
+            // For demonstration, redirect to profile after settings update
+            return RedirectToAction("Profile");
+        }
     }
 }
