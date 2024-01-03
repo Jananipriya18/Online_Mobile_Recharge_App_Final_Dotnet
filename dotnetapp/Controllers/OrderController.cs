@@ -17,52 +17,42 @@ namespace dotnetapp.Controllers
 
         public IActionResult Index()
         {
-            var orders = _context.Orders.ToList();
+            var orders = _context.Orders.Include(o => o.Items).ToList();
             return View(orders);
         }
 
         public IActionResult Details(int id)
         {
-            var order = _context.Orders.FirstOrDefault(o => o.OrderId == id);
+            var order = _context.Orders.Include(o => o.Items).FirstOrDefault(o => o.OrderId == id);
             if (order == null)
             {
                 return NotFound();
             }
             return View(order);
         }
+
         [HttpPost]
-public IActionResult AddToOrder(int menuItemId)
-{
-    var menuItem = _context.MenuItems.FirstOrDefault(m => m.MenuId == menuItemId);
-    if (menuItem != null)
-    {
-        var userId = GetCurrentUserId(); // Method to get the current logged-in user's ID
-        var currentOrder = _context.Orders.FirstOrDefault(o => o.User.Id == userId && !o.IsCompleted);
-
-        if (currentOrder == null)
+        public IActionResult AddToOrder(int menuItemId)
         {
-            currentOrder = new Order
+            var menuItem = _context.Menu.FirstOrDefault(m => m.MenuId == menuItemId);
+
+            if (menuItem != null)
             {
-                OrderDate = DateTime.Now,
-                OrderItems = new List<OrderItem>(),
-                User = _context.Users.Find(userId) // Assuming there's a User entity in your context
-            };
-            _context.Orders.Add(currentOrder);
+                var order = _context.Orders.Include(o => o.Items).FirstOrDefault();
+                if (order == null)
+                {
+                    order = new Order { OrderDate = DateTime.Now };
+                    _context.Orders.Add(order);
+                }
+
+                order.Items.Add(menuItem);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index", "Home"); // Redirect to wherever you want after adding to the order
+            }
+
+            // Handle the case where the menu item is not found
+            return RedirectToAction("MenuNotFound", "Error"); // Redirect to an error page or handle accordingly
         }
-
-        var newOrderItem = new OrderItem
-        {
-            MenuItemId = menuItemId,
-            Order = currentOrder
-            // Other properties as needed
-        };
-
-        _context.OrderItems.Add(newOrderItem);
-        _context.SaveChanges();
     }
-
-    return RedirectToAction("Index", "Order"); // Redirect to Order Index after adding
 }
-
-
-}}
