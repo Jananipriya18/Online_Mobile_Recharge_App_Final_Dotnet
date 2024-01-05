@@ -32,28 +32,64 @@ namespace dotnetapp.Controllers
             return View();
         }
 
+        // [HttpPost]
+        // public ActionResult Create(Complaint newComplaint)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         _db.Complaints.Add(newComplaint);
+        //         _db.SaveChanges();
+        //         return RedirectToAction("Dashboard");
+        //     }
+
+        //     // If the model state is not valid, retrieve executives again and return to the view
+        //     var executives = _db.Executives
+        //         .Select(e => new SelectListItem
+        //         {
+        //             Value = e.ExecutiveID.ToString(),
+        //             Text = e.ExecutiveName
+        //         })
+        //         .ToList();
+
+        //     ViewBag.Executives = executives;
+        //     return View(newComplaint);
+        // }
         [HttpPost]
-        public ActionResult Create(Complaint newComplaint)
+public ActionResult Create(Complaint newComplaint)
+{
+    if (ModelState.IsValid)
+    {
+        // Fetch the selected executive from the database based on the provided ExecutiveID
+        var selectedExecutive = _db.Executives.FirstOrDefault(e => e.ExecutiveID == newComplaint.ExecutiveID);
+
+        if (selectedExecutive != null)
         {
-            if (ModelState.IsValid)
-            {
-                _db.Complaints.Add(newComplaint);
-                _db.SaveChanges();
-                return RedirectToAction("Dashboard");
-            }
-
-            // If the model state is not valid, retrieve executives again and return to the view
-            var executives = _db.Executives
-                .Select(e => new SelectListItem
-                {
-                    Value = e.ExecutiveID.ToString(),
-                    Text = e.ExecutiveName
-                })
-                .ToList();
-
-            ViewBag.Executives = executives;
-            return View(newComplaint);
+            // Associate the selected executive with the new complaint
+            newComplaint.Executive = selectedExecutive;
+            // Add the complaint to the database
+            _db.Complaints.Add(newComplaint);
+            _db.SaveChanges();
+            return RedirectToAction("Dashboard");
         }
+        else
+        {
+            ModelState.AddModelError("", "Selected Executive not found");
+        }
+    }
+
+    // If the model state is not valid or the executive wasn't found, retrieve executives again and return to the view
+    var executives = _db.Executives
+        .Select(e => new SelectListItem
+        {
+            Value = e.ExecutiveID.ToString(),
+            Text = e.ExecutiveName
+        })
+        .ToList();
+
+    ViewBag.Executives = executives;
+    return View(newComplaint);
+}
+
 
         public ActionResult Dashboard()
         {
