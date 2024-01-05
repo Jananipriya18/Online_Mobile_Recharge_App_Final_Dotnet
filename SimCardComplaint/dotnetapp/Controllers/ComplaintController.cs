@@ -25,10 +25,20 @@ namespace dotnetapp.Controllers
         })
         .ToList();
 
-    ViewBag.Executives = executives;
+    if (executives.Any())
+    {
+        ViewBag.Executives = executives;
+    }
+    else
+    {
+        // Handle the case where no executives are found
+        ViewBag.Executives = new List<SelectListItem>();
+        // You can set default values or handle this scenario as per your requirement
+    }
 
     return View();
 }
+
 
 
     // Action for handling the submission of a new complaint form

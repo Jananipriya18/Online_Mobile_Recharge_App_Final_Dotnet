@@ -1,0 +1,32 @@
+@model IEnumerable<dotnetapp.Models.Executive>
+
+<h2>Executive List</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Executive ID</th>
+            <th>Name</th>
+            <th>Contact Number</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var executive in Model)
+        {
+            <tr>
+                <td>@executive.ExecutiveID</td>
+                <td>@executive.ExecutiveName</td>
+                <td>@executive.ContactNumber</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@executive.ExecutiveID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@executive.ExecutiveID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@executive.ExecutiveID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
