@@ -31,28 +31,26 @@ namespace dotnetapp.Controllers
         }
 
         [HttpPost]
-[ValidateAntiForgeryToken]
-public IActionResult Create(Executive newExecutive)
-{
-    try
-    {
-        if (ModelState.IsValid)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Executive newExecutive)
         {
-            _db.Executives.Add(newExecutive);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _db.Executives.Add(newExecutive);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(newExecutive);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                ModelState.AddModelError("", "An error occurred while creating the executive.");
+                return View(newExecutive);
+            }
         }
-        Console.Write("Hello");
-        return View(newExecutive);
-    }
-    catch (Exception ex)
-    {
-        // Log the exception or handle it appropriately
-        ModelState.AddModelError("", "An error occurred while creating the executive.");
-        return View(newExecutive);
-    }
-}
-
 
         // GET: /Executive/Edit/5
         public IActionResult Edit(int? id)
@@ -71,7 +69,6 @@ public IActionResult Create(Executive newExecutive)
             return View(executive);
         }
 
-        // POST: /Executive/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Executive executive)
@@ -83,9 +80,23 @@ public IActionResult Create(Executive newExecutive)
 
             if (ModelState.IsValid)
             {
-                _db.Update(executive);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    _db.Update(executive);
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ExecutiveExists(executive.ExecutiveID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
             return View(executive);
         }
@@ -107,7 +118,6 @@ public IActionResult Create(Executive newExecutive)
             return View(executive);
         }
 
-        // POST: /Executive/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
@@ -121,6 +131,11 @@ public IActionResult Create(Executive newExecutive)
             _db.Executives.Remove(executive);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private bool ExecutiveExists(int id)
+        {
+            return _db.Executives.Any(e => e.ExecutiveID == id);
         }
     }
 }

@@ -2,8 +2,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Data;
 using dotnetapp.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic; // Ensure to include this namespace for List<SelectListItem>
 
 namespace dotnetapp.Controllers
 {
@@ -32,72 +32,51 @@ namespace dotnetapp.Controllers
             return View();
         }
 
-        // [HttpPost]
-        // public ActionResult Create(Complaint newComplaint)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         _db.Complaints.Add(newComplaint);
-        //         _db.SaveChanges();
-        //         return RedirectToAction("Dashboard");
-        //     }
-
-        //     // If the model state is not valid, retrieve executives again and return to the view
-        //     var executives = _db.Executives
-        //         .Select(e => new SelectListItem
-        //         {
-        //             Value = e.ExecutiveID.ToString(),
-        //             Text = e.ExecutiveName
-        //         })
-        //         .ToList();
-
-        //     ViewBag.Executives = executives;
-        //     return View(newComplaint);
-        // }
         [HttpPost]
-public ActionResult Create(Complaint newComplaint)
-{
-    if (ModelState.IsValid)
-    {
-        // Fetch the selected executive from the database based on the provided ExecutiveID
-        var selectedExecutive = _db.Executives.FirstOrDefault(e => e.ExecutiveID == newComplaint.ExecutiveID);
-
-        if (selectedExecutive != null)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Complaint newComplaint)
         {
-            // Associate the selected executive with the new complaint
-            newComplaint.Executive = selectedExecutive;
-            // Add the complaint to the database
-            _db.Complaints.Add(newComplaint);
-            _db.SaveChanges();
-            return RedirectToAction("Dashboard");
+            if (ModelState.IsValid)
+            {
+                // Fetch the selected executive from the database based on the provided ExecutiveID
+                var selectedExecutive = _db.Executives.FirstOrDefault(e => e.ExecutiveID == newComplaint.ExecutiveID);
+
+                if (selectedExecutive != null)
+                {
+                    // Associate the selected executive with the new complaint
+                    newComplaint.Executive = selectedExecutive;
+                    // Add the complaint to the database
+                    _db.Complaints.Add(newComplaint);
+                    _db.SaveChanges();
+                    return RedirectToAction("Dashboard");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Selected Executive not found");
+                }
+            }
+
+            // If the model state is not valid or the executive wasn't found, retrieve executives again and return to the view
+            var executives = _db.Executives
+                .Select(e => new SelectListItem
+                {
+                    Value = e.ExecutiveID.ToString(),
+                    Text = e.ExecutiveName
+                })
+                .ToList();
+
+            ViewBag.Executives = executives;
+            return View(newComplaint);
         }
-        else
-        {
-            ModelState.AddModelError("", "Selected Executive not found");
-        }
-    }
-
-    // If the model state is not valid or the executive wasn't found, retrieve executives again and return to the view
-    var executives = _db.Executives
-        .Select(e => new SelectListItem
-        {
-            Value = e.ExecutiveID.ToString(),
-            Text = e.ExecutiveName
-        })
-        .ToList();
-
-    ViewBag.Executives = executives;
-    return View(newComplaint);
-}
-
 
         public ActionResult Dashboard()
         {
-            var complaints = _db.Complaints.ToList();
+            var complaints = _db.Complaints.Include(c => c.Executive).ToList();
             return View(complaints);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateStatus(int complaintId, string newStatus)
         {
             var complaint = _db.Complaints.Find(complaintId);
