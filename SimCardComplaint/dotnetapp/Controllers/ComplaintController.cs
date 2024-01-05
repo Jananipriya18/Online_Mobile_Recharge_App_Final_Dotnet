@@ -39,7 +39,7 @@ namespace dotnetapp.Controllers
                 
                 // var executiveId = 1; // Replace with the actual executive ID
                 var executiveId = complaint.ExecutiveID; // Remove this line
-
+                Console.Write("Hello");
                 // Assign the executive ID to the complaint
                 // complaint.ExecutiveID = executiveId; // Use the ID obtained from your authentication mechanism
                 complaint.Status = "Pending"; // Set default status
