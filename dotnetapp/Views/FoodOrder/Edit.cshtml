@@ -1,6 +1,6 @@
 @model dotnetapp.Models.FoodOrder
 
-<h1>Edit Food Order</h1>
+<h1>Refine Your Culinary Masterpiece - Edit Your Food Menu</h1>
 
 <form asp-action="Edit">
     <input type="hidden" asp-for="Id" />
@@ -18,6 +18,11 @@
         <label asp-for="Date"></label>
         <input asp-for="Date" class="form-control" />
         <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="rating"></label>
+        <input asp-for="rating" class="form-control" />
+        <span asp-validation-for="rating" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>

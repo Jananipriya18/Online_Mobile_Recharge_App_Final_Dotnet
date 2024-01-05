@@ -1,6 +1,6 @@
 @model IEnumerable<dotnetapp.Models.FoodOrder>
 
-<h1>Food Orders</h1>
+<h1>Welcome to the Chef's Culinary Delights!</h1>
 
 <table class="table">
     <thead>
@@ -8,8 +8,9 @@
             <th>ID</th>
             <th>Food Name</th>
             <th>Price</th>
-            <th>Order Date</th>
-            <th>Action</th>
+            <th>Order Date and Time</th>
+            <th>Rating</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -19,11 +20,11 @@
                 <td>@foodOrder.Id</td>
                 <td>@foodOrder.FoodName</td>
                 <td>@foodOrder.Price</td>
-                
+                <td>@foodOrder.Date</td>
+                <td>@foodOrder.rating</td>
                 
                 <td>
                     <a asp-action="Edit" asp-route-id="@foodOrder.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@foodOrder.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@foodOrder.Id">Delete</a>
                 </td>
             </tr>
