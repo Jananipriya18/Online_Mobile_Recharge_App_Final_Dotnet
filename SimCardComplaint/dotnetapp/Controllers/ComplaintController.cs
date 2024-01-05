@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Models;
 using dotnetapp.Data;
-using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace dotnetapp.Controllers
 {
@@ -19,6 +20,12 @@ namespace dotnetapp.Controllers
         // GET: Complaint/Create
         public IActionResult Create()
         {
+            // Assuming you have a list of executives available in your application
+            var executives = _context.Executives.ToList(); // Fetching the executives from your database
+
+            // Creating a SelectList for the dropdown
+            ViewBag.ExecutiveList = new SelectList(executives, "ExecutiveID", "ExecutiveName");
+
             return View();
         }
 
