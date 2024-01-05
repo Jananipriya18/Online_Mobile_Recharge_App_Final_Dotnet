@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P6PtB8r5Ldnku7lpU1hRrxzZ9ITJyJF2Tg5jftHhD0e1Pd5nPk46f7Ol0fABdKYNtiDY/pTIxACphfuEsWcSpg==",
+  "dgSpecHash": "/LLb8919OSBouufZ0C0EAvANZNIDiSKeIMZp5Lc79M8Pmt2k3ps5Sffg7i3W2NHSMpwtNLDgOw8yDxbfd8Hgmw==",
   "success": true,
-  "projectFilePath": "/home/coder/project/workspace/TestProject/TestProject.csproj",
+  "projectFilePath": "/home/coder/project/workspace/FoodOrder/TestProject/TestProject.csproj",
   "expectedPackageFiles": [
     "/home/coder/.nuget/packages/coverlet.collector/3.1.2/coverlet.collector.3.1.2.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.codecoverage/17.1.0/microsoft.codecoverage.17.1.0.nupkg.sha512",

@@ -5808,11 +5808,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/coder/project/workspace/TestProject/TestProject.csproj",
+      "projectUniqueName": "/home/coder/project/workspace/FoodOrder/TestProject/TestProject.csproj",
       "projectName": "TestProject",
-      "projectPath": "/home/coder/project/workspace/TestProject/TestProject.csproj",
+      "projectPath": "/home/coder/project/workspace/FoodOrder/TestProject/TestProject.csproj",
       "packagesPath": "/home/coder/.nuget/packages/",
-      "outputPath": "/home/coder/project/workspace/TestProject/obj/",
+      "outputPath": "/home/coder/project/workspace/FoodOrder/TestProject/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/coder/.nuget/NuGet/NuGet.Config"
@@ -5827,8 +5827,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj": {
-              "projectPath": "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj"
+            "/home/coder/project/workspace/FoodOrder/dotnetapp/dotnetapp.csproj": {
+              "projectPath": "/home/coder/project/workspace/FoodOrder/dotnetapp/dotnetapp.csproj"
             }
           }
         }

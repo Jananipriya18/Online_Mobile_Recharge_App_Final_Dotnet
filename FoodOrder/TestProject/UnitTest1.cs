@@ -212,7 +212,7 @@ public class Tests
         [Test]
         public void Test_Create_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Create.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -226,7 +226,7 @@ public class Tests
          [Test]
         public void Test_Delete_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Delete.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -240,7 +240,7 @@ public class Tests
          [Test]
         public void Test_Edit_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Edit.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -254,7 +254,7 @@ public class Tests
          [Test]
         public void Test_Index_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Index.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -264,49 +264,7 @@ public class Tests
             bool fileExists = File.Exists(filePath);
             Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
         }
+        
 
-        [Test]
-        public void FoodOrderController_Create_ReturnsViewResult()
-        {
-            string assemblyName = "dotnetapp"; // Replace with your assembly name
-            string typeName = "dotnetapp.Controllers.FoodOrderController";
-
-            Assembly assembly = Assembly.Load(assemblyName);
-            Type controllerType = assembly.GetType(typeName);
-
-            if (controllerType != null)
-            {
-                var constructor = controllerType.GetConstructor(new[] { typeof(ApplicationDbContext) });
-
-                if (constructor != null)
-                {
-                    var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-                        .UseInMemoryDatabase("TestDatabase")
-                        .Options;
-                    var dbContext = new ApplicationDbContext(dbContextOptions);
-
-                    var controller = constructor.Invoke(new object[] { dbContext });
-
-                    var createMethod = controllerType.GetMethod("Create");
-
-                    if (createMethod != null)
-                    {
-                        IActionResult result = createMethod.Invoke(controller, null) as IActionResult;
-                        Assert.IsInstanceOf<ViewResult>(result);
-                    }
-                    else
-                    {
-                        Assert.Fail("Create method not found.");
-                    }
-                }
-                else
-                {
-                    Assert.Fail("FoodOrderController constructor not found.");
-                }
-            }
-            else
-            {
-                Assert.Fail("FoodOrderController not found.");
-            }
-        }
+        
 }

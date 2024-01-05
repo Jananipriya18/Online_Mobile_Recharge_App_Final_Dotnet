@@ -2043,11 +2043,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj",
+      "projectUniqueName": "/home/coder/project/workspace/FoodOrder/dotnetapp/dotnetapp.csproj",
       "projectName": "dotnetapp",
-      "projectPath": "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj",
+      "projectPath": "/home/coder/project/workspace/FoodOrder/dotnetapp/dotnetapp.csproj",
       "packagesPath": "/home/coder/.nuget/packages/",
-      "outputPath": "/home/coder/project/workspace/dotnetapp/obj/",
+      "outputPath": "/home/coder/project/workspace/FoodOrder/dotnetapp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/coder/.nuget/NuGet/NuGet.Config"
