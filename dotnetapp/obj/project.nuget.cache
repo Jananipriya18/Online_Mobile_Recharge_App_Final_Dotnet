@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZLRSIyEK9l0W1okQDYjXH/ZDw9pbsj3E0yj5yskxIdhXfKOeJ0+wsSHGGesCOrMCYbK/0uNwVs8pPqXOZF0uVw==",
+  "dgSpecHash": "iECa+N2yW7JFWhkQtUIyJNwiH5yEr0ItwSlRfE/OTMZ9ggwVaySP7E3NSngrPFclXnYO6UNNDGubXRhvnJ4tqA==",
   "success": true,
   "projectFilePath": "/home/coder/project/workspace/dotnetapp/dotnetapp.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.0/microsoft.entityframeworkcore.abstractions.6.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.analyzers/6.0.0/microsoft.entityframeworkcore.analyzers.6.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.design/6.0.0/microsoft.entityframeworkcore.design.6.0.0.nupkg.sha512",
+    "/home/coder/.nuget/packages/microsoft.entityframeworkcore.inmemory/6.0.0/microsoft.entityframeworkcore.inmemory.6.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.relational/6.0.0/microsoft.entityframeworkcore.relational.6.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.sqlserver/6.0.0/microsoft.entityframeworkcore.sqlserver.6.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.tools/6.0.0/microsoft.entityframeworkcore.tools.6.0.0.nupkg.sha512",
