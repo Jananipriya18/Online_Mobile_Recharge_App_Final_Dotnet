@@ -1,7 +1,10 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Data;
 using dotnetapp.Models;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnetapp.Controllers
 {
