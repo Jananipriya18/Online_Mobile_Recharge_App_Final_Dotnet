@@ -1,61 +1,57 @@
-using Microsoft.AspNetCore.Mvc;
-using dotnetapp.Models;
-using dotnetapp.Data;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
+using Microsoft.AspNetCore.Mvc;
+using dotnetapp.Data;
+using dotnetapp.Models;
 
 namespace dotnetapp.Controllers
 {
     public class ComplaintController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
 
-        public ComplaintController(ApplicationDbContext context)
+        public ComplaintController(ApplicationDbContext db)
         {
-            _context = context;
+            _db = db;
         }
 
-        // GET: Complaint/Create
-        public IActionResult Create()
+        public IActionResult AddComplaint()
         {
-            // Assuming you have a list of executives available in your application
-            var executives = _context.Executives.ToList(); // Fetching the executives from your database
-
-            // Creating a SelectList for the dropdown
-            ViewBag.ExecutiveList = new SelectList(executives, "ExecutiveID", "ExecutiveName");
-
             return View();
         }
 
-        // POST: Complaint/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Complaint complaint)
+        public IActionResult AddComplaint(Complaint newComplaint)
         {
             if (ModelState.IsValid)
             {
-                
-                // var executiveId = 1; // Replace with the actual executive ID
-                var executiveId = complaint.ExecutiveID; // Remove this line
-                Console.Write("Hello");
-                // Assign the executive ID to the complaint
-                // complaint.ExecutiveID = executiveId; // Use the ID obtained from your authentication mechanism
-                complaint.Status = "Pending"; // Set default status
+                _db.Complaints.Add(newComplaint);
+                _db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
 
-                _context.Complaints.Add(complaint);
-                _context.SaveChanges();
-
-                return RedirectToAction("Index", "Home"); 
-                    }
-                    return View(complaint);
+            return View(newComplaint);
         }
 
         public IActionResult Dashboard()
         {
-            var complaints = _context.Complaints.Include(c => c.Executive).ToList();
+            var complaints = _db.Complaints.ToList();
             return View(complaints);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateStatus(int complaintId, string newStatus)
+        {
+            var complaint = _db.Complaints.Find(complaintId);
+
+            if (complaint != null)
+            {
+                complaint.Status = newStatus;
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("Dashboard");
         }
     }
 }

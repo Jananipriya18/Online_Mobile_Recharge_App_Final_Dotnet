@@ -1,15 +1,12 @@
 @model List<dotnetapp.Models.Complaint>
 
-<h2>Complaint Dashboard</h2>
-
 <table class="table">
     <thead>
         <tr>
             <th>Customer Name</th>
-            <th>SIM Card Number</th>
-            <th>Description</th>
+            <!-- Other columns as needed -->
             <th>Status</th>
-            <th>Executive Name</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -17,10 +14,18 @@
         {
             <tr>
                 <td>@complaint.CustomerName</td>
-                <td>@complaint.SIMCardNumber</td>
-                <td>@complaint.Description</td>
-                <td>@complaint.Status</td>
-                <td>@complaint.Executive?.ExecutiveName</td>
+                <!-- Other columns for complaint details -->
+                <td>
+                    @using (Html.BeginForm("UpdateStatus", "Complaint", FormMethod.Post))
+                    {
+                        @Html.Hidden("complaintId", complaint.ComplaintID)
+                        <select name="newStatus" class="form-control" onchange="this.form.submit()">
+                            <option value="Pending" @(complaint.Status == "Pending" ? "selected" : "")>Pending</option>
+                            <option value="Under Investigation" @(complaint.Status == "Under Investigation" ? "selected" : "")>Under Investigation</option>
+                            <option value="Resolved" @(complaint.Status == "Resolved" ? "selected" : "")>Resolved</option>
+                        </select>
+                    }
+                </td>
             </tr>
         }
     </tbody>
