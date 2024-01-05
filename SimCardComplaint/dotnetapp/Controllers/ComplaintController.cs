@@ -36,19 +36,20 @@ namespace dotnetapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Assuming ExecutiveID is obtained from the logged-in executive
-                // You might need to adjust this logic based on your authentication mechanism
-                var executiveId = 1; // Replace with the actual executive ID
+                
+                // var executiveId = 1; // Replace with the actual executive ID
+                var executiveId = complaint.ExecutiveID; // Remove this line
 
-                complaint.ExecutiveID = executiveId; // Assign the executive ID to the complaint
+                // Assign the executive ID to the complaint
+                // complaint.ExecutiveID = executiveId; // Use the ID obtained from your authentication mechanism
                 complaint.Status = "Pending"; // Set default status
 
                 _context.Complaints.Add(complaint);
                 _context.SaveChanges();
 
-                return RedirectToAction("Index", "Home"); // Redirect to home page after adding complaint
-            }
-            return View(complaint);
+                return RedirectToAction("Index", "Home"); 
+                    }
+                    return View(complaint);
         }
 
         public IActionResult Dashboard()
