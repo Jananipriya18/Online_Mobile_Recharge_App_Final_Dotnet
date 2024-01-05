@@ -1,7 +1,5 @@
 @model dotnetapp.Models.Complaint
 
-<h2>Add Complaint</h2>
-
 <form asp-action="Create" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -15,32 +13,20 @@
         <label asp-for="SIMCardNumber"></label>
         <input asp-for="SIMCardNumber" class="form-control" />
         <span asp-validation-for="SIMCardNumber" class="text-danger"></span>
-        <!-- Required field validation message for SIMCardNumber -->
-        <span class="text-danger" asp-validation-for="SIMCardNumber"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
-        <!-- Required field validation message for Description -->
-        <span class="text-danger" asp-validation-for="Description"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Status"></label>
-        <input asp-for="Status" class="form-control" />
-        <span asp-validation-for="Status" class="text-danger"></span>
-        <!-- Required field validation message for Status -->
-        <span class="text-danger" asp-validation-for="Status"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Executive"></label>
-        <input asp-for="Executive" class="form-control" />
-        <span asp-validation-for="Executive" class="text-danger"></span>
-        <!-- Required field validation message for Executive -->
-        <span class="text-danger" asp-validation-for="Executive"></span>
+        <label asp-for="ExecutiveID">Select an Executive</label>
+        <select asp-for="ExecutiveID" asp-items="@ViewBag.ExecutiveList" class="form-control">
+            <option value="">-- Select an Executive --</option>
+        </select>
+        <span asp-validation-for="ExecutiveID" class="text-danger"></span>
     </div>
 
     <div class="form-group">

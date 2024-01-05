@@ -1,4 +1,4 @@
-@* @model IEnumerable<dotnetapp.Models.Complaint>
+@model List<dotnetapp.Models.Complaint>
 
 <h2>Complaint Dashboard</h2>
 
@@ -7,7 +7,9 @@
         <tr>
             <th>Customer Name</th>
             <th>SIM Card Number</th>
+            <th>Description</th>
             <th>Status</th>
+            <th>Executive Name</th>
         </tr>
     </thead>
     <tbody>
@@ -16,10 +18,10 @@
             <tr>
                 <td>@complaint.CustomerName</td>
                 <td>@complaint.SIMCardNumber</td>
-                <td>
-                    <select asp-for="@complaint.Status" asp-items='Html.GetEnumSelectList<ComplaintStatus>()'></select>
-                </td>
+                <td>@complaint.Description</td>
+                <td>@complaint.Status</td>
+                <td>@complaint.Executive?.ExecutiveName</td>
             </tr>
         }
     </tbody>
-</table> *@
+</table>
