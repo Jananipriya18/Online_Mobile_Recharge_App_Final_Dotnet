@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dotnetapp.Models
 {
-    ppublic class Complaint
+    public class Complaint
 {
     public int ComplaintID { get; set; }
     public string CustomerName { get; set; }

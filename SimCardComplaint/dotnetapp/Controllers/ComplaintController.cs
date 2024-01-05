@@ -8,53 +8,107 @@ using System.Collections.Generic; // Ensure to include this namespace for List<S
 namespace dotnetapp.Controllers
 {
     public class ComplaintController : Controller
-{
-    private readonly YourDbContext _db;
-
-    public ComplaintController(YourDbContext db)
     {
-        _db = db;
-    }
+        private readonly ApplicationDbContext _db;
 
-    public IActionResult AddComplaint()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult AddComplaint(Complaint newComplaint)
-    {
-        if (ModelState.IsValid)
+        public ComplaintController(ApplicationDbContext db)
         {
+            _db = db;
+        }
+
+        public ActionResult Create()
+        {
+            var executives = _db.Executives
+                .Select(e => new SelectListItem
+                {
+                    Value = e.ExecutiveID.ToString(),
+                    Text = e.ExecutiveName
+                })
+                .ToList();
+
+            // Always pass the executives to the view, whether it's empty or not
+            ViewBag.Executives = executives;
+
+            return View();
+        }
+
+        // [HttpPost]
+        // public ActionResult Create(Complaint newComplaint)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         _db.Complaints.Add(newComplaint);
+        //         _db.SaveChanges();
+        //         return RedirectToAction("Dashboard");
+        //     }
+
+        //     // If the model state is not valid, retrieve executives again and return to the view
+        //     var executives = _db.Executives
+        //         .Select(e => new SelectListItem
+        //         {
+        //             Value = e.ExecutiveID.ToString(),
+        //             Text = e.ExecutiveName
+        //         })
+        //         .ToList();
+
+        //     ViewBag.Executives = executives;
+        //     return View(newComplaint);
+        // }
+        [HttpPost]
+public ActionResult Create(Complaint newComplaint)
+{
+    if (ModelState.IsValid)
+    {
+        // Fetch the selected executive from the database based on the provided ExecutiveID
+        var selectedExecutive = _db.Executives.FirstOrDefault(e => e.ExecutiveID == newComplaint.ExecutiveID);
+
+        if (selectedExecutive != null)
+        {
+            // Associate the selected executive with the new complaint
+            newComplaint.Executive = selectedExecutive;
+            // Add the complaint to the database
             _db.Complaints.Add(newComplaint);
             _db.SaveChanges();
             return RedirectToAction("Dashboard");
         }
-
-        return View(newComplaint);
-    }
-
-    public IActionResult Dashboard()
-    {
-        var complaints = _db.Complaints.Include(c => c.Executive).ToList();
-        return View(complaints);
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult UpdateStatus(int complaintId, string newStatus)
-    {
-        var complaint = _db.Complaints.Find(complaintId);
-
-        if (complaint != null)
+        else
         {
-            complaint.Status = newStatus;
-            _db.SaveChanges();
+            ModelState.AddModelError("", "Selected Executive not found");
         }
-
-        return RedirectToAction("Dashboard");
     }
+
+    // If the model state is not valid or the executive wasn't found, retrieve executives again and return to the view
+    var executives = _db.Executives
+        .Select(e => new SelectListItem
+        {
+            Value = e.ExecutiveID.ToString(),
+            Text = e.ExecutiveName
+        })
+        .ToList();
+
+    ViewBag.Executives = executives;
+    return View(newComplaint);
 }
 
+
+        public ActionResult Dashboard()
+        {
+            var complaints = _db.Complaints.ToList();
+            return View(complaints);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatus(int complaintId, string newStatus)
+        {
+            var complaint = _db.Complaints.Find(complaintId);
+
+            if (complaint != null)
+            {
+                complaint.Status = newStatus;
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("Dashboard");
+        }
+    }
 }
