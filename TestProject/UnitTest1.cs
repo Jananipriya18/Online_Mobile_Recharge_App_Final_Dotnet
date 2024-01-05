@@ -253,7 +253,7 @@ public class Tests
          [Test]
         public void Test_Index_Views_File_Exists()
         {
-            string folderPath = @"C:\Users\janan\Downloads\DotnetApp_FoodOrder-main\DotnetApp_FoodOrder-main\dotnetapp\Views\FoodOrder\"; // Replace with the folder path you want to check
+            string folderPath = @"@"/home/coder/project/workspace/dotnetapp/Views/FoodOrder"; // Replace with the folder path you want to check
             string desiredFiles = "Index.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
