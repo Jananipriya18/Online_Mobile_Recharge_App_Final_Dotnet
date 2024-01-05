@@ -7,8 +7,10 @@
     <div>
         <h3>@Model.ExecutiveName</h3>
         <!-- Display other executive details -->
+        <p>Executive ID: @Model.ExecutiveID</p>
+        <!-- Add other executive details to display -->
 
-        <form asp-action="Delete" asp-route-id="@Model.ExecutiveID">
+        <form asp-action="Delete" asp-route-id="@Model.ExecutiveID" method="post">
             <input type="submit" value="Delete" class="btn btn-danger" />
             <a asp-action="Index" class="btn btn-secondary">Cancel</a>
         </form>

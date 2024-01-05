@@ -3,84 +3,76 @@ using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Data;
 using dotnetapp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic; // Ensure to include this namespace for List<SelectListItem>
 
 namespace dotnetapp.Controllers
 {
     public class ComplaintController : Controller
-{
-    private readonly ApplicationDbContext _db; // Your ApplicationDbContext instance
-
-    public ComplaintController(ApplicationDbContext db)
     {
-        _db = db;
-    }
+        private readonly ApplicationDbContext _db;
 
-    public ActionResult Create()
-{
-    var executives = _db.Executives
-        .Select(e => new SelectListItem
+        public ComplaintController(ApplicationDbContext db)
         {
-            Value = e.ExecutiveID.ToString(),
-            Text = e.ExecutiveName
-        })
-        .ToList();
+            _db = db;
+        }
 
-    if (executives.Any())
-    {
-        ViewBag.Executives = executives;
-    }
-    else
-    {
-        // Handle the case where no executives are found
-        ViewBag.Executives = new List<SelectListItem>();
-        // You can set default values or handle this scenario as per your requirement
-    }
-
-    return View();
-}
-
-
-
-    // Action for handling the submission of a new complaint form
-    [HttpPost]
-    public ActionResult Create(Complaint newComplaint)
-    {
-        if (ModelState.IsValid)
+        public ActionResult Create()
         {
-            // Add the new complaint to the database using _db instance
-            _db.Complaints.Add(newComplaint);
-            _db.SaveChanges();
+            var executives = _db.Executives
+                .Select(e => new SelectListItem
+                {
+                    Value = e.ExecutiveID.ToString(),
+                    Text = e.ExecutiveName
+                })
+                .ToList();
 
-            // Redirect to a success page or dashboard after adding the complaint
+            // Always pass the executives to the view, whether it's empty or not
+            ViewBag.Executives = executives;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Complaint newComplaint)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Complaints.Add(newComplaint);
+                _db.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+
+            // If the model state is not valid, retrieve executives again and return to the view
+            var executives = _db.Executives
+                .Select(e => new SelectListItem
+                {
+                    Value = e.ExecutiveID.ToString(),
+                    Text = e.ExecutiveName
+                })
+                .ToList();
+
+            ViewBag.Executives = executives;
+            return View(newComplaint);
+        }
+
+        public ActionResult Dashboard()
+        {
+            var complaints = _db.Complaints.ToList();
+            return View(complaints);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStatus(int complaintId, string newStatus)
+        {
+            var complaint = _db.Complaints.Find(complaintId);
+
+            if (complaint != null)
+            {
+                complaint.Status = newStatus;
+                _db.SaveChanges();
+            }
+
             return RedirectToAction("Dashboard");
         }
-
-        // If the model state is not valid, return to the add complaint form with errors
-        return View(newComplaint);
     }
-
-    // Action for displaying the dashboard with a list of complaints
-    public ActionResult Dashboard()
-    {
-        // Fetch all complaints and pass them to the dashboard view using _db instance
-        var complaints = _db.Complaints.ToList();
-        return View(complaints);
-    }
-
-    // Action for updating the status of a complaint
-    [HttpPost]
-    public ActionResult UpdateStatus(int complaintId, string newStatus)
-    {
-        var complaint = _db.Complaints.Find(complaintId);
-
-        if (complaint != null)
-        {
-            complaint.Status = newStatus;
-            _db.SaveChanges();
-        }
-
-        // Redirect back to the dashboard after updating the status
-        return RedirectToAction("Dashboard");
-    }
-}
 }
