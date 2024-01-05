@@ -27,19 +27,29 @@ namespace dotnetapp.Controllers
             return View();
         }
 
-        // POST: /Executive/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Executive newExecutive)
+[ValidateAntiForgeryToken]
+public IActionResult Create(Executive newExecutive)
+{
+    try
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                _db.Executives.Add(newExecutive);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(newExecutive);
+            _db.Executives.Add(newExecutive);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
+        Console.Write("Hello");
+        return View(newExecutive);
+    }
+    catch (Exception ex)
+    {
+        // Log the exception or handle it appropriately
+        ModelState.AddModelError("", "An error occurred while creating the executive.");
+        return View(newExecutive);
+    }
+}
+
 
         // GET: /Executive/Edit/5
         public IActionResult Edit(int? id)
