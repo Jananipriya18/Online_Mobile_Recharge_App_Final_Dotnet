@@ -1,16 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace dotnetapp.Models
 {
     public class FoodOrder
     {
         public int Id { get; set; }
-        public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "Food Name is required")]
         public string FoodName { get; set; }
-        public decimal Price {get; set;}
-        public int rating { get; set;}
+
+        [Required(ErrorMessage = "Price is required")]
+        public decimal Price { get; set; }
+
+        [Required(ErrorMessage = "Date is required")]
+        public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "Rating is required")]
+        [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
+        public decimal Rating { get; set; }
     }
 }

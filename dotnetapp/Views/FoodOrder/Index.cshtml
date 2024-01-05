@@ -21,7 +21,7 @@
                 <td>@foodOrder.FoodName</td>
                 <td>@foodOrder.Price</td>
                 <td>@foodOrder.Date</td>
-                <td>@foodOrder.rating</td>
+                <td>@string.Format("{0:0.0}", foodOrder.Rating)</td> <!-- Display rating with one decimal place -->
                 
                 <td>
                     <a asp-action="Edit" asp-route-id="@foodOrder.Id">Edit</a> |
