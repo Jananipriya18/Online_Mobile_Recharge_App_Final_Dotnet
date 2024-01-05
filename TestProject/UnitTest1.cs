@@ -112,11 +112,12 @@ public class Tests
             Assembly assembly = Assembly.Load(assemblyName);
             Type foodOrderType = assembly.GetType(typeName);
 
-            PropertyInfo propertyInfo = foodOrderType.GetProperty("rating");
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("Rating");
 
             Assert.IsNotNull(propertyInfo);
-            Assert.AreEqual(typeof(int), propertyInfo.PropertyType);
+            Assert.AreEqual(typeof(decimal), propertyInfo.PropertyType);
         }
+
 
         [Test]
         public void FoodOrderController_IndexMethodExists()
@@ -211,7 +212,7 @@ public class Tests
         [Test]
         public void Test_Create_Views_File_Exists()
         {
-            string folderPath = @"C:\Users\janan\Downloads\DotnetApp_FoodOrder-main\DotnetApp_FoodOrder-main\dotnetapp\Views\FoodOrder\"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Create.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -225,7 +226,7 @@ public class Tests
          [Test]
         public void Test_Delete_Views_File_Exists()
         {
-            string folderPath = @"C:\Users\janan\Downloads\DotnetApp_FoodOrder-main\DotnetApp_FoodOrder-main\dotnetapp\Views\FoodOrder\"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Delete.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -239,7 +240,7 @@ public class Tests
          [Test]
         public void Test_Edit_Views_File_Exists()
         {
-            string folderPath = @"C:\Users\janan\Downloads\DotnetApp_FoodOrder-main\DotnetApp_FoodOrder-main\dotnetapp\Views\FoodOrder\"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Edit.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -253,7 +254,7 @@ public class Tests
          [Test]
         public void Test_Index_Views_File_Exists()
         {
-            string folderPath = @"@"/home/coder/project/workspace/dotnetapp/Views/FoodOrder"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Index.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
