@@ -1,0 +1,25 @@
+@model IEnumerable<dotnetapp.Models.Complaint>
+
+<h2>Complaint Dashboard</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>SIM Card Number</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var complaint in Model)
+        {
+            <tr>
+                <td>@complaint.CustomerName</td>
+                <td>@complaint.SIMCardNumber</td>
+                <td>
+                    <select asp-for="@complaint.Status" asp-items='Html.GetEnumSelectList<ComplaintStatus>()'></select>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
