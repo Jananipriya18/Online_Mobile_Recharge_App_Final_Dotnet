@@ -3,6 +3,7 @@ using dotnetapp.Models;
 using dotnetapp.Data;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore; 
 
 namespace dotnetapp.Controllers
 {
@@ -41,6 +42,12 @@ namespace dotnetapp.Controllers
                 return RedirectToAction("Index", "Home"); // Redirect to home page after adding complaint
             }
             return View(complaint);
+        }
+
+        public IActionResult Dashboard()
+        {
+            var complaints = _context.Complaints.Include(c => c.Executive).ToList();
+            return View(complaints);
         }
     }
 }
