@@ -65,95 +65,179 @@ public class Tests
         }
 
         [Test]
-        public void Complaint_Class_Has_Id_Property()
+        public void Complaint_Class_Has_ComplaintID_Property()
         {
             string assemblyName = "dotnetapp";
-            string typeName = "dotnetapp.Models.FoodOrder";
+            string typeName = "dotnetapp.Models.Complaint";
 
             Assembly assembly = Assembly.Load(assemblyName);
             Type foodOrderType = assembly.GetType(typeName);
 
-            PropertyInfo propertyInfo = foodOrderType.GetProperty("Id");
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("ComplaintID");
 
             Assert.IsNotNull(propertyInfo);
             Assert.AreEqual(typeof(int), propertyInfo.PropertyType);
         }
 
-    //     [Test]
-    //     public void Complaint_Class_Has _Date_Property()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Models.FoodOrder";
+         [Test]
+         public void Complaint_Class_Has_CustomerName_Property()
+         {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Complaint";
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type foodOrderType = assembly.GetType(typeName);
+             Assembly assembly = Assembly.Load(assemblyName);
+             Type foodOrderType = assembly.GetType(typeName);
 
-    //         PropertyInfo propertyInfo = foodOrderType.GetProperty("Date");
+             PropertyInfo propertyInfo = foodOrderType.GetProperty("CustomerName");
 
-    //         Assert.IsNotNull(propertyInfo);
-    //         Assert.AreEqual(typeof(DateTime), propertyInfo.PropertyType);
-    //     }
+             Assert.IsNotNull(propertyInfo);
+             Assert.AreEqual(typeof(string), propertyInfo.PropertyType);
+         }
 
-    //     [Test]
-    //     public void Complaint_Class_Has _FoodName_Property()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Models.FoodOrder";
+        [Test]
+        public void Complaint_Class_Has_ContactNumber_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Complaint";
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type foodOrderType = assembly.GetType(typeName);
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
 
-    //         PropertyInfo propertyInfo = foodOrderType.GetProperty("FoodName");
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("ContactNumber");
 
-    //         Assert.IsNotNull(propertyInfo);
-    //         Assert.AreEqual(typeof(string), propertyInfo.PropertyType);
-    //     }
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(string), propertyInfo.PropertyType);
+        }
 
-    //     [Test]
-    //     public void Complaint_Class_Has _Price_Property()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Models.FoodOrder";
+        [Test]
+        public void Complaint_Class_Has_SIMCardNumber_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Complaint";
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type foodOrderType = assembly.GetType(typeName);
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
 
-    //         PropertyInfo propertyInfo = foodOrderType.GetProperty("Price");
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("SIMCardNumber");
 
-    //         Assert.IsNotNull(propertyInfo);
-    //         Assert.AreEqual(typeof(decimal), propertyInfo.PropertyType);
-    //     }
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(string), propertyInfo.PropertyType);
+        }
 
-    //     [Test]
-    //     public void Complaint_Class_Has _Rating_Property()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Models.FoodOrder";
+        [Test]
+        public void Complaint_Class_Has_Description_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Complaint";
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type foodOrderType = assembly.GetType(typeName);
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
 
-    //         PropertyInfo propertyInfo = foodOrderType.GetProperty("Rating");
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("Description");
 
-    //         Assert.IsNotNull(propertyInfo);
-    //         Assert.AreEqual(typeof(decimal), propertyInfo.PropertyType);
-    //     }
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(string), propertyInfo.PropertyType);
+        }
+            [Test]
+        public void Complaint_Class_Has_Status_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Complaint";
+
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
+
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("Status");
+
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(string), propertyInfo.PropertyType);
+        }
+    [Test]
+        public void Complaint_Class_Has_ExecutiveID_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Complaint";
+
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
+
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("ExecutiveID");
+
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(int), propertyInfo.PropertyType);
+        }
+    [Test]
+        public void Complaint_Class_Has_Executive_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Complaint";
+
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
+
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("Executive");
+
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(Executive), propertyInfo.PropertyType);
+        }
+        [Test]
+        public void Executive_Class_Has_ExecutiveID_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Executive";
+
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
+
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("ExecutiveID");
+
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(int), propertyInfo.PropertyType);
+        }
+        [Test]
+        public void Executive_Class_Has_ExecutiveName_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Executive";
+
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
+
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("ExecutiveName");
+
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(string), propertyInfo.PropertyType);
+        }
+        [Test]
+        public void Executive_Class_Has_ContactNumber_Property()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Models.Executive";
+
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type foodOrderType = assembly.GetType(typeName);
+
+            PropertyInfo propertyInfo = foodOrderType.GetProperty("ContactNumber");
+
+            Assert.IsNotNull(propertyInfo);
+            Assert.AreEqual(typeof(string), propertyInfo.PropertyType);
+        }
 
 
-    //     [Test]
-    //     public void FoodOrderController_IndexMethodExists()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Controllers.FoodOrderController";
+        [Test]
+        public void FoodOrderController_IndexMethodExists()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Controllers.FoodOrderController";
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type controllerType = assembly.GetType(typeName);
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type controllerType = assembly.GetType(typeName);
 
-    //         MethodInfo indexMethod = controllerType.GetMethod("Index");
+            MethodInfo indexMethod = controllerType.GetMethod("Index");
 
-    //         Assert.IsNotNull(indexMethod);
-    //         Assert.IsTrue(typeof(Task<IActionResult>).IsAssignableFrom(indexMethod.ReturnType));
-    //     }
+            Assert.IsNotNull(indexMethod);
+            Assert.IsTrue(typeof(Task<IActionResult>).IsAssignableFrom(indexMethod.ReturnType));
+        }
 
     //     [Test]
     //     public void FoodOrderController_CreateGetMethodExists()
