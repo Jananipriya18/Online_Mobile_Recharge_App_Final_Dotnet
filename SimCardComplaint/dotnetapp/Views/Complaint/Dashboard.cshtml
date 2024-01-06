@@ -10,6 +10,7 @@
             <th>Description</th>
             <th>Status</th>
             <th>Executive Name</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -19,9 +20,30 @@
                 <td>@complaint.CustomerName</td>
                 <td>@complaint.SIMCardNumber</td>
                 <td>@complaint.Description</td>
-                <td>@complaint.Status</td>
+                <td>
+                    <!-- Dropdown for Status Update -->
+                    <form asp-controller="Complaint" asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="complaintId" value="@complaint.ComplaintID" />
+                        <select name="newStatus" class="status-dropdown">
+                            <option value="Pending" @(complaint.Status == "Pending" ? "selected" : "")>Pending</option>
+                            <option value="Under Investigation" @(complaint.Status == "Under Investigation" ? "selected" : "")>Under Investigation</option>
+                            <option value="Resolved" @(complaint.Status == "Resolved" ? "selected" : "")>Resolved</option>
+                            <!-- Add other status options based on your statuses -->
+                        </select>
+                        <button type="submit">Update Status</button>
+                    </form>
+                </td>
                 <td>@complaint.Executive.ExecutiveName</td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Summary Labels -->
+<div>
+    <label>Total Complaints: @Model.Count()</label><br />
+    <label>Total Pending Complaints: @Model.Count(c => c.Status == "Pending")</label><br />
+    <label>Total Complaints under Investigation: @Model.Count(c => c.Status == "Under Investigation")</label><br />
+    <label>Total Resolved Complaints: @Model.Count(c => c.Status == "Resolved")</label><br />
+    <!-- Total days remaining for complaints under investigation will require further calculation based on your logic -->
+</div>
