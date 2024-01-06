@@ -291,60 +291,183 @@ public void ExecutiveController_IndexMethodExists()
     Assert.IsNotNull(indexMethod);
 }
 
+// [Test]
+// public void ExecutiveController_CreateMethodExists()
+// {
+//     string assemblyName = "dotnetapp"; // Replace with your assembly name
+//     string typeName = "dotnetapp.Controllers.ExecutiveController";
+//     string methodName = "Create";
 
-    //     [Test]
-    //     public void Test_Create_Views_File_Exists()
-    //     {
-    //         string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
-    //         string desiredFiles = "Create.cshtml"; // Replace with the names of the files you want to check
+//     Assembly assembly = Assembly.Load(assemblyName);
+//     Type controllerType = assembly.GetType(typeName);
 
-    //         bool folderExists = Directory.Exists(folderPath);
+//     // Get the Create method
+//     MethodInfo createMethod = controllerType.GetMethod(methodName);
 
-    //         Assert.IsTrue(folderExists, "The folder does not exist.");
-    //         string filePath = Path.Combine(folderPath, desiredFiles);
-    //         bool fileExists = File.Exists(filePath);
-    //         Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
-    //     }
+//     Assert.IsNotNull(createMethod);
+// }
 
-    //      [Test]
-    //     public void Test_Delete_Views_File_Exists()
-    //     {
-    //         string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
-    //         string desiredFiles = "Delete.cshtml"; // Replace with the names of the files you want to check
+[Test]
+public void ExecutiveController_CreatePostMethodExists()
+{
+    string assemblyName = "dotnetapp"; // Replace with your assembly name
+    string typeName = "dotnetapp.Controllers.ExecutiveController";
+    string methodName = "Create"; // Assuming the HTTP POST method has the same name as Create
 
-    //         bool folderExists = Directory.Exists(folderPath);
+    Assembly assembly = Assembly.Load(assemblyName);
+    Type controllerType = assembly.GetType(typeName);
 
-    //         Assert.IsTrue(folderExists, "The folder does not exist.");
-    //         string filePath = Path.Combine(folderPath, desiredFiles);
-    //         bool fileExists = File.Exists(filePath);
-    //         Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
-    //     }
+    // Get the HTTP POST Create method
+    MethodInfo createPostMethod = controllerType.GetMethods().FirstOrDefault(m => m.Name == methodName && m.GetCustomAttributes(typeof(HttpPostAttribute), true).Length > 0);
 
-    //      [Test]
-    //     public void Test_Edit_Views_File_Exists()
-    //     {
-    //         string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
-    //         string desiredFiles = "Edit.cshtml"; // Replace with the names of the files you want to check
+    Assert.IsNotNull(createPostMethod);
+}
+[Test]
+public void ExecutiveController_EditMethodExists()
+{
+    string assemblyName = "dotnetapp"; // Replace with your assembly name
+    string typeName = "dotnetapp.Controllers.ExecutiveController";
+    string methodName = "Edit";
 
-    //         bool folderExists = Directory.Exists(folderPath);
+    Assembly assembly = Assembly.Load(assemblyName);
+    Type controllerType = assembly.GetType(typeName);
 
-    //         Assert.IsTrue(folderExists, "The folder does not exist.");
-    //         string filePath = Path.Combine(folderPath, desiredFiles);
-    //         bool fileExists = File.Exists(filePath);
-    //         Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
-    //     }
+    // Get the Edit method
+    MethodInfo editMethod = controllerType.GetMethod(methodName, new[] { typeof(int) });
 
-    //      [Test]
-    //     public void Test_Index_Views_File_Exists()
-    //     {
-    //         string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
-    //         string desiredFiles = "Index.cshtml"; // Replace with the names of the files you want to check
+    Assert.IsNotNull(editMethod);
+}
 
-    //         bool folderExists = Directory.Exists(folderPath);
+[Test]
+public void ExecutiveController_EditPostMethodExists()
+{
+    string assemblyName = "dotnetapp"; // Replace with your assembly name
+    string typeName = "dotnetapp.Controllers.ExecutiveController";
+    string methodName = "Edit"; // Assuming the HTTP POST method has the same name as Edit
 
-    //         Assert.IsTrue(folderExists, "The folder does not exist.");
-    //         string filePath = Path.Combine(folderPath, desiredFiles);
-    //         bool fileExists = File.Exists(filePath);
-    //         Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
-    //     }        
+    Assembly assembly = Assembly.Load(assemblyName);
+    Type controllerType = assembly.GetType(typeName);
+
+    // Get the HTTP POST Edit method
+    MethodInfo editPostMethod = controllerType.GetMethods().FirstOrDefault(m => m.Name == methodName && m.GetCustomAttributes(typeof(HttpPostAttribute), true).Length > 0);
+
+    Assert.IsNotNull(editPostMethod);
+}
+
+[Test]
+public void ExecutiveController_DeleteMethodExists()
+{
+    string assemblyName = "dotnetapp"; // Replace with your assembly name
+    string typeName = "dotnetapp.Controllers.ExecutiveController";
+    string methodName = "Delete";
+
+    Assembly assembly = Assembly.Load(assemblyName);
+    Type controllerType = assembly.GetType(typeName);
+
+    // Get the Delete method
+    MethodInfo deleteMethod = controllerType.GetMethod(methodName, new[] { typeof(int?) });
+
+    Assert.IsNotNull(deleteMethod);
+}
+
+[Test]
+public void ExecutiveController_DeleteConfirmedMethodExists()
+{
+    string assemblyName = "dotnetapp"; // Replace with your assembly name
+    string typeName = "dotnetapp.Controllers.ExecutiveController";
+    string methodName = "DeleteConfirmed";
+
+    Assembly assembly = Assembly.Load(assemblyName);
+    Type controllerType = assembly.GetType(typeName);
+
+    // Get the DeleteConfirmed method
+    MethodInfo deleteConfirmedMethod = controllerType.GetMethod(methodName, new[] { typeof(int) });
+
+    Assert.IsNotNull(deleteConfirmedMethod);
+}
+
+[Test]
+public void ExecutiveController_CreateMethodExists()
+{
+    string assemblyName = "dotnetapp"; // Replace with your assembly name
+    string typeName = "dotnetapp.Controllers.ExecutiveController";
+    string methodName = "Create";
+
+    Assembly assembly = Assembly.Load(assemblyName);
+    Type controllerType = assembly.GetType(typeName);
+
+    // Get the Create method that does not accept any parameters
+    MethodInfo createMethod = controllerType.GetMethod(methodName, Type.EmptyTypes);
+
+    Assert.IsNotNull(createMethod);
+}
+
+        [Test]
+        public void Test_Create_Views_File_Exists()
+        {
+            string folderPath = @"/home/coder/project/workspace/SimCardComplaint/dotnetapp/Views/Executive/"; // Replace with the folder path you want to check
+            string desiredFiles = "Create.cshtml"; // Replace with the names of the files you want to check
+
+            bool folderExists = Directory.Exists(folderPath);
+
+            Assert.IsTrue(folderExists, "The folder does not exist.");
+            string filePath = Path.Combine(folderPath, desiredFiles);
+            bool fileExists = File.Exists(filePath);
+            Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
+        }
+
+         [Test]
+        public void Test_Delete_Views_File_Exists()
+        {
+            string folderPath = @"/home/coder/project/workspace/SimCardComplaint/dotnetapp/Views/Executive/"; // Replace with the folder path you want to check
+            string desiredFiles = "Delete.cshtml"; // Replace with the names of the files you want to check
+
+            bool folderExists = Directory.Exists(folderPath);
+
+            Assert.IsTrue(folderExists, "The folder does not exist.");
+            string filePath = Path.Combine(folderPath, desiredFiles);
+            bool fileExists = File.Exists(filePath);
+            Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
+        }
+
+         [Test]
+        public void Test_Edit_Views_File_Exists()
+        {
+            string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
+            string desiredFiles = "Edit.cshtml"; // Replace with the names of the files you want to check
+
+            bool folderExists = Directory.Exists(folderPath);
+
+            Assert.IsTrue(folderExists, "The folder does not exist.");
+            string filePath = Path.Combine(folderPath, desiredFiles);
+            bool fileExists = File.Exists(filePath);
+            Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
+        }
+
+         [Test]
+        public void Test_Complaint_Create_Views_File_Exists()
+        {
+            string folderPath = @"/home/coder/project/workspace/SimCardComplaint/dotnetapp/Views/Complaint/"; // Replace with the folder path you want to check
+            string desiredFiles = "Create.cshtml"; // Replace with the names of the files you want to check
+
+            bool folderExists = Directory.Exists(folderPath);
+
+            Assert.IsTrue(folderExists, "The folder does not exist.");
+            string filePath = Path.Combine(folderPath, desiredFiles);
+            bool fileExists = File.Exists(filePath);
+            Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
+        }    
+        [Test]
+        public void Test_Dashboard_Views_File_Exists()
+        {
+            string folderPath = @"/home/coder/project/workspace/SimCardComplaint/dotnetapp/Views/Complaint/"; // Replace with the folder path you want to check
+            string desiredFiles = "Dashboard.cshtml"; // Replace with the names of the files you want to check
+
+            bool folderExists = Directory.Exists(folderPath);
+
+            Assert.IsTrue(folderExists, "The folder does not exist.");
+            string filePath = Path.Combine(folderPath, desiredFiles);
+            bool fileExists = File.Exists(filePath);
+            Assert.IsTrue(fileExists, $"File '{desiredFiles}' does not exist.");
+        }        
 }
