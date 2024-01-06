@@ -353,6 +353,22 @@ public void ExecutiveController_EditPostMethodExists()
 
     Assert.IsNotNull(editPostMethod);
 }
+[Test]
+public void ExecutiveController_EditPostMethodExists()
+{
+    string assemblyName = "dotnetapp"; // Replace with your assembly name
+    string typeName = "dotnetapp.Controllers.ExecutiveController";
+    string methodName = "Edit"; // Assuming the HTTP POST method has the same name as Edit
+
+    Assembly assembly = Assembly.Load(assemblyName);
+    Type controllerType = assembly.GetType(typeName);
+
+    // Get the HTTP POST Edit method
+    MethodInfo editPostMethod = controllerType.GetMethods().FirstOrDefault(m => m.Name == methodName && m.GetCustomAttributes(typeof(HttpPostAttribute), true).Length > 0);
+
+    Assert.IsNotNull(editPostMethod);
+}
+
 
 [Test]
 public void ExecutiveController_DeleteMethodExists()

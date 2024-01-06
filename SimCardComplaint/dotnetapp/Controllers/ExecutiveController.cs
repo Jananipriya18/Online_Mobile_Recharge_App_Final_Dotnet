@@ -40,7 +40,6 @@ public IActionResult Create(Executive newExecutive)
         {
             _db.Executives.Add(newExecutive);
             _db.SaveChanges();
-            Console.WriteLine("Hello");
             return RedirectToAction("Index"); // Redirect to Index action after successful creation
         }
         else
