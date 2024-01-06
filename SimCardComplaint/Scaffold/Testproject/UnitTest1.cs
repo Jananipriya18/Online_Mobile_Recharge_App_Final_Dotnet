@@ -407,7 +407,7 @@ public void ExecutiveController_CreateMethodExists()
         [Test]
         public void Test_Create_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/SimCardComplaint/dotnetapp/Views/Executive/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/Executive/"; // Replace with the folder path you want to check
             string desiredFiles = "Create.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -421,7 +421,7 @@ public void ExecutiveController_CreateMethodExists()
          [Test]
         public void Test_Delete_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/SimCardComplaint/dotnetapp/Views/Executive/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/Executive/"; // Replace with the folder path you want to check
             string desiredFiles = "Delete.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -435,7 +435,7 @@ public void ExecutiveController_CreateMethodExists()
          [Test]
         public void Test_Edit_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/FoodOrder/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/FoodOrder/"; // Replace with the folder path you want to check
             string desiredFiles = "Edit.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -449,7 +449,7 @@ public void ExecutiveController_CreateMethodExists()
          [Test]
         public void Test_Complaint_Create_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/SimCardComplaint/dotnetapp/Views/Complaint/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/Complaint/"; // Replace with the folder path you want to check
             string desiredFiles = "Create.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
@@ -462,7 +462,7 @@ public void ExecutiveController_CreateMethodExists()
         [Test]
         public void Test_Dashboard_Views_File_Exists()
         {
-            string folderPath = @"/home/coder/project/workspace/SimCardComplaint/dotnetapp/Views/Complaint/"; // Replace with the folder path you want to check
+            string folderPath = @"/home/coder/project/workspace/dotnetapp/Views/Complaint/"; // Replace with the folder path you want to check
             string desiredFiles = "Dashboard.cshtml"; // Replace with the names of the files you want to check
 
             bool folderExists = Directory.Exists(folderPath);
