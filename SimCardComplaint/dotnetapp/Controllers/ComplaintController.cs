@@ -1,36 +1,95 @@
-@model dotnetapp.Models.Executive
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using dotnetapp.Data;
+using dotnetapp.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-<h2>Create Executive</h2>
-<form asp-controller="Executive" asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="ExecutiveName"></label>
-        <input asp-for="ExecutiveName" class="form-control" />
-        <span asp-validation-for="ExecutiveName" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="ContactNumber"></label>
-        <input asp-for="ContactNumber" class="form-control" />
-        <span asp-validation-for="ContactNumber" class="text-danger"></span>
-    </div>
-    <!-- Other properties for creating executives -->
-
-    @if (ViewBag.Complaints != null && ViewBag.Complaints.Count > 0)
+namespace dotnetapp.Controllers
+{
+    public class ComplaintController : Controller
     {
-        <div class="form-group">
-            <label>Select Complaints</label>
-            <br />
-            @foreach (var complaint in ViewBag.Complaints)
+        private readonly ApplicationDbContext _db;
+
+        public ComplaintController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+
+        public ActionResult Create()
+        {
+            var executives = _db.Executives
+                .Select(e => new SelectListItem
+                {
+                    Value = e.ExecutiveID.ToString(),
+                    Text = e.ExecutiveName
+                })
+                .ToList();
+
+            // Always pass the executives to the view, whether it's empty or not
+            ViewBag.Executives = executives;
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Complaint newComplaint)
+        {
+            if (ModelState.IsValid)
             {
-                <input type="checkbox" asp-for="Complaints" value="@complaint.ComplaintID" />
-                <label>@complaint.Description</label>
-                <br />
+                // Fetch the selected executive from the database based on the provided ExecutiveID
+                var selectedExecutive = _db.Executives.FirstOrDefault(e => e.ExecutiveID == newComplaint.ExecutiveID);
+
+                if (selectedExecutive != null)
+                {
+                    // Associate the selected executive with the new complaint
+                    newComplaint.Executive = selectedExecutive;
+                    // Add the complaint to the database
+                    _db.Complaints.Add(newComplaint);
+                    _db.SaveChanges();
+                    return RedirectToAction("Dashboard");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Selected Executive not found");
+                }
             }
-            <span asp-validation-for="Complaints" class="text-danger"></span>
-        </div>
+
+            // If the model state is not valid or the executive wasn't found, retrieve executives again and return to the view
+            var executives = _db.Executives
+                .Select(e => new SelectListItem
+                {
+                    Value = e.ExecutiveID.ToString(),
+                    Text = e.ExecutiveName
+                })
+                .ToList();
+
+            ViewBag.Executives = executives;
+            return View(newComplaint);
+        }
+
+        public ActionResult Dashboard()
+        {
+            var complaints = _db.Complaints.Include(c => c.Executive).ToList();
+            return View(complaints);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateStatus(int complaintId, string newStatus)
+        {
+            var complaint = _db.Complaints.Find(complaintId);
+
+            if (complaint != null)
+            {
+                complaint.Status = newStatus;
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("Dashboard");
+        }
     }
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
-The Complaints field is required.
-The Complaints field is required.
-The Complaints field is required.
+}
+
+

@@ -9,7 +9,7 @@
             <th>SIM Card Number</th>
             <th>Description</th>
             <th>Status</th>
-            <th>Executive Name</th>
+            @* <th>Executive Name</th> *@
             <th>Action</th>
         </tr>
     </thead>
@@ -20,7 +20,7 @@
                 <td>@complaint.CustomerName</td>
                 <td>@complaint.SIMCardNumber</td>
                 <td>@complaint.Description</td>
-                <td>
+                @* <td>
                     <!-- Dropdown for Status Update -->
                     <form asp-controller="Complaint" asp-action="UpdateStatus" method="post">
                         <input type="hidden" name="complaintId" value="@complaint.ComplaintID" />
@@ -32,18 +32,18 @@
                         </select>
                         <button type="submit">Update Status</button>
                     </form>
-                </td>
-                <td>@complaint.Executive.ExecutiveName</td>
+                </td> *@
+                @* <td>@complaint.Executive.ExecutiveName</td> *@
             </tr>
         }
     </tbody>
 </table>
 
-<!-- Summary Labels -->
+@* <!-- Summary Labels -->
 <div>
     <label>Total Complaints: @Model.Count()</label><br />
     <label>Total Pending Complaints: @Model.Count(c => c.Status == "Pending")</label><br />
     <label>Total Complaints under Investigation: @Model.Count(c => c.Status == "Under Investigation")</label><br />
     <label>Total Resolved Complaints: @Model.Count(c => c.Status == "Resolved")</label><br />
     <!-- Total days remaining for complaints under investigation will require further calculation based on your logic -->
-</div>
+</div> *@
