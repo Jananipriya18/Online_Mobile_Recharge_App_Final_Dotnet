@@ -16,21 +16,21 @@ namespace dotnetapp.Controllers
             _db = db;
         }
 
-        // public ActionResult Create()
-        // {
-        //     var executives = _db.Executives
-        //         .Select(e => new SelectListItem
-        //         {
-        //             Value = e.ExecutiveID.ToString(),
-        //             Text = e.ExecutiveName
-        //         })
-        //         .ToList();
+        public ActionResult Create()
+        {
+            var executives = _db.Executives
+                .Select(e => new SelectListItem
+                {
+                    Value = e.ExecutiveID.ToString(),
+                    Text = e.ExecutiveName
+                })
+                .ToList();
 
-        //     // Always pass the executives to the view, whether it's empty or not
-        //     ViewBag.Executives = executives;
+            // Always pass the executives to the view, whether it's empty or not
+            ViewBag.Executives = executives;
 
-        //     return View();
-        // }
+            return View();
+        }
 
         // [HttpPost]
         // [ValidateAntiForgeryToken]
