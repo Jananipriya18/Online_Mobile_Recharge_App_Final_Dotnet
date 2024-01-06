@@ -225,95 +225,73 @@ public class Tests
 
 
         [Test]
-        public void FoodOrderController_IndexMethodExists()
+        public void ComplaintController_CreateMethodExists()
         {
             string assemblyName = "dotnetapp";
-            string typeName = "dotnetapp.Controllers.FoodOrderController";
+            string typeName = "dotnetapp.Controllers.ComplaintController";
 
             Assembly assembly = Assembly.Load(assemblyName);
             Type controllerType = assembly.GetType(typeName);
 
-            MethodInfo indexMethod = controllerType.GetMethod("Index");
+            // Get the Create method with the expected parameters
+            MethodInfo createMethod = controllerType.GetMethod("Create", new[] { typeof(Complaint) });
 
-            Assert.IsNotNull(indexMethod);
-            Assert.IsTrue(typeof(Task<IActionResult>).IsAssignableFrom(indexMethod.ReturnType));
+            Assert.IsNotNull(createMethod);
+            Assert.IsTrue(typeof(IActionResult).IsAssignableFrom(createMethod.ReturnType));
         }
 
-    //     [Test]
-    //     public void FoodOrderController_CreateGetMethodExists()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Controllers.FoodOrderController";
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type controllerType = assembly.GetType(typeName);
+            [Test]
+        public void ComplaintController_CreatePostMethodExists()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Controllers.ComplaintController";
 
-    //         MethodInfo createGetMethod = controllerType.GetMethod("Create", new Type[] { });
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type controllerType = assembly.GetType(typeName);
 
-    //         Assert.IsNotNull(createGetMethod);
-    //         Assert.IsTrue(typeof(IActionResult).IsAssignableFrom(createGetMethod.ReturnType));
-    //     }
+            // Get the Create (POST) method
+            MethodInfo createPostMethod = controllerType.GetMethod("Create", new[] { typeof(Complaint) });
+            var postAttributes = createPostMethod?.GetCustomAttributes(typeof(HttpPostAttribute), true);
 
-    //     [Test]
-    //     public void FoodOrderController_CreatePostMethodExists()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Controllers.FoodOrderController";
+            Assert.IsNotNull(createPostMethod);
+            Assert.IsNotNull(postAttributes);
+        }
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type controllerType = assembly.GetType(typeName);
+        [Test]
+        public void ComplaintController_DashboardMethodExists()
+        {
+            string assemblyName = "dotnetapp";
+            string typeName = "dotnetapp.Controllers.ComplaintController";
 
-    //         MethodInfo createPostMethod = controllerType.GetMethod("Create", new[] { typeof(FoodOrder) });
+            Assembly assembly = Assembly.Load(assemblyName);
+            Type controllerType = assembly.GetType(typeName);
 
-    //         Assert.IsNotNull(createPostMethod);
-    //         Assert.IsTrue(typeof(Task<IActionResult>).IsAssignableFrom(createPostMethod.ReturnType));
-    //     }
+            // Get the Dashboard method
+            MethodInfo dashboardMethod = controllerType.GetMethod("Dashboard");
 
-    //     [Test]
-    //     public void FoodOrderController_EditGetMethodExists()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Controllers.FoodOrderController";
+            Assert.IsNotNull(dashboardMethod);
+        }
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type controllerType = assembly.GetType(typeName);
 
-    //         MethodInfo editGetMethod = controllerType.GetMethod("Edit", new[] { typeof(int?) });
 
-    //         Assert.IsNotNull(editGetMethod);
-    //         Assert.IsTrue(typeof(Task<IActionResult>).IsAssignableFrom(editGetMethod.ReturnType));
-    //     }
+   [Test]
+public void ExecutiveController_IndexMethodExists()
+{
+    string assemblyName = "dotnetapp";
+    string typeName = "dotnetapp.Controllers.ExecutiveController";
+    string methodName = "Index";
 
-    //     [Test]
-    //     public void FoodOrderController_EditPostMethodExists()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Controllers.FoodOrderController";
+    Assembly assembly = Assembly.Load(assemblyName);
+    Type controllerType = assembly.GetType(typeName);
 
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type controllerType = assembly.GetType(typeName);
+    // Get the Index method
+    MethodInfo indexMethod = controllerType.GetMethod(methodName);
 
-    //         MethodInfo editPostMethod = controllerType.GetMethod("Edit", new[] { typeof(int), typeof(FoodOrder) });
+    Assert.IsNotNull(indexMethod);
+}
 
-    //         Assert.IsNotNull(editPostMethod);
-    //         Assert.IsTrue(typeof(Task<IActionResult>).IsAssignableFrom(editPostMethod.ReturnType));
-    //     }
 
-    //     [Test]
-    //     public void FoodOrderController_DeleteMethodExists()
-    //     {
-    //         string assemblyName = "dotnetapp";
-    //         string typeName = "dotnetapp.Controllers.FoodOrderController";
-
-    //         Assembly assembly = Assembly.Load(assemblyName);
-    //         Type controllerType = assembly.GetType(typeName);
-
-    //         MethodInfo deleteMethod = controllerType.GetMethod("Delete", new[] { typeof(int) });
-
-    //         Assert.IsNotNull(deleteMethod);
-    //         Assert.IsTrue(typeof(Task<IActionResult>).IsAssignableFrom(deleteMethod.ReturnType));
-    //     }
-        
     //     [Test]
     //     public void Test_Create_Views_File_Exists()
     //     {
