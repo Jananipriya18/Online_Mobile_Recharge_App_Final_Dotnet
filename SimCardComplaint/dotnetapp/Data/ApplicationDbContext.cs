@@ -23,4 +23,3 @@ namespace dotnetapp.Data
         }
     }
 }
-https://github.com/Jananipriya18/Dotnet-EF_Simcard.git
