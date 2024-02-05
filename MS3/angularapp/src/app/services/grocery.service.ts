@@ -7,7 +7,7 @@ import { GroceryItem } from '../models/grocery-item.model';
   providedIn: 'root',
 })
 export class GroceryService {
-  private apiUrl = 'https://localhost:7107/api/GroceryItem'; 
+  private apiUrl = 'https://8080-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/GroceryItem'; 
   constructor(private http: HttpClient) {}
 
   // Get all grocery items
