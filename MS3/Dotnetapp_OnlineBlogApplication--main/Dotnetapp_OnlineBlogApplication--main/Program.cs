@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
-        builder => builder.WithOrigins("http://localhost:4200")
+        builder => builder.WithOrigins("https://8081-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io")
         .AllowAnyHeader()
         .AllowAnyMethod());
 });
