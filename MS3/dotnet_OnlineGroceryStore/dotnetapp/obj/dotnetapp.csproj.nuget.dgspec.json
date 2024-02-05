@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\janan\\source\\repos\\dotnet_OnlineGroceryStore\\dotnetapp\\dotnetapp.csproj": {}
+    "/home/coder/project/workspace/MS3/dotnet_OnlineGroceryStore/dotnetapp/dotnetapp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\janan\\source\\repos\\dotnet_OnlineGroceryStore\\dotnetapp\\dotnetapp.csproj": {
+    "/home/coder/project/workspace/MS3/dotnet_OnlineGroceryStore/dotnetapp/dotnetapp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\janan\\source\\repos\\dotnet_OnlineGroceryStore\\dotnetapp\\dotnetapp.csproj",
+        "projectUniqueName": "/home/coder/project/workspace/MS3/dotnet_OnlineGroceryStore/dotnetapp/dotnetapp.csproj",
         "projectName": "dotnetapp",
-        "projectPath": "C:\\Users\\janan\\source\\repos\\dotnet_OnlineGroceryStore\\dotnetapp\\dotnetapp.csproj",
-        "packagesPath": "C:\\Users\\janan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\janan\\source\\repos\\dotnet_OnlineGroceryStore\\dotnetapp\\obj\\",
+        "projectPath": "/home/coder/project/workspace/MS3/dotnet_OnlineGroceryStore/dotnetapp/dotnetapp.csproj",
+        "packagesPath": "/home/coder/.nuget/packages/",
+        "outputPath": "/home/coder/project/workspace/MS3/dotnet_OnlineGroceryStore/dotnetapp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\janan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/coder/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -74,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.417/RuntimeIdentifierGraph.json"
         }
       }
     }
