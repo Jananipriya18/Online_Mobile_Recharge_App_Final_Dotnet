@@ -1,36 +1,47 @@
-.item-card {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  .item-card h3 {
-    color: #333;
-  }
-  
-  .item-card p {
-    margin-bottom: 10px;
-  }
-  
-  .item-card button {
-    padding: 8px 12px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .item-card button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .item-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
+/* Style for the main container */
+.container {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+/* Style for the heading */
+.dashboard-header {
+  color: #007bff;
+  text-align: center;
+}
+
+/* Style for individual item rows in the table */
+.item-row {
+  background-color: #fff;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for table header */
+.table th {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Style for table cells */
+.table td {
+  color: #555;
+}
+
+/* Style for the 'Add to Cart' button */
+.table button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Style for the 'Add to Cart' button when disabled */
+.table button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

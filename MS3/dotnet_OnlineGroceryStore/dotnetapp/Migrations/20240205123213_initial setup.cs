@@ -4,7 +4,7 @@
 
 namespace dotnetapp.Migrations
 {
-    public partial class InitialSetup : Migration
+    public partial class initialsetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

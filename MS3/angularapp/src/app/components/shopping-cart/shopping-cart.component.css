@@ -1,26 +1,31 @@
+/* Style for the cart table */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+/* Style for table headers */
+.cart-table th {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Style for table rows */
 .cart-item {
-    border: 1px solid #ccc;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  .cart-item h3 {
-    color: #333;
-  }
-  
-  .cart-item p {
-    margin-bottom: 10px;
-  }
-  
-  .total-amount {
-    margin-top: 20px;
-  }
-  
-  .cart-item:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
+  border: 1px solid #ccc;
+}
+
+/* Style for table cells */
+.cart-item td {
+  padding: 8px;
+}
+
+/* Style for the total amount section */
+.total-amount {
+  margin-top: 15px;
+}
+
+/* Additional styling as needed */
