@@ -1,12 +1,23 @@
 <div class="container mt-3">
   <h2 class="dashboard-header">View Blogs</h2>
-  <div *ngFor="let blog of blogs" class="card mb-3 blog-card">
-    <div class="card-body">
-      <h5 class="card-title">{{ blog.blogSubject }}</h5>
-      <p class="card-text">{{ blog.blogContent }}</p>
-      <p class="card-text"><strong>Author:</strong> {{ blog.authorName }}</p>
-      <p class="card-text"><strong>Category:</strong> {{ blog.blogCategory }}</p>
-      <p class="card-text"><strong>Date:</strong> {{ blog.postedDate | date }}</p>
-    </div>
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Blog Subject</th>
+        <th>Blog Content</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let blog of blogs" class="blog-row">
+        <td>{{ blog.blogSubject }}</td>
+        <td>{{ blog.blogContent }}</td>
+        <td>{{ blog.authorName }}</td>
+        <td>{{ blog.blogCategory }}</td>
+        <td>{{ blog.postedDate | date }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

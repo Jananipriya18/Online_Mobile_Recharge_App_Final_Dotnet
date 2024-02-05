@@ -7,7 +7,7 @@ import { Blogmodel } from '../model/blog.model';
   providedIn: 'root'
 })
 export class BlogService {
-  private apiUrl = 'https://localhost:7160/api/blog';
+  private apiUrl = 'https://8080-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/api/blog';
 
   constructor(private http: HttpClient) { }
 

@@ -1,43 +1,43 @@
 /* Style for the main container */
 .container {
-    background-color: #f8f9fa;
-    padding: 20px;
-  }
-  
-  /* Style for the heading */
-  .dashboard-header {
-    color: #007bff;
-    text-align: center;
-  }
-  
-  /* Style for individual blog cards */
-  .blog-card {
-    background-color: #fff;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Style for card body */
-  .card-body {
-    padding: 15px;
-  }
-  
-  /* Style for card title */
-  .card-title {
-    font-size: 1.2rem;
-    color: #333;
-  }
-  
-  /* Style for card text */
-  .card-text {
-    color: #555;
-    margin-bottom: 5px;
-  }
-  
-  /* Style for strong elements within card text */
-  .card-text strong {
-    color: #007bff;
-  }
-  
+  margin-top: 3rem;
+}
+
+/* Style for the heading */
+.dashboard-header {
+  color: #007bff;
+  text-align: center;
+}
+
+/* Style for the table */
+.table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+}
+
+/* Style for table headers */
+.table th, .table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Style for individual blog rows */
+.blog-row {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for card title in the table */
+.blog-row td {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Style for strong elements within card text in the table */
+.blog-row strong {
+  color: #007bff;
+}
