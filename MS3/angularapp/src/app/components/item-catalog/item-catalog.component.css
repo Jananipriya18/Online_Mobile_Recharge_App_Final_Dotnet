@@ -1,0 +1,36 @@
+.item-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .item-card h3 {
+    color: #333;
+  }
+  
+  .item-card p {
+    margin-bottom: 10px;
+  }
+  
+  .item-card button {
+    padding: 8px 12px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .item-card button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .item-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  

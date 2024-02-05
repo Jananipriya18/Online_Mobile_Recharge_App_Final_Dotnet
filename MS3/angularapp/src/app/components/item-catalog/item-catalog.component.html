@@ -1,0 +1,8 @@
+<div *ngFor="let item of catalog" class="item-card">
+  <h3>{{ item.itemName }}</h3>
+  <p>{{ item.itemDescription }}</p>
+  <p>Price: ${{ item.price }}</p>
+  <p>Quantity Available: {{ item.quantityAvailable }}</p>
+  <p>Category: {{ item.category }}</p>
+  <button (click)="addToCart(item)" [disabled]="item.quantityAvailable === 0">Add to Cart</button>
+</div>
