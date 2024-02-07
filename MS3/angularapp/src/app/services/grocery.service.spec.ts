@@ -21,23 +21,23 @@ describe('GroceryService', () => {
     httpTestingController.verify();
   });
 
-  it('groceryService_should_be_created', () => {
+  fit('groceryService_should_be_created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('groceryService_should_have_getGroceryItems_method', () => {
+  fit('groceryService_should_have_getGroceryItems_method', () => {
     expect(service.getGroceryItems).toBeDefined();
   });
 
-  it('groceryService_should_have_addGroceryItem_method', () => {
+  fit('groceryService_should_have_addGroceryItem_method', () => {
     expect(service.addGroceryItem).toBeDefined();
   });
 
-  it('groceryService_should_have_getShoppingCartItems_method', () => {
+  fit('groceryService_should_have_getShoppingCartItems_method', () => {
     expect(service.getShoppingCartItems).toBeDefined();
   });
 
-  it('groceryService_should_call_getShoppingCartItems_method_and_return_data', (done) => {
+  fit('groceryService_should_call_getShoppingCartItems_method_and_return_data', (done) => {
     const mockCartItems: any[] = [
       { itemName: 'Cart Item 1', price: 10.99 },
       { itemName: 'Cart Item 2', price: 15.99 },
@@ -51,11 +51,11 @@ describe('GroceryService', () => {
     // No HTTP request is expected for getShoppingCartItems
   });
 
-  it('groceryService_should_have_addToCart_method', () => {
+  fit('groceryService_should_have_addToCart_method', () => {
     expect(service.addToCart).toBeDefined();
   });
 
-  it('groceryService_should_add_item_to_cart_and_update_subject_when_addToCart_is_called', () => {
+  fit('groceryService_should_add_item_to_cart_and_update_subject_when_addToCart_is_called', () => {
     const sampleCartItem: any = { itemName: 'Sample Item', price: 20.99 };
 
     service.addToCart(sampleCartItem);
@@ -66,7 +66,7 @@ describe('GroceryService', () => {
     });
   });
 
-  it('groceryService_should_add_item_to_cart_and_emit_event_when_addToCart_is_called', (done) => {
+  fit('groceryService_should_add_item_to_cart_and_emit_event_when_addToCart_is_called', (done) => {
     const sampleCartItem: any = { itemName: 'Sample Item', price: 20.99 };
 
     service.getShoppingCartItems().subscribe(items => {
@@ -83,8 +83,8 @@ describe('GroceryService', () => {
     service.addToCart(sampleCartItem);
   });
 
-  it('groceryService_should_call_addGroceryItem_method_and_return_data', () => {
-    const newItem: GroceryItem = { itemId: 3, itemName: 'New Item', itemDescription: 'New Description', price: 20.99, quantityAvailable: 20, category: 'New Category' };
+  fit('groceryService_should_call_addGroceryItem_method_and_return_data', () => {
+    const newItem: Items = { itemId: 3, itemName: 'New Item', itemDescription: 'New Description', price: 20.99, quantityAvailable: 20, category: 'New Category' };
 
     service.addGroceryItem(newItem).subscribe(item => {
       expect(item).toEqual(newItem);
@@ -96,8 +96,8 @@ describe('GroceryService', () => {
     req.flush(newItem);
   });
 
-  it('groceryService_should_call_getGroceryItems_method_and_return_data', () => {
-    const mockItems: GroceryItem[] = [
+  fit('groceryService_should_call_getGroceryItems_method_and_return_data', () => {
+    const mockItems: Items[] = [
       { itemId: 1, itemName: 'Item 1', itemDescription: 'Description 1', price: 10.99, quantityAvailable: 50, category: 'Category 1' },
       { itemId: 2, itemName: 'Item 2', itemDescription: 'Description 2', price: 15.99, quantityAvailable: 30, category: 'Category 2' },
     ];

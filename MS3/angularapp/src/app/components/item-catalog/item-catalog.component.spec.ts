@@ -10,7 +10,7 @@ describe('ItemCatalogComponent', () => {
   let groceryServiceSpy: jasmine.SpyObj<GroceryService>;
  
   beforeEach(() => {
-    groceryServiceSpy = jasmine.createSpyObj('GroceryService', ['getItems', 'addToCart', 'getShoppingCartItems']);
+    groceryServiceSpy = jasmine.createSpyObj('GroceryService', ['getGroceryItems', 'addToCart', 'getShoppingCartItems']);
     TestBed.configureTestingModule({
       declarations: [ItemCatalogComponent],
       providers: [
@@ -22,21 +22,21 @@ describe('ItemCatalogComponent', () => {
     component = fixture.componentInstance;
   });
  
-  it('should create ItemCatalogComponent', () => {
+  fit('should create ItemCatalogComponent', () => {
     expect(component).toBeTruthy();
   });
  
-  it('should load item catalog on init and display properties in HTML', () => {
+  fit('should load item catalog on init and display properties in HTML', () => {
     const items: Items[] = [
       { itemId: 4, itemName: 'Item 1', itemDescription: 'Description 1', price: 10, quantityAvailable: 5, category: 'Category 1' },
       { itemId: 5, itemName: 'Item 2', itemDescription: 'Description 2', price: 15, quantityAvailable: 8, category: 'Category 2' }
     ];
  
-    groceryServiceSpy.getItems.and.returnValue(of(items));
+    groceryServiceSpy.getGroceryItems.and.returnValue(of(items));
  
     fixture.detectChanges();
  
-    expect(groceryServiceSpy.getItems).toHaveBeenCalled();
+    expect(groceryServiceSpy.getGroceryItems).toHaveBeenCalled();
     expect(component.catalog).toEqual(items);
  
     const itemRows = fixture.nativeElement.querySelectorAll('.item-row');
@@ -52,7 +52,7 @@ describe('ItemCatalogComponent', () => {
     });
   });
  
-  it('should add item to cart when addToCart is called', () => {
+  fit('should add item to cart when addToCart is called', () => {
     const sampleItem: Items = { itemId: 3, itemName: 'Sample Item', itemDescription: 'Sample Description', price: 20, quantityAvailable: 3, category: 'Sample Category' };
     component.addToCart(sampleItem);
  

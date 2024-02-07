@@ -8,26 +8,27 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class GroceryService {
   private apiUrl = 'https://8080-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/api/GroceryItem'; 
+  private cartItems: Items[] = [];
+  private cartItemsSubject: BehaviorSubject<Items[]> = new BehaviorSubject<Items[]>([]);
+
   constructor(private http: HttpClient) {}
-  private cartItems: any[] = [];
-  private cartItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   // Get all grocery items
-  getGroceryItems(): Observable<GroceryItem[]> {
-    return this.http.get<GroceryItem[]>(this.apiUrl);
+  getGroceryItems(): Observable<Items[]> {
+    return this.http.get<Items[]>(this.apiUrl);
   }
 
   // Add a new grocery item
-  addGroceryItem(groceryItem: GroceryItem): Observable<GroceryItem> {
-    return this.http.post<GroceryItem>(this.apiUrl, groceryItem);
+  addGroceryItem(groceryItem: Items): Observable<Items> {
+    return this.http.post<Items>(this.apiUrl, groceryItem);
   }
-  getShoppingCartItems(): Observable<any[]> {
+
+  getShoppingCartItems(): Observable<Items[]> {
     return this.cartItemsSubject.asObservable();
   }
 
-  addToCart(item: any): void {
+  addToCart(item: Items): void {
     this.cartItems.push(item);
     this.cartItemsSubject.next([...this.cartItems]);
   }
-
 }
