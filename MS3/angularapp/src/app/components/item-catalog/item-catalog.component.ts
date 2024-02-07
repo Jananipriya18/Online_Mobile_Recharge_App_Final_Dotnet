@@ -36,16 +36,20 @@ export class ItemCatalogComponent implements OnInit {
   }
 
   loadShoppingCart(): void {
-    this.groceryService.getShoppingCartItems().subscribe(
-      (items: any[]) => {
-        this.cartItems = items;
-        this.calculateTotalAmount();
-      },
-      (error) => {
-        console.error('Error fetching shopping cart items:', error);
-      }
-    );
+    if (this.groceryService.getShoppingCartItems()) {
+      this.groceryService.getShoppingCartItems().subscribe(
+        (items: any[]) => {
+          this.cartItems = items;
+          this.calculateTotalAmount();
+        },
+        (error) => {
+          console.error('Error fetching shopping cart items:', error);
+        }
+      );
+    }
   }
+  
+  
 
   calculateTotalAmount(): void {
     const total = this.cartItems.reduce((total, item) => total + item.price, 0);
