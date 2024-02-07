@@ -16,19 +16,19 @@ describe('ItemsModel', () => {
     expect(item).toBeTruthy();
 
     // Check if individual properties are truthy (defined)
-    expect(item.itemId).toBeTruthy();
-    expect(item.itemName).toBeTruthy();
-    expect(item.itemDescription).toBeTruthy();
-    expect(item.price).toBeTruthy();
-    expect(item.quantityAvailable).toBeTruthy();
-    expect(item.category).toBeTruthy();
+    expect(item['itemId']).toBeTruthy();
+    expect(item['itemName']).toBeTruthy();
+    expect(item['itemDescription']).toBeTruthy();
+    expect(item['price']).toBeTruthy();
+    expect(item['quantityAvailable']).toBeTruthy();
+    expect(item['category']).toBeTruthy();
 
     // Check data types for each property
-    expect(typeof item.itemId).toEqual('number');
-    expect(typeof item.itemName).toEqual('string');
-    expect(typeof item.itemDescription).toEqual('string');
-    expect(typeof item.price).toEqual('number');
-    expect(typeof item.quantityAvailable).toEqual('number');
-    expect(typeof item.category).toEqual('string');
+    expect(typeof item['itemId']).toEqual('number');
+    expect(typeof item['itemName']).toEqual('string');
+    expect(typeof item['itemDescription']).toEqual('string');
+    expect(typeof item['price']).toEqual('number');
+    expect(typeof item['quantityAvailable']).toEqual('number');
+    expect(typeof item['category']).toEqual('string');
   });
 });
