@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class GroceryService {
-  private apiUrl = 'https://8080-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/api/Items'; 
+  private apiUrl = 'https://8080-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/api/GroceryItem'; 
   private cartItems: Items[] = [];
   private cartItemsSubject: BehaviorSubject<Items[]> = new BehaviorSubject<Items[]>([]);
 
@@ -23,12 +23,4 @@ export class GroceryService {
     return this.http.post<Items>(this.apiUrl, groceryItem);
   }
 
-  getShoppingCartItems(): Observable<Items[]> {
-    return this.cartItemsSubject.asObservable();
-  }
-
-  addToCart(item: Items): void {
-    this.cartItems.push(item);
-    this.cartItemsSubject.next([...this.cartItems]);
-  }
 }
