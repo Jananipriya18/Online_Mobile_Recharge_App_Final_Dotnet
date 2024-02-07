@@ -17,17 +17,17 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('headerComponent_should create the app', () => {
+  fit('headerComponent_should_create_the_app', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('headerComponent_should contain an h1 element with "Online Grocery Store"', () => {
+  fit('headerComponent_should_contain_an_h1_element_with_Online_Grocery_Store', () => {
     const h1Element: HTMLElement = fixture.nativeElement.querySelector('h1');
     expect(h1Element).toBeTruthy();
     expect(h1Element.textContent).toContain('Online Grocery Store');
   });
 
-  fit('headerComponent_should contain a navigation menu with two items', () => {
+  fit('headerComponent_should_contain_a_navigation_menu_with_two_items', () => {
     const navElement: HTMLElement = fixture.nativeElement.querySelector('nav');
     expect(navElement).toBeTruthy();
 
