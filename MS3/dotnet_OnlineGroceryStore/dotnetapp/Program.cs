@@ -21,14 +21,12 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(builder =>
-            {
-                builder.AllowAnyOrigin("*")
-                       .AllowAnyHeader()
-                       .AllowAnyMethod();
-            });
-        });
+{
+    options.AddPolicy("AllowOrigin",
+        builder => builder.WithOrigins("https://8080-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/api/GroceryItem")
+        .AllowAnyHeader()
+        .AllowAnyMethod());
+});
 
         var app = builder.Build();
 
