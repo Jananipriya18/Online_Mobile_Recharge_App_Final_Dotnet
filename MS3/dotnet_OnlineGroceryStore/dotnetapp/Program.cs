@@ -21,14 +21,14 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowOrigin",
-        builder => builder
-            .WithOrigins("https://8081-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/")
-            .AllowAnyHeader()
-            .AllowAnyMethod());
-});
-
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
+            });
+        });
 
         var app = builder.Build();
 
@@ -43,7 +43,7 @@ public class Program
 
         app.UseAuthorization();
 
-        app.UseCors("AllowOrigin"); 
+        app.UseCors(); // This line enables CORS
 
         app.MapControllers();
 
