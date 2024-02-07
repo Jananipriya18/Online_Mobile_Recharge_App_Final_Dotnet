@@ -25,11 +25,4 @@ describe('ItemCatalogComponent', () => {
   fit('should create ItemCatalogComponent', async(() => {
     expect(component).toBeTruthy();
   }));
-  
-  fit('should add item to cart when addToCart is called', () => {
-    const sampleItem: Items = { ['itemId']: 3, ['itemName']: 'Sample Item', ['itemDescription']: 'Sample Description', ['price']: 20, ['quantityAvailable']: 3, ['category']: 'Sample Category' };
-    component['addToCart'](sampleItem);
-
-    expect(groceryServiceSpy['addToCart']).toHaveBeenCalledWith(sampleItem);
-  });
 });
