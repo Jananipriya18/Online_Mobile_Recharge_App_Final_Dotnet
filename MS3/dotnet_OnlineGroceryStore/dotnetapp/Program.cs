@@ -23,7 +23,7 @@ public class Program
         builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
-        builder => builder.WithOrigins("https://8080-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/api/GroceryItem")
+        builder => builder.WithOrigins("*")
         .AllowAnyHeader()
         .AllowAnyMethod());
 });
