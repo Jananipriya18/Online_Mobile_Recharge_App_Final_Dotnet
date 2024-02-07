@@ -24,7 +24,7 @@ public class Program
         {
             options.AddDefaultPolicy(builder =>
             {
-                builder.AllowAnyOrigin()
+                builder.AllowAnyOrigin("*")
                        .AllowAnyHeader()
                        .AllowAnyMethod();
             });
@@ -43,7 +43,7 @@ public class Program
 
         app.UseAuthorization();
 
-        app.UseCors(); // This line enables CORS
+        app.UseCors(); 
 
         app.MapControllers();
 
