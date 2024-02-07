@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroceryService } from '../../services/grocery.service';
+import { Router } from '@angular/router';  // Add this import statement
 
 @Component({
   selector: 'app-add-new-item',
@@ -11,7 +12,7 @@ export class AddNewItemComponent {
   newItemForm: FormGroup;
   newlyAddedItem: any; 
 
-  constructor(private fb: FormBuilder, private groceryService: GroceryService) {
+  constructor(private fb: FormBuilder, private groceryService: GroceryService, private router: Router) {  // Add 'private router: Router' to the constructor
     this.newItemForm = this.fb.group({
       itemName: ['', Validators.required],
       itemDescription: ['', Validators.required],
@@ -29,11 +30,12 @@ export class AddNewItemComponent {
           console.log('Item added successfully:', response);
           this.newlyAddedItem = newItem;
           this.newItemForm.reset();
+          this.router.navigate(['/item-catalog']);  // Use router for navigation
         },
         (error) => {
           console.error('Error adding item:', error);
-            console.log(error);
-  
+          console.log(error);
+
           if (error.error && error.error.errors) {
             console.log('Validation errors:', error.error.errors);
           }
