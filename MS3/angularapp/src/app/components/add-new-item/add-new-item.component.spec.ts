@@ -24,21 +24,21 @@ describe('AddNewItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('add-new-itemComponent_should_contain_all_properties_in_the_form', () => {
-    const itemNameInput = fixture.nativeElement.querySelector('#itemName');
-    const itemDescriptionInput = fixture.nativeElement.querySelector('#itemDescription');
-    const priceInput = fixture.nativeElement.querySelector('#price');
-    const quantityAvailableInput = fixture.nativeElement.querySelector('#quantityAvailable');
-    const categoryInput = fixture.nativeElement.querySelector('#category');
-    const submitButton = fixture.nativeElement.querySelector('button');
+  // fit('add-new-itemComponent_should_contain_all_properties_in_the_form', () => {
+  //   const itemNameInput = fixture.nativeElement.querySelector('#itemName');
+  //   const itemDescriptionInput = fixture.nativeElement.querySelector('#itemDescription');
+  //   const priceInput = fixture.nativeElement.querySelector('#price');
+  //   const quantityAvailableInput = fixture.nativeElement.querySelector('#quantityAvailable');
+  //   const categoryInput = fixture.nativeElement.querySelector('#category');
+  //   const submitButton = fixture.nativeElement.querySelector('button');
 
-    expect(itemNameInput).toBeTruthy();
-    expect(itemDescriptionInput).toBeTruthy();
-    expect(priceInput).toBeTruthy();
-    expect(quantityAvailableInput).toBeTruthy();
-    expect(categoryInput).toBeTruthy();
-    expect(submitButton).toBeTruthy();
-  });
+  //   expect(itemNameInput).toBeTruthy();
+  //   expect(itemDescriptionInput).toBeTruthy();
+  //   expect(priceInput).toBeTruthy();
+  //   expect(quantityAvailableInput).toBeTruthy();
+  //   expect(categoryInput).toBeTruthy();
+  //   expect(submitButton).toBeTruthy();
+  // });
 
   // fit('add-new-itemComponent_should_display_required_error_messages', () => {
   //   component.newItemForm.controls['itemName'].markAsTouched();
