@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { GroceryService } from './grocery.service';
-import { GroceryItem } from '../models/grocery-item.model';
+import { Items } from '../models/items.model';
 
 describe('GroceryService', () => {
   let service: GroceryService;

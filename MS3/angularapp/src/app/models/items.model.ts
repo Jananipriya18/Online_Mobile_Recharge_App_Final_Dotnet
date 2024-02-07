@@ -1,4 +1,4 @@
-export class GroceryItem {
+export class Items {
     itemId: number;
     itemName: string;
     itemDescription: string;

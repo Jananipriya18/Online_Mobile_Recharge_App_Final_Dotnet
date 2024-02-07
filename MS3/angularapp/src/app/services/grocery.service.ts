@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GroceryItem } from '../models/grocery-item.model';
+import { Items } from '../models/items.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
