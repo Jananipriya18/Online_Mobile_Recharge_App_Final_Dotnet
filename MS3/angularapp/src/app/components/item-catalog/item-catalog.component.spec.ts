@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ItemCatalogComponent } from './item-catalog.component';
 import { GroceryService } from '../../services/grocery.service';
-import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { GroceryItem } from '../../models/grocery-item.model';
 import { of } from 'rxjs';
 

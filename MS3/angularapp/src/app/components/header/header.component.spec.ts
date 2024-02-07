@@ -27,14 +27,14 @@ describe('HeaderComponent', () => {
     expect(h1Element.textContent).toContain('Online Grocery Store');
   });
 
-  fit('headerComponent_should contain a navigation menu with three items', () => {
+  fit('headerComponent_should contain a navigation menu with two items', () => {
     const navElement: HTMLElement = fixture.nativeElement.querySelector('nav');
     expect(navElement).toBeTruthy();
 
     const navItems: NodeListOf<HTMLLIElement> = navElement.querySelectorAll('li');
-    expect(navItems.length).toBe(3);
+    expect(navItems.length).toBe(2);
 
-    const expectedLinks = ['/item-catalog', '/shopping-cart', '/add-new-item'];
+    const expectedLinks = ['/item-catalog', '/add-new-item'];
     navItems.forEach((item, index) => {
       const link: HTMLAnchorElement = item.querySelector('a');
       expect(link).toBeTruthy();

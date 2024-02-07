@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GroceryService } from '../../services/grocery.service';
-import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 @Component({
   selector: 'app-item-catalog',
@@ -9,11 +8,14 @@ import { ShoppingCartService } from '../../services/shopping-cart.service';
 })
 export class ItemCatalogComponent implements OnInit {
   catalog: any[] = [];
+  cartItems: any[] = [];
+  totalAmount: number = 0;
 
-  constructor(private groceryService: GroceryService, private shoppingCartService: ShoppingCartService) {}
+  constructor(private groceryService: GroceryService) {}
 
   ngOnInit(): void {
     this.loadItemCatalog();
+    this.loadShoppingCart();
   }
 
   loadItemCatalog(): void {
@@ -28,8 +30,25 @@ export class ItemCatalogComponent implements OnInit {
   }
 
   addToCart(item: any): void {
-    // Add the item to the shopping cart service
-    this.shoppingCartService.addToCart(item);
+    // Add the item to the grocery service's cart
+    this.groceryService.addToCart(item);
     console.log('Added to cart:', item);
+  }
+
+  loadShoppingCart(): void {
+    this.groceryService.getShoppingCartItems().subscribe(
+      (items: any[]) => {
+        this.cartItems = items;
+        this.calculateTotalAmount();
+      },
+      (error) => {
+        console.error('Error fetching shopping cart items:', error);
+      }
+    );
+  }
+
+  calculateTotalAmount(): void {
+    const total = this.cartItems.reduce((total, item) => total + item.price, 0);
+    this.totalAmount = parseFloat(total.toFixed(3));
   }
 }
