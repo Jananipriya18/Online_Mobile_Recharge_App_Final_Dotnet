@@ -25,3 +25,23 @@
     </tbody>
   </table>
 </div>
+
+<table class="cart-table">
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of cartItems" class="cart-item">
+      <td>{{ item.itemName }}</td>
+      <td>${{ item.price }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="total-amount">
+  <p>Total Amount: ${{ totalAmount }}</p>
+</div>
+
