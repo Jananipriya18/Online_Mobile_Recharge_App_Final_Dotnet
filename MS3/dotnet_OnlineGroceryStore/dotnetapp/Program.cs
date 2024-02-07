@@ -23,10 +23,12 @@ public class Program
         builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
-        builder => builder.WithOrigins("*")
-        .AllowAnyHeader()
-        .AllowAnyMethod());
+        builder => builder
+            .WithOrigins("https://8081-fcebdccccdbcfacbdcbaeadbebabcdebdca.premiumproject.examly.io/")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
 });
+
 
         var app = builder.Build();
 
@@ -41,7 +43,7 @@ public class Program
 
         app.UseAuthorization();
 
-        app.UseCors(); 
+        app.UseCors("AllowOrigin"); 
 
         app.MapControllers();
 
