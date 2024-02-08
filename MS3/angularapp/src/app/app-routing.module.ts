@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ItemCatalogComponent } from './components/item-catalog/item-catalog.component';
 import { HeaderComponent } from './components/header/header.component';
-import { AddNewItemComponent } from './components/add-new-item/add-new-item.component'; // Import the new component
+import { AddNewItemComponent } from './components/add-new-item/add-new-item.component';
 
 const routes: Routes = [
   { path: 'item-catalog', component: ItemCatalogComponent },

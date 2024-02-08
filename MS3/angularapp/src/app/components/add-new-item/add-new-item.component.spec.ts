@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddNewItemComponent } from './add-new-item.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AddNewItemComponent', () => {
   let component: AddNewItemComponent;
@@ -10,7 +11,7 @@ describe('AddNewItemComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AddNewItemComponent],
-      imports: [ReactiveFormsModule, HttpClientTestingModule],
+      imports: [ReactiveFormsModule, HttpClientTestingModule, RouterTestingModule], // Combine the imports into a single property
     }).compileComponents();
   }));
 
@@ -23,7 +24,6 @@ describe('AddNewItemComponent', () => {
   fit('add-new-item_Component_should_be_created', () => {
     expect(component).toBeTruthy();
   });
-
   // fit('add-new-itemComponent_should_contain_all_properties_in_the_form', () => {
   //   const itemNameInput = fixture.nativeElement.querySelector('#itemName');
   //   const itemDescriptionInput = fixture.nativeElement.querySelector('#itemDescription');
@@ -93,7 +93,7 @@ describe('AddNewItemComponent', () => {
     const submitButton = fixture.nativeElement.querySelector('button');
     expect(submitButton.disabled).toBeTruthy();
 
-    component.newItemForm.setValue({
+    component['newItemForm'].setValue({
       ['itemName']: 'Test Item',
       ['itemDescription']: 'Test Description',
       ['price']: 10,
@@ -103,6 +103,7 @@ describe('AddNewItemComponent', () => {
 
     fixture.detectChanges();
 
-    expect(submitButton.disabled).toBeFalsy();
+    // expect(submitButton.disabled).toBeFalsy();
+    expect(submitButton.disabled).toBe(false);
   });
 });
