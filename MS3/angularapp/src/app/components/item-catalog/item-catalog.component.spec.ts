@@ -20,7 +20,7 @@ describe('ItemCatalogComponent', () => {
     component = fixture.componentInstance;
   });
 
-  fit('item_catalog_should_be_created', async(() => {
+  fit('item_catalog_component_should_be_created', async(() => {
     expect(component).toBeTruthy();
   }));
 });
