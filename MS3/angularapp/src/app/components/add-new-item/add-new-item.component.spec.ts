@@ -90,20 +90,20 @@ describe('AddNewItemComponent', () => {
   // });
 
   fit('add-new-item_Component_should_disable_the_submit_button_when_the_form_is_invalid', () => {
-    const submitButton = fixture.nativeElement.querySelector('button');
-    expect(submitButton.disabled).toBeTruthy();
+    const submitButton: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+    expect(submitButton.disabled).toBe(true);
 
-    component['newItemForm'].setValue({
-      ['itemName']: 'Test Item',
-      ['itemDescription']: 'Test Description',
-      ['price']: 10,
-      ['quantityAvailable']: 5,
-      ['category']: 'Test Category',
+    component.newItemForm.setValue({
+      itemName: 'Test Item',
+      itemDescription: 'Test Description',
+      price: 10,
+      quantityAvailable: 5,
+      category: 'Test Category',
     });
 
     fixture.detectChanges();
 
-    // expect(submitButton.disabled).toBeFalsy();
     expect(submitButton.disabled).toBe(false);
   });
 });
+  
