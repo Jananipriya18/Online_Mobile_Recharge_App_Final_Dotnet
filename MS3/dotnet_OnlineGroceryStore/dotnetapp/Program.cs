@@ -6,10 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using dotnetapp.Data;
 
-public class Program
-{
-    public static void Main(string[] args)
-    {
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
@@ -48,5 +44,4 @@ public class Program
         app.MapControllers();
 
         app.Run();
-    }
-}
+    

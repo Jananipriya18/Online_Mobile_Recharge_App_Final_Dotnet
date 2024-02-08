@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { ItemCatalogComponent } from './item-catalog.component';
 import { GroceryService } from '../../services/grocery.service';
-import { Items } from '../../models/items.model';
-import { of } from 'rxjs';
 
 describe('ItemCatalogComponent', () => {
   let component: ItemCatalogComponent;
@@ -22,7 +20,7 @@ describe('ItemCatalogComponent', () => {
     component = fixture.componentInstance;
   });
 
-  fit('should create ItemCatalogComponent', async(() => {
+  fit('item_catalog_should_be_created', async(() => {
     expect(component).toBeTruthy();
   }));
 });
