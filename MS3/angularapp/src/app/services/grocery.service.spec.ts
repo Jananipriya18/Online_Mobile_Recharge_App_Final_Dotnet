@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { GroceryService } from './grocery.service';
-import { Items } from '../models/items.model';
+// import { Items }  '../models/items.model';
 
 describe('GroceryService', () => {
   let service: GroceryService;
@@ -67,7 +67,7 @@ describe('GroceryService', () => {
   // });
 
   fit('groceryService_should_call_addGroceryItem_method_and_return_data', () => {
-    const newItem: Items = { ['itemId']: 3, ['itemName']: 'New Item', ['itemDescription']: 'New Description', ['price']: 20.99, ['quantityAvailable']: 20, ['category']: 'New Category' };
+    const newItem: any = { ['itemId']: 3, ['itemName']: 'New Item', ['itemDescription']: 'New Description', ['price']: 20.99, ['quantityAvailable']: 20, ['category']: 'New Category' };
 
     service['addGroceryItem'](newItem).subscribe(item => {
       expect(item).toEqual(newItem);
@@ -80,7 +80,7 @@ describe('GroceryService', () => {
   });
 
   fit('groceryService_should_call_getGroceryItems_method_and_return_data', () => {
-    const mockItems: Items[] = [
+    const mockItems: any[] = [
       { ['itemId']: 1, ['itemName']: 'Item 1', ['itemDescription']: 'Description 1', ['price']: 10.99, ['quantityAvailable']: 50, ['category']: 'Category 1' },
       { ['itemId']: 2, ['itemName']: 'Item 2', ['itemDescription']: 'Description 2', ['price']: 15.99, ['quantityAvailable']: 30, ['category']: 'Category 2' },
     ];

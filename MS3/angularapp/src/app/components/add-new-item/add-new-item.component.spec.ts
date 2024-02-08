@@ -20,7 +20,7 @@ describe('AddNewItemComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('add-new-itemComponent_should_be_created', () => {
+  fit('add-new-item_Component_should_be_created', () => {
     expect(component).toBeTruthy();
   });
 
@@ -89,7 +89,7 @@ describe('AddNewItemComponent', () => {
   //   });
   // });
 
-  fit('add-new-itemComponent_should_disable_the_submit_button_when_the_form_is_invalid', () => {
+  fit('add-new-item_Component_should_disable_the_submit_button_when_the_form_is_invalid', () => {
     const submitButton = fixture.nativeElement.querySelector('button');
     expect(submitButton.disabled).toBeTruthy();
 
