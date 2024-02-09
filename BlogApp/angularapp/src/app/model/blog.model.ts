@@ -1,4 +1,4 @@
-export class Blog {
+export class Blogmodel {
     public BlogId: number
     public blogSubject: string
     public blogContent: string
