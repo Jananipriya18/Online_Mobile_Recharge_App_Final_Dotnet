@@ -48,7 +48,7 @@ describe('ScheduleDetailsComponent', () => {
   fit('should create', () => {
     expect(component).toBeTruthy();
   });
-
+  
   fit('should fetch schedules on initialization', () => {
     component.ngOnInit();
     expect(component.schedules.length).toBe(3);
