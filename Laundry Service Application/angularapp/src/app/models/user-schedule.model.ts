@@ -4,11 +4,6 @@ export interface UserSchedule {
   mobileNumber: string;
   email: string;
   address: string;
-  area: string;
-  pincode: string;
   pickupDay: string;
   pickupTimeSlot: string;
-  packageId: number;
-  statusId: number;
-  expectedDeliveryDate?: Date | null;
 }
