@@ -18,28 +18,27 @@ public class LaundryController : ControllerBase
 
     // GET /api/laundry/schedules
     [HttpGet("schedules")]
-    public async Task<ActionResult<IEnumerable<UserSchedule>>> GetSchedules()
+    public IActionResult GetSchedules()
     {
-        var schedules = await _context.UserSchedules.ToListAsync();
+        var schedules = _context.UserSchedules.ToList();
         return Ok(schedules);
     }
 
     // POST /api/laundry/schedule/add
     [HttpPost("schedule/add")]
-    public async Task<ActionResult<UserSchedule>> AddSchedule(UserSchedule userSchedule)
+    public IActionResult AddSchedule(UserSchedule userSchedule)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        // Set default status for new schedule (e.g., "Scheduled")
-        // Note: You may need to adjust this based on your actual status IDs or logic
+        // Set default values for new schedule (e.g., "DefaultDay" and "DefaultTimeSlot")
         userSchedule.PickupDay = "DefaultDay";
         userSchedule.PickupTimeSlot = "DefaultTimeSlot";
 
         _context.UserSchedules.Add(userSchedule);
-        await _context.SaveChangesAsync();
+        _context.SaveChanges();
 
         return CreatedAtAction(nameof(GetSchedules), new { id = userSchedule.Id }, userSchedule);
     }
