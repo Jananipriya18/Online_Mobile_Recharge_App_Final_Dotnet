@@ -23,9 +23,8 @@ describe('ScheduleDetailsComponent', () => {
 
     mockScheduleService = {
       getSchedules: () => of([
-        { id: 1, fullName: 'John Doe', mobileNumber: '123-456-7890', email: 'john.doe@example.com', address: '123 Main St', pickupDay: 'Monday', pickupTimeSlot: '1-3pm' },
-        { id: 2, fullName: 'Jane Smith', mobileNumber: '987-654-3210', email: 'jane.smith@example.com', address: '456 Oak Ave', pickupDay: 'Tuesday', pickupTimeSlot: '5-7pm' },
-        { id: 3, fullName: 'Jane Smith', mobileNumber: '987-654-3210', email: 'jane.smith@example.com', address: '456 Oak Ave', pickupDay: 'Wednesday', pickupTimeSlot: '3-5pm' },
+        { ['id']: 1, ['fullName']: 'John Doe', ['mobileNumber']: '123-456-7890', ['email']: 'john.doe@example.com', ['address']: '123 Main St', ['pickupDay']: 'Monday', ['pickupTimeSlot']: '1-3pm' },
+        { ['id']: 2, ['fullName']: 'Jane Smith', ['mobileNumber']: '987-654-3210', ['email']: 'jane.smith@example.com', ['address']: '456 Oak Ave', ['pickupDay']: 'Tuesday', ['pickupTimeSlot']: '5-7pm' }
       ]),
     };
 
@@ -45,13 +44,13 @@ describe('ScheduleDetailsComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('should create', () => {
+  fit('ScheduleDetailsComponent should be created', () => {
     expect(component).toBeTruthy();
   });
   
-  fit('should fetch schedules on initialization', () => {
+  fit('ScheduleDetailsComponent should fetch schedules on initialization', () => {
     component.ngOnInit();
-    expect(component.schedules.length).toBe(3);
+    expect(component.schedules.length).toBe(2);
   });
 
   // fit('should render schedule data correctly', () => {
