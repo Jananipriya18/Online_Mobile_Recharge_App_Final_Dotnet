@@ -1,0 +1,44 @@
+<div>
+  <h2>Schedule Details</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Schedule ID</th>
+        <th>Full Name</th>
+        <th>Mobile Number</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Area</th>
+        <th>Pincode</th>
+        <th>Pickup Day</th>
+        <th>Pickup Time Slot</th>
+        <th>Selected Package</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let schedule of schedules" class="schedule-item">
+        <td>{{ schedule.id }}</td>
+        <td>{{ schedule.fullName }}</td>
+        <td>{{ schedule.mobileNumber }}</td>
+        <td>{{ schedule.email }}</td>
+        <td>{{ schedule.address }}</td>
+        <td>{{ schedule.area }}</td>
+        <td>{{ schedule.pincode }}</td>
+        <td>{{ schedule.pickupDay }}</td>
+        <td>{{ schedule.pickupTimeSlot }}</td>
+        <td>{{ getPackageName(schedule.packageId) }}</td>
+        <td>
+          <select [(ngModel)]="schedule.statusId" class="form-control">
+            <option *ngFor="let status of statusOptions" [value]="status.id">{{ status.name }}</option>
+          </select>
+        </td>
+        <td>
+          <button (click)="updateStatus(schedule)" class="btn btn-primary">Update</button>
+          <button (click)="deleteSchedule(schedule.id)" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
