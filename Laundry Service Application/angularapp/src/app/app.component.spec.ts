@@ -24,8 +24,9 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('should render a table with specific columns', () => {
+  fit('appComponent should have app-navbar router', () => {
     const tableElement = fixture.debugElement.query(By.css('app-navbar'));
     expect(tableElement).toBeTruthy();
   });
 });
+ 

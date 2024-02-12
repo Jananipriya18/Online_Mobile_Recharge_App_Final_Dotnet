@@ -18,21 +18,21 @@ describe('UserSchedule Models', () => {
     expect(userSchedule).toBeTruthy();
 
     // Check if individual properties are truthy (defined)
-    expect(userSchedule.id).toBeTruthy();
-    expect(userSchedule.fullName).toBeTruthy();
-    expect(userSchedule.mobileNumber).toBeTruthy();
-    expect(userSchedule.email).toBeTruthy();
-    expect(userSchedule.address).toBeTruthy();
-    expect(userSchedule.pickupDay).toBeTruthy();
-    expect(userSchedule.pickupTimeSlot).toBeTruthy();
+    expect(userSchedule['id']).toBeTruthy();
+    expect(userSchedule['fullName']).toBeTruthy();
+    expect(userSchedule['mobileNumber']).toBeTruthy();
+    expect(userSchedule['email']).toBeTruthy();
+    expect(userSchedule['address']).toBeTruthy();
+    expect(userSchedule['pickupDay']).toBeTruthy();
+    expect(userSchedule['pickupTimeSlot']).toBeTruthy();
 
     // Check data types for each property
-    expect(typeof userSchedule.id).toEqual('number');
-    expect(typeof userSchedule.fullName).toEqual('string');
-    expect(typeof userSchedule.mobileNumber).toEqual('string');
-    expect(typeof userSchedule.email).toEqual('string');
-    expect(typeof userSchedule.address).toEqual('string');
-    expect(typeof userSchedule.pickupDay).toEqual('string');
-    expect(typeof userSchedule.pickupTimeSlot).toEqual('string');
+    expect(typeof userSchedule['id']).toEqual('number');
+    expect(typeof userSchedule['fullName']).toEqual('string');
+    expect(typeof userSchedule['mobileNumber']).toEqual('string');
+    expect(typeof userSchedule['email']).toEqual('string');
+    expect(typeof userSchedule['address']).toEqual('string');
+    expect(typeof userSchedule['pickupDay']).toEqual('string');
+    expect(typeof userSchedule['pickupTimeSlot']).toEqual('string');
   });
 });

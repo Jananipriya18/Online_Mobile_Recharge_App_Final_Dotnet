@@ -30,18 +30,18 @@ describe('ScheduleFormComponent', () => {
     fixture.detectChanges();
   }));
 
-  fit('should create', () => {
+  fit('ScheduleFormComponent should be created', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('should have a form with the correct form controls', () => {
+  fit('ScheduleFormComponent should have a form with the correct form controls', () => {
     expect(component.scheduleForm).toBeDefined();
-    expect(component.scheduleForm.controls.fullName).toBeDefined();
-    expect(component.scheduleForm.controls.mobileNumber).toBeDefined();
-    expect(component.scheduleForm.controls.email).toBeDefined();
-    expect(component.scheduleForm.controls.address).toBeDefined();
-    expect(component.scheduleForm.controls.pickupDay).toBeDefined();
-    expect(component.scheduleForm.controls.pickupTimeSlot).toBeDefined();
+    expect(component.scheduleForm.controls['fullName']).toBeDefined();
+    expect(component.scheduleForm.controls['mobileNumber']).toBeDefined();
+    expect(component.scheduleForm.controls['email']).toBeDefined();
+    expect(component.scheduleForm.controls['address']).toBeDefined();
+    expect(component.scheduleForm.controls['pickupDay']).toBeDefined();
+    expect(component.scheduleForm.controls['pickupTimeSlot']).toBeDefined();
   });
 
   // fit('should submit the form when valid', fakeAsync(() => {
@@ -66,12 +66,12 @@ describe('ScheduleFormComponent', () => {
   //   // Add additional expectations based on your specific logic after form submission
   // }));
 
-  fit('should render the Schedule Pick-Up header', () => {
+  fit('ScheduleFormComponent should render the Schedule Pick-Up header', () => {
     const headerElement = fixture.debugElement.query(By.css('h2')).nativeElement;
     expect(headerElement.textContent).toContain('Schedule Pick-Up');
   });
 
-  fit('should render form controls and labels', () => {
+  fit('ScheduleFormComponent should render form controls and labels', () => {
     const formElements = fixture.debugElement.queryAll(By.css('form input, form select'));
     expect(formElements.length).toBe(6); // Adjust the count based on your actual form controls
 
@@ -82,7 +82,7 @@ describe('ScheduleFormComponent', () => {
     }
   });
 
-  fit('should render the submit button', () => {
+  fit('ScheduleFormComponent should render the submit button', () => {
     const submitButton = fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement;
     expect(submitButton).toBeTruthy();
   });
