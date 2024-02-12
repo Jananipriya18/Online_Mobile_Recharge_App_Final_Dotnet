@@ -34,7 +34,7 @@ export class ScheduleFormComponent implements OnInit {
     if (this.scheduleForm.invalid) {
       return;
     }
-
+  
     // Submit the form data to your API using apiService
     this.apiService.createSchedule(this.scheduleForm.value).subscribe(
       (response: any) => {
@@ -48,5 +48,5 @@ export class ScheduleFormComponent implements OnInit {
         console.error('Error creating schedule:', error);
       }
     );
-  }
+  }  
 }

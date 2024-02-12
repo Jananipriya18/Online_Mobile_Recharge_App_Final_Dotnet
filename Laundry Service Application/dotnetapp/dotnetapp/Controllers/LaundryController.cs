@@ -33,13 +33,10 @@ public class LaundryController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        // Set default values for new schedule (e.g., "DefaultDay" and "DefaultTimeSlot")
-        userSchedule.PickupDay = "DefaultDay";
-        userSchedule.PickupTimeSlot = "DefaultTimeSlot";
-
         _context.UserSchedules.Add(userSchedule);
         _context.SaveChanges();
 
         return CreatedAtAction(nameof(GetSchedules), new { id = userSchedule.Id }, userSchedule);
     }
+
 }

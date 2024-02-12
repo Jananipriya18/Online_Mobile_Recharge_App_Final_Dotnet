@@ -18,21 +18,11 @@
   </div>
   <div class="form-group">
     <label for="pickupDay">Pickup Day</label>
-    <select id="pickupDay" formControlName="pickupDay" class="form-control" required>
-      <option value="Monday">Monday</option>
-      <option value="Tuesday">Tuesday</option>
-      <option value="Wednesday">Wednesday</option>
-      <option value="Thursday">Thursday</option>
-      <option value="Friday">Friday</option>
-    </select>
+    <input type="text" id="pickupDay" formControlName="pickupDay" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="pickupTimeSlot">Pickup Time Slot</label>
-    <select id="pickupTimeSlot" formControlName="pickupTimeSlot" class="form-control" required>
-      <option value="1-3pm">1 pm - 3 pm</option>
-      <!-- <option value="3-5pm">3 pm - 5 pm</option> -->
-      <option value="5-7pm">5 pm - 7 pm</option>
-    </select>
+    <input type="text" id="pickupTimeSlot" formControlName="pickupTimeSlot" class="form-control" required>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
