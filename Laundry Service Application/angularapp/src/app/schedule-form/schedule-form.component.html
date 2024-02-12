@@ -17,14 +17,6 @@
     <input type="text" id="address" formControlName="address" class="form-control" required>
   </div>
   <div class="form-group">
-    <label for="area">Area</label>
-    <input type="text" id="area" formControlName="area" class="form-control" required>
-  </div>
-  <div class="form-group">
-    <label for="pincode">Pincode</label>
-    <input type="text" id="pincode" formControlName="pincode" class="form-control" required>
-  </div>
-  <div class="form-group">
     <label for="pickupDay">Pickup Day</label>
     <select id="pickupDay" formControlName="pickupDay" class="form-control" required>
       <option value="Monday">Monday</option>
@@ -42,12 +34,5 @@
       <option value="5-7pm">5 pm - 7 pm</option>
     </select>
   </div>
-  <div class="form-group">
-    <label for="packageId">Select Package</label>
-    <select id="packageId" formControlName="packageId" class="form-control" required>
-      <option *ngFor="let package of packageOptions" [value]="package.id">{{ package.name }}</option>
-    </select>
-  </div>
-
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
