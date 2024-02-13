@@ -1,82 +1,41 @@
-// using Microsoft.AspNetCore.Mvc;
-// using dotnetapp.Service;
-// using dotnetapp.Models;
-// using System;
-// using System.Collections;
-// using System.Collections.Generic;
-// using Microsoft.EntityFrameworkCore;
-// namespace dotnetapp.Controllers;
+using dotnetapp.Data;
+using dotnetapp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-// [ApiController]
-// [Route("api/[controller]")]
-// public class PlayersController : ControllerBase
-// {
-//     private readonly IPlayersService _playerService;
+[Route("api/football")]
+[ApiController]
+public class PlayerController : ControllerBase
+{
+    private readonly FootballdbContext _context;
 
-//     public PlayersController(IPlayersService playerService)
-//     {
-//         _playerService = playerService;
-//     }
+    public PlayerController(FootballdbContext context)
+    {
+        _context = context;
+    }
 
-//     // GET: api/Players
-//     [HttpGet]
-//     public async Task<IEnumerable<Player>> Get()
-//     {
-//         return await _playerService.GetPlayersList();
-//     }
+    // GET /api/football/players
+    [HttpGet("players")]
+    public IActionResult GetPlayers()
+    {
+        var players = _context.Players.ToList();
+        return Ok(players);
+    }
 
-//     // GET: api/Players/5
-//     [HttpGet("{id}")]
-//     public async Task<ActionResult<Player>> Get(int id)
-//     {
-//         var player = await _playerService.GetPlayerById(id);
+    // POST /api/football/player/add
+    [HttpPost("player/add")]
+    public IActionResult AddPlayer(Player player)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
 
-//         if (player == null)
-//         {
-//             return NotFound();
-//         }
+        _context.Players.Add(player);
+        _context.SaveChanges();
 
-//         return Ok(player);
-//     }
-
-//     // POST: api/Players
-//     [HttpPost]
-//     public async Task<ActionResult<Player>> Post(Player player)
-//     {
-//         await _playerService.CreatePlayer(player);
-
-//         return CreatedAtAction("Post", new { id = player.Id }, player);
-//     }
-
-//     // PUT: api/Players/5
-//     [HttpPut("{id}")]
-//     public async Task<IActionResult> Put(int id, Player player)
-//     {
-//         if (id != player.Id)
-//         {
-//             return BadRequest("Not a valid player id");
-//         }
-
-//         await _playerService.UpdatePlayer(player);
-
-//         return NoContent();
-//     }
-
-//     // DELETE: api/Players/5
-//     [HttpDelete("{id}")]
-//     public async Task<IActionResult> Delete(int id)
-//     {
-//         if (id <= 0)
-//             return BadRequest("Not a valid player id");
-
-//         var player = await _playerService.GetPlayerById(id);
-//         if (player == null)
-//         {
-//             return NotFound();
-//         }
-
-//         await _playerService.DeletePlayer(player);
-
-//         return NoContent();
-//     }
-// }
+        return CreatedAtAction(nameof(GetPlayers), new { id = player.Id }, player);
+    }
+}

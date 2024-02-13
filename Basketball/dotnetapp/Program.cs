@@ -2,8 +2,8 @@ using dotnetapp.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<LaundryDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnStringn")));
+builder.Services.AddDbContext<FootballdbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnString")));
 
 builder.Services.AddCors(options =>
 {
