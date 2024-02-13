@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<JobApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnString")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 // Configure JWT authentication
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddRoles<IdentityRole>()

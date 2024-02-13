@@ -4,6 +4,7 @@ using BookStoreDBFirst.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreDBFirst.Migrations
 {
     [DbContext(typeof(JobApplicationDbContext))]
-    partial class JobApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240213084147_fwfij")]
+    partial class fwfij
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
