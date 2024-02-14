@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace dotnetapp.Controllers
 {
-    [Route("api/")]
+    [Route("api")]
     [ApiController]
     public class AuthController : ControllerBase
     {
