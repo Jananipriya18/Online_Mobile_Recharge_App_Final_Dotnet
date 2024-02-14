@@ -1,3 +1,5 @@
+using dotnetapp.Data;
+using dotnetapp.Models;
 public interface IPlanService
 {
     Plan AddPlan(Plan plan);

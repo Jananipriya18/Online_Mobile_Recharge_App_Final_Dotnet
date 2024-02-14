@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using dotnetapp.Data;
-
+using dotnetapp.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +33,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 
 builder.Services.AddControllers();
 

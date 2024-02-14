@@ -1,3 +1,14 @@
+using Microsoft.AspNetCore.Mvc; // For ControllerBase, IActionResult, etc.
+using Microsoft.AspNetCore.Http; // For StatusCodes
+using Microsoft.EntityFrameworkCore; // If you are using Entity Framework
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using dotnetapp.Data;
+using dotnetapp.Models;
+using dotnetapp.Services;
+
 [Route("api/admin")]
 [ApiController]
 public class AdminController : ControllerBase
