@@ -36,6 +36,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<IAddonService, AddonService>();
 builder.Services.AddScoped<IAddonRepository, AddonRepository>(); 
+builder.Services.AddScoped<IRechargeService, RechargeServiceImpl>();
 builder.Services.AddControllers();
 
 // Configure Swagger
