@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc; // For ControllerBase, IActionResult, etc.
-using Microsoft.AspNetCore.Http; // For StatusCodes
-using Microsoft.EntityFrameworkCore; // If you are using Entity Framework
+using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Http; 
+using Microsoft.EntityFrameworkCore; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using dotnetapp.Data;
 using dotnetapp.Models;
 using dotnetapp.Services;
+using dotnetapp.Repositories;
 
 [Route("api/admin")]
 [ApiController]

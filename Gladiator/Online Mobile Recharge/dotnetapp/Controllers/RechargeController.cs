@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using dotnetapp.Models;
 using dotnetapp.Repositories;
 using dotnetapp.Services;
+using dotnetapp.Data;
 
 [Route("api/admin")]
 [ApiController]

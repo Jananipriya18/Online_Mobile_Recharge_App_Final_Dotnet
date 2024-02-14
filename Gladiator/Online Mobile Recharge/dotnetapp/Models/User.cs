@@ -1,4 +1,5 @@
 using System;
+using dotnetapp.Data;
 using System.ComponentModel.DataAnnotations;
 
 namespace dotnetapp.Models

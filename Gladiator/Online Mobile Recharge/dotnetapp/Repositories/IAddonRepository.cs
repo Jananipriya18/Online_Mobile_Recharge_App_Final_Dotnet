@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using dotnetapp.Models;
+using dotnetapp.Data;
 
 namespace dotnetapp.Repositories
 {

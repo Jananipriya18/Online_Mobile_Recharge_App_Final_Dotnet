@@ -4,6 +4,7 @@ using dotnetapp.Data;
 using dotnetapp.Models;
 using dotnetapp.Services;
 using Microsoft.AspNetCore.Mvc;
+using dotnetapp.Repositories;
 
 [Route("api/admin")]
 [ApiController]

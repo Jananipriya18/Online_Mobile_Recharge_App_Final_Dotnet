@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using dotnetapp.Models;
 using dotnetapp.Repositories;
 using dotnetapp.Services;
+using dotnetapp.Data;
+
 public class AddonService : IAddonService
 {
     private readonly IAddonRepository _addonRepository;

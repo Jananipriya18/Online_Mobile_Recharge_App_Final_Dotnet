@@ -1,4 +1,6 @@
 // Plan model
+using dotnetapp.Data;
+
 namespace dotnetapp.Models
 {
     public class Plan
