@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Repositories;
 using Microsoft.AspNetCore.Authorization;
 
-[Route("api/admin")]
+// [Route("api/admin")]
 [ApiController]
 public class AddOnController : ControllerBase
 {
@@ -18,7 +18,7 @@ public class AddOnController : ControllerBase
         _context = context;
     }
     
-    [Authorize(Roles = "Admin")]
+    // //[Authorize(Roles = "Admin")]
     // POST: api/admin/addAddon
     [HttpPost("addAddon")]
     public IActionResult AddAddon([FromBody] Addon addon)
@@ -34,7 +34,7 @@ public class AddOnController : ControllerBase
         return Ok("Addon added successfully");
     }
 
-    [Authorize(Roles = "Admin,Applicant")]
+    //[Authorize(Roles = "Admin,Applicant")]
     // GET: api/admin/getAddon
     [HttpGet("getAddon")]
     public IActionResult GetAddons()
@@ -43,7 +43,7 @@ public class AddOnController : ControllerBase
         return Ok(addons);
     }
 
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     // PUT: api/admin/editAddon/{addonId}
     [HttpPut("editAddon/{addonId}")]
     public IActionResult EditAddon(long addonId, [FromBody] Addon updatedAddon)
@@ -66,7 +66,7 @@ public class AddOnController : ControllerBase
         return Ok("Addon updated successfully");
     }
 
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     // DELETE: api/admin/deleteAddon/{addonId}
     [HttpDelete("deleteAddon/{addonId}")]
     public IActionResult DeleteAddon(long addonId)
