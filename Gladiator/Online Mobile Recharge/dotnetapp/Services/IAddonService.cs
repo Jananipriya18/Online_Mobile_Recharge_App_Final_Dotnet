@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using dotnetapp.Repositories;
+using dotnetapp.Models;
 
 namespace dotnetapp.Services
 {

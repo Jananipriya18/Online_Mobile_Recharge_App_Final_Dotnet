@@ -1,4 +1,6 @@
 // Addon model
+namespace dotnetapp.Models
+{
 public class Addon
 {
     public long AddonId { get; set; }
@@ -6,4 +8,5 @@ public class Addon
     public double AddonPrice { get; set; }
     public string AddonDetails { get; set; }
     public string AddonValidity { get; set; }
+}
 }

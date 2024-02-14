@@ -1,5 +1,8 @@
 using dotnetapp.Data;
 using dotnetapp.Models;
+using System.Collections.Generic;
+using dotnetapp.Repositories;
+
 public interface IPlanService
 {
     Plan AddPlan(Plan plan);

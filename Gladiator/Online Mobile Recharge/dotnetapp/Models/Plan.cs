@@ -1,4 +1,6 @@
 // Plan model
+namespace dotnetapp.Models
+{
 public class Plan
 {
     public long PlanId { get; set; }
@@ -7,4 +9,5 @@ public class Plan
     public string PlanValidity { get; set; }
     public string PlanDetails { get; set; }
     public double PlanPrice { get; set; }
+}
 }

@@ -1,4 +1,7 @@
 using dotnetapp.Repositories;
+using System.Collections.Generic;
+using dotnetapp.Models;
+
 public class PlanServiceImpl : IPlanService
 {
     private readonly IPlanRepository _planRepository;
