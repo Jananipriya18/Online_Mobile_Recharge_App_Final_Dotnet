@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using dotnetapp.Models;
 
 namespace dotnetapp.Repositories
 {
