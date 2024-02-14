@@ -5,6 +5,7 @@ using dotnetapp.Models;
 using dotnetapp.Repositories;
 using dotnetapp.Services;
 using dotnetapp.Data;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/admin")]
 [ApiController]
@@ -17,6 +18,7 @@ public class RechargeController : ControllerBase
         _rechargeService = rechargeService;
     }
 
+    [Authorize(Roles = "Applicant")]
     [HttpPost("addRecharge")]
     public IActionResult AddRecharge([FromBody] Recharge recharge)
     {
@@ -24,6 +26,7 @@ public class RechargeController : ControllerBase
         return Ok(addedRecharge);
     }
 
+    [Authorize(Roles = "Admin,Applicant")]
     [HttpGet("getRecharge/{rechargeId}")]
     public IActionResult GetRechargeById(long rechargeId)
     {
@@ -37,6 +40,7 @@ public class RechargeController : ControllerBase
         return Ok(recharge);
     }
 
+    [Authorize(Roles = "Admin,Applicant")]
     [HttpGet("getRechargesByUser/{userId}")]
     public IActionResult GetRechargesByUserId(long userId)
     {
@@ -44,6 +48,7 @@ public class RechargeController : ControllerBase
         return Ok(recharges);
     }
 
+    [Authorize(Roles = "Admin,Applicant")]
     [HttpGet("getAllRecharges")]
     public IActionResult GetAllRecharges()
     {

@@ -9,6 +9,7 @@ using dotnetapp.Data;
 using dotnetapp.Models;
 using dotnetapp.Services;
 using dotnetapp.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/")]
 [ApiController]
@@ -37,7 +38,7 @@ public class PlanController : ControllerBase
         return Ok("Plan added successfully");
     }
      
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Applicant")]
     // GET: api/admin/getAllPlan
     [HttpGet("getAllPlan")]
     public IActionResult GetAllPlans()

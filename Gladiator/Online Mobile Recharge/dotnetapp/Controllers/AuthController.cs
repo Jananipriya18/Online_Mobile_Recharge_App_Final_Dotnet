@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using dotnetapp.Data;
 using dotnetapp.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dotnetapp.Controllers
 {

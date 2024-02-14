@@ -5,6 +5,7 @@ using dotnetapp.Models;
 using dotnetapp.Services;
 using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/admin")]
 [ApiController]
@@ -33,7 +34,7 @@ public class AddOnController : ControllerBase
         return Ok("Addon added successfully");
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Applicant")]
     // GET: api/admin/getAddon
     [HttpGet("getAddon")]
     public IActionResult GetAddons()
