@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using dotnetapp.Repositories;
 
-namespace dotnetapp.Service
+namespace dotnetapp.Services
 {
     public interface IReviewService
     {

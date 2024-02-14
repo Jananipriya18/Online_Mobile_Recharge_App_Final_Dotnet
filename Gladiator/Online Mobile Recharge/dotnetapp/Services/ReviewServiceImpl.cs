@@ -2,10 +2,11 @@ using dotnetapp.Models;
 using dotnetapp.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
- 
-namespace dotnetapp.Service
+using dotnetapp.Data;
+
+namespace dotnetapp.Services
 {
-    public class ReviewServiceImpl : ReviewService
+    public class ReviewServiceImpl : IReviewService
     {
         private readonly ReviewRepository _reviewRepo;
  
