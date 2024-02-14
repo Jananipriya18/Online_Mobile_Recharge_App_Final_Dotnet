@@ -22,7 +22,7 @@ public class PlanController : ControllerBase
         _context = context;
     }
 
-    ////[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     // POST: api/admin/addPlan
     [HttpPost("addPlan")]
     public IActionResult AddPlan([FromBody] Plan plan)
@@ -38,7 +38,7 @@ public class PlanController : ControllerBase
         return Ok("Plan added successfully");
     }
      
-    ////[Authorize(Roles = "Admin,Applicant")]
+    //[Authorize(Roles = "Admin,Applicant")]
     // GET: api/admin/getAllPlan
     [HttpGet("getAllPlan")]
     public IActionResult GetAllPlans()
@@ -47,7 +47,7 @@ public class PlanController : ControllerBase
         return Ok(plans);
     }
 
-    ////[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     // PUT: api/admin/editPlan/{planId}
     [HttpPut("editPlan/{planId}")]
     public IActionResult EditPlan(long planId, [FromBody] Plan updatedPlan)
@@ -71,7 +71,7 @@ public class PlanController : ControllerBase
         return Ok("Plan updated successfully");
     }
      
-    ////[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     // DELETE: api/admin/deletePlan/{planId}
     [HttpDelete("deletePlan/{planId}")]
     public IActionResult DeletePlan(long planId)
