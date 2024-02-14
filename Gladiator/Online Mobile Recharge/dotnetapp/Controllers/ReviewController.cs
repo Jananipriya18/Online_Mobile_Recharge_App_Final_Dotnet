@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using dotnetapp.Models;
-using dotnetapp.Service;
+using dotnetapp.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
  
@@ -11,7 +11,7 @@ namespace dotnetapp.Controllers
     [ApiController]
     public class ReviewController : ControllerBase
     {
-        private readonly ReviewService _reviewService;
+        private readonly IReviewService _reviewService;
  
         public ReviewController(ReviewService reviewService)
         {

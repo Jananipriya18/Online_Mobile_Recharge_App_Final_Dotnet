@@ -38,6 +38,8 @@ builder.Services.AddScoped<IAddonService, AddonService>();
 builder.Services.AddScoped<IAddonRepository, AddonRepository>(); 
 builder.Services.AddScoped<IRechargeRepository, RechargeRepository>();
 builder.Services.AddScoped<IRechargeService, RechargeServiceImpl>();
+builder.Services.AddScoped<IReviewRepo, ReviewRepo>();
+builder.Services.AddScoped<IReviewService, ReviewServiceImpl>();
 builder.Services.AddControllers();
 
 // Configure Swagger

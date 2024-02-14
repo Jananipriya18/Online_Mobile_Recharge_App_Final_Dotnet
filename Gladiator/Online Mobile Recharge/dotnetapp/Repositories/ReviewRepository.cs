@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using dotnetapp.Data;
+using dotnetapp.Service; 
 
 namespace dotnetapp.Repository
 {
