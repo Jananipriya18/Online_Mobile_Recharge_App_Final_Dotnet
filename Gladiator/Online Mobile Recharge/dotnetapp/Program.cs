@@ -35,6 +35,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<IAddonService, AddonService>();
+builder.Services.AddScoped<IAddonRepository, AddonRepository>(); 
 builder.Services.AddControllers();
 
 // Configure Swagger

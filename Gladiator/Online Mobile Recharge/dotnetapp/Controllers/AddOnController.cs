@@ -5,7 +5,7 @@ using dotnetapp.Models;
 using dotnetapp.Services;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/admin")]
+[Route("api/addon")]
 [ApiController]
 public class AdminController : ControllerBase
 {
