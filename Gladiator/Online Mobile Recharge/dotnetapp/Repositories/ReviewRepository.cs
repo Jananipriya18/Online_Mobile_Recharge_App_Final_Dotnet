@@ -2,7 +2,8 @@ using dotnetapp.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
- 
+using dotnetapp.Data;
+
 namespace dotnetapp.Repository
 {
     public interface IReviewRepo

@@ -114,6 +114,38 @@ namespace dotnetapp.Migrations
                     b.ToTable("Recharges");
                 });
 
+            modelBuilder.Entity("dotnetapp.Models.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"), 1L, 1);
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ReviewId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("dotnetapp.Models.User", b =>
                 {
                     b.Property<long>("UserId")
@@ -348,18 +380,29 @@ namespace dotnetapp.Migrations
             modelBuilder.Entity("dotnetapp.Models.Recharge", b =>
                 {
                     b.HasOne("dotnetapp.Models.Plan", "Plan")
-                        .WithMany("Recharges")
+                        .WithMany()
                         .HasForeignKey("PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("dotnetapp.Models.User", "User")
-                        .WithMany("Recharges")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Plan");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("dotnetapp.Models.Review", b =>
+                {
+                    b.HasOne("dotnetapp.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -413,16 +456,6 @@ namespace dotnetapp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("dotnetapp.Models.Plan", b =>
-                {
-                    b.Navigation("Recharges");
-                });
-
-            modelBuilder.Entity("dotnetapp.Models.User", b =>
-                {
-                    b.Navigation("Recharges");
                 });
 #pragma warning restore 612, 618
         }

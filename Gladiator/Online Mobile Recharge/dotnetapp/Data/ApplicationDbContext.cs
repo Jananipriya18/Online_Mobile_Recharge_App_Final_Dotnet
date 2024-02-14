@@ -11,7 +11,7 @@ namespace dotnetapp.Data
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Addon> Addons { get; set; }
         public DbSet<Recharge> Recharges { get; set; }
-
+        public DbSet<Review> Reviews { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
