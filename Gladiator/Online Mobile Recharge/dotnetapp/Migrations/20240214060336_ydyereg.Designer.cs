@@ -12,8 +12,8 @@ using dotnetapp.Data;
 namespace dotnetapp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240213161728_hgcgFS")]
-    partial class hgcgFS
+    [Migration("20240214060336_ydyereg")]
+    partial class ydyereg
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace dotnetapp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Addon", b =>
+            modelBuilder.Entity("dotnetapp.Models.Addon", b =>
                 {
                     b.Property<long>("AddonId")
                         .ValueGeneratedOnAdd()
@@ -50,6 +50,70 @@ namespace dotnetapp.Migrations
                     b.HasKey("AddonId");
 
                     b.ToTable("Addons");
+                });
+
+            modelBuilder.Entity("dotnetapp.Models.Plan", b =>
+                {
+                    b.Property<long>("PlanId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("PlanId"), 1L, 1);
+
+                    b.Property<string>("PlanDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlanName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PlanPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("PlanType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlanValidity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlanId");
+
+                    b.ToTable("Plans");
+                });
+
+            modelBuilder.Entity("dotnetapp.Models.Recharge", b =>
+                {
+                    b.Property<long>("RechargeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("RechargeId"), 1L, 1);
+
+                    b.Property<long>("PlanId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RechargeDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("ValidityDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RechargeId");
+
+                    b.HasIndex("PlanId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Recharges");
                 });
 
             modelBuilder.Entity("dotnetapp.Models.User", b =>
@@ -283,36 +347,23 @@ namespace dotnetapp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Plan", b =>
+            modelBuilder.Entity("dotnetapp.Models.Recharge", b =>
                 {
-                    b.Property<long>("PlanId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                    b.HasOne("dotnetapp.Models.Plan", "Plan")
+                        .WithMany("Recharges")
+                        .HasForeignKey("PlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("PlanId"), 1L, 1);
+                    b.HasOne("dotnetapp.Models.User", "User")
+                        .WithMany("Recharges")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("PlanDetails")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Navigation("Plan");
 
-                    b.Property<string>("PlanName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("PlanPrice")
-                        .HasColumnType("float");
-
-                    b.Property<string>("PlanType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlanValidity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PlanId");
-
-                    b.ToTable("Plans");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -364,6 +415,16 @@ namespace dotnetapp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("dotnetapp.Models.Plan", b =>
+                {
+                    b.Navigation("Recharges");
+                });
+
+            modelBuilder.Entity("dotnetapp.Models.User", b =>
+                {
+                    b.Navigation("Recharges");
                 });
 #pragma warning restore 612, 618
         }
