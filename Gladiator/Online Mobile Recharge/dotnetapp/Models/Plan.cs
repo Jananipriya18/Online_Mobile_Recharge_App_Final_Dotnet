@@ -11,6 +11,5 @@ namespace dotnetapp.Models
         public string PlanValidity { get; set; }
         public string PlanDetails { get; set; }
         public double PlanPrice { get; set; }
-        public virtual ICollection<Recharge>? Recharges { get; set; }
     }
 }

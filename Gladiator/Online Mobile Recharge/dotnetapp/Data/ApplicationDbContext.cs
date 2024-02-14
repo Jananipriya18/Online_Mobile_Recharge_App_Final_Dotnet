@@ -15,21 +15,5 @@ namespace dotnetapp.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            // Foreign key relationships for Recharge
-            modelBuilder.Entity<Recharge>()
-                .HasOne(r => r.User)
-                .WithMany(u => u.Recharges)
-                .HasForeignKey(r => r.UserId);
-
-            modelBuilder.Entity<Recharge>()
-                .HasOne(r => r.Plan)
-                .WithMany(p => p.Recharges)
-                .HasForeignKey(r => r.PlanId);
-        }
     }
 }

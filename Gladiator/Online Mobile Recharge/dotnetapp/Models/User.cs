@@ -13,6 +13,5 @@ namespace dotnetapp.Models
         public string Username { get; set; }
         public string MobileNumber { get; set; }
         public string Role { get; set; }
-        public virtual ICollection<Recharge>? Recharges { get; set; }
     }
 }
