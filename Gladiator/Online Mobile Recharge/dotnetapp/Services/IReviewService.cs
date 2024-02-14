@@ -1,7 +1,6 @@
 using dotnetapp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using dotnetapp.Repositories;
 
 namespace dotnetapp.Services
 {

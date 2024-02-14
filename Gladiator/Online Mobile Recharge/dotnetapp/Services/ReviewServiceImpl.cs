@@ -2,27 +2,26 @@ using dotnetapp.Models;
 using dotnetapp.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using dotnetapp.Data;
 
 namespace dotnetapp.Services
 {
     public class ReviewServiceImpl : IReviewService
     {
-        private readonly ReviewRepository _reviewRepo;
- 
-        public ReviewServiceImpl(ReviewRepository reviewRepo)
+        private readonly IReviewRepository _reviewRepository;
+
+        public ReviewServiceImpl(IReviewRepository reviewRepository)
         {
-            _reviewRepo = reviewRepo;
+            _reviewRepository = reviewRepository;
         }
- 
+
         public async Task<List<Review>> GetAllReviewsAsync()
         {
-            return await _reviewRepo.GetAllReviewsAsync();
+            return await _reviewRepository.GetAllReviewsAsync();
         }
- 
+
         public async Task<Review> AddReviewAsync(Review review)
         {
-            return await _reviewRepo.AddReviewAsync(review);
+            return await _reviewRepository.AddReviewAsync(review);
         }
     }
 }
