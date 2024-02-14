@@ -11,11 +11,11 @@ using dotnetapp.Services;
 
 [Route("api/admin")]
 [ApiController]
-public class AuthController : ControllerBase
+public class PlanController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
 
-    public AuthController(ApplicationDbContext context)
+    public PlanController(ApplicationDbContext context)
     {
         _context = context;
     }

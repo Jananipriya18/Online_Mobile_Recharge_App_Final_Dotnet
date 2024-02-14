@@ -5,13 +5,13 @@ using dotnetapp.Models;
 using dotnetapp.Services;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/addon")]
+[Route("api/admin")]
 [ApiController]
-public class AdminController : ControllerBase
+public class AddOnController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
 
-    public AdminController(ApplicationDbContext context)
+    public AddOnController(ApplicationDbContext context)
     {
         _context = context;
     }
