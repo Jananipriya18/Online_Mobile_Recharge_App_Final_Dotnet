@@ -30,7 +30,7 @@ namespace dotnetapp.Controllers
             if (user == null)
                 return BadRequest("Invalid user data");
 
-            if (user.Role == "admin" || user.Role == "applicant")
+            if (user.Role == "admin" || user.Role == "Customer")
             {
                 Console.WriteLine("Role: " + user.Role);
 

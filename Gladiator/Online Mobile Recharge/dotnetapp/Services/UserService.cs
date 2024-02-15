@@ -50,7 +50,7 @@ namespace dotnetapp.Services
                     UserName = user.Username,
                 };
 
-                Console.WriteLine(identityUser.email);
+                Console.WriteLine(identityUser.UserName);
 
 
                 var result = await _userManager.CreateAsync(identityUser, user.Password);
@@ -83,15 +83,15 @@ namespace dotnetapp.Services
             }
         }
 
-        public async Task<string> LoginAsync(string email, string password)
-        {
-             try
+            public async Task<string> LoginAsync(string username, string password)
+{
+    try
     {
-        var user = await _userManager.FindByNameAsync(email);
-        Console.WriteLine("User: " + user?.email); // Debug output
+        var user = await _userManager.FindByNameAsync(username);
+        Console.WriteLine("User: " + user?.Email); // Debug output
         Console.WriteLine("Password: " + password); // Debug output
 
-        if (user == null || !(await _signInManager.CheckPasswordSignInAsync(email, password, false)).Succeeded)
+        if (user == null || !(await _signInManager.CheckPasswordSignInAsync(user, password, false)).Succeeded)
         {
             Console.WriteLine("Invalid username or password"); // Debug output
             return null; // Invalid username or password
@@ -103,13 +103,13 @@ namespace dotnetapp.Services
 
         return token;
     }
-            catch (Exception ex)
-            {
-                Console.WriteLine("zxcvbnm" + ex.Message);
-                // Handle exceptions appropriately (e.g., logging)
-                return null; // Login failed
-            }
-        }
+    catch (Exception ex)
+    {
+        Console.WriteLine("zxcvbnm" + ex.Message);
+        // Handle exceptions appropriately (e.g., logging)
+        return null; // Login failed
+    }
+}
 
     //     private string GenerateJwtToken(IdentityUser user)
     //     {
