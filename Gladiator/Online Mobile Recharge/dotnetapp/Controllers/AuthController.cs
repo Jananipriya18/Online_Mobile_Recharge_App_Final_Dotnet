@@ -33,7 +33,7 @@ namespace dotnetapp.Controllers
             if (user == null)
                 return BadRequest("Invalid user data");
 
-            if (user.Role == "admin" || user.Role == "applicant")
+            if (user.Role == "admin" || user.Role == "Customer")
             {
                 Console.WriteLine("asd  "+user.Role);
 
@@ -90,11 +90,11 @@ namespace dotnetapp.Controllers
         //     return Ok("This is an admin-protected endpoint.");
         // }
 
-        // [Authorize(Roles = "applicant")]
-        // [HttpGet("applicant")]
-        // public IActionResult applicantProtected()
+        // [Authorize(Roles = "Customer")]
+        // [HttpGet("Customer")]
+        // public IActionResult CustomerProtected()
         // {
-        //     return Ok("This is an applicant-protected endpoint.");
+        //     return Ok("This is an Customer-protected endpoint.");
         // }
     }
 }
