@@ -15,14 +15,13 @@ namespace dotnetapp.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        private readonly IUserService _userService;
+        private readonly UserService _userService;
 
-        public AuthController(IUserService userService, ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public AuthController(UserService userService, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _userService = userService;
             _context = context;
-
         }
 
         [HttpPost("register")]
@@ -31,12 +30,12 @@ namespace dotnetapp.Controllers
             if (user == null)
                 return BadRequest("Invalid user data");
 
-            if (user.Role == "admin" || user.Role == "applicant")
+            if (user.Role == "admin" || user.Role == "customer")
             {
-                Console.WriteLine("asd  "+user.Role);
+                Console.WriteLine("asd  " + user.Role);
 
                 var isRegistered = await _userService.RegisterAsync(user);
-                Console.WriteLine("status"+isRegistered);
+                Console.WriteLine("status" + isRegistered);
 
                 if (isRegistered)
                 {
@@ -60,40 +59,24 @@ namespace dotnetapp.Controllers
             return BadRequest("Registration failed. Username may already exist.");
         }
 
-
-        [HttpPost("login")]
+       [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
-            if (request == null || string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
+            if (request == null || string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
                 return BadRequest("Invalid login request");
-
-            var token = await _userService.LoginAsync(request.Username, request.Password);
-
+            Console.WriteLine("controller" + request.Email);
+            var token = await _userService.LoginAsync(request.Email, request.Password);
+ 
             if (token == null)
-                return Unauthorized("Invalid username or password");
-
+                return Unauthorized("Invalid email or password");
+ 
             // Retrieve the user from UserManager to get their roles
-            var user = await _userManager.FindByNameAsync(request.Username);
+            var user = await _userManager.FindByEmailAsync(request.Email);
             Console.WriteLine("role"+user);
             var roles = await _userManager.GetRolesAsync(user);
-
+ 
             return Ok(new { Token = token, Roles = roles });
+    
         }
-
-
-        // [Authorize(Roles = "admin")]
-        // [HttpGet("admin")]
-        // public IActionResult AdminProtected()
-        // {
-        //     return Ok("This is an admin-protected endpoint.");
-        // }
-
-        // [Authorize(Roles = "applicant")]
-        // [HttpGet("applicant")]
-        // public IActionResult applicantProtected()
-        // {
-        //     return Ok("This is an applicant-protected endpoint.");
-        // }
     }
 }
-
