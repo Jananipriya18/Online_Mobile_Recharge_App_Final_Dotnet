@@ -13,20 +13,26 @@ using dotnetapp.Services;
 using dotnetapp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin",
+        builder =>
+        {
+            builder.WithOrigins()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+ 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
-
-// Add Identity services
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
-
-// Add authentication services  
+ 
+// Add authentication services
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -41,19 +47,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
-
-// Add CORS policy
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
-});
-
-// Add other services
+ 
+// Register services and repositories
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<IAddonService, AddonService>();
@@ -64,39 +59,21 @@ builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewServiceImpl>();
 
 var app = builder.Build();
-
-// using (var scope = app.Services.CreateScope())
-// {
-//     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-//     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-
-//     // Create roles if they don't exist
-//     if (!await roleManager.RoleExistsAsync("admin"))
-//     {
-//         await roleManager.CreateAsync(new IdentityRole("admin"));
-//     }
-
-//     if (!await roleManager.RoleExistsAsync("Customer"))
-//     {
-//         await roleManager.CreateAsync(new IdentityRole("Customer"));
-//     }
-// }
-
-// Configure the HTTP request pipeline.
+ 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+ 
 app.UseHttpsRedirection();
 app.UseRouting();
-
-app.UseCors();
-
-// Add authentication and authorization middleware
+ 
+// Apply CORS policy
+app.UseCors("AllowOrigin");
+ 
 app.UseAuthentication();
 app.UseAuthorization();
-
+ 
 app.MapControllers();
 app.Run();
