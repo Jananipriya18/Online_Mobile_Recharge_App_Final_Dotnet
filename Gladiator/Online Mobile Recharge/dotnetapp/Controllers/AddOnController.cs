@@ -21,7 +21,7 @@ public class AddOnController : ControllerBase
     
     // [Authorize(Roles = "Admin")]
     // POST: api/admin/addAddon
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     [HttpPost("addAddon")]
     public IActionResult AddAddon([FromBody] Addon addon)
     {
@@ -36,7 +36,7 @@ public class AddOnController : ControllerBase
         return Ok("Addon added successfully");
     }
 
-    [Authorize(Roles = "admin,Customer")]
+    [Authorize(Roles = "admin,customer")]
     // GET: api/admin/getAddon
     [HttpGet("getAddon")]
     public IActionResult GetAddons()
@@ -45,7 +45,7 @@ public class AddOnController : ControllerBase
         return Ok(addons);
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     // PUT: api/admin/editAddon/{addonId}
     [HttpPut("editAddon/{addonId}")]
     public IActionResult EditAddon(long addonId, [FromBody] Addon updatedAddon)
@@ -68,7 +68,7 @@ public class AddOnController : ControllerBase
         return Ok("Addon updated successfully");
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     // DELETE: api/admin/deleteAddon/{addonId}
     [HttpDelete("deleteAddon/{addonId}")]
     public IActionResult DeleteAddon(long addonId)
