@@ -12,7 +12,7 @@ namespace dotnetapp.Services
         Recharge GetRechargeById(long rechargeId);
         List<Recharge> GetRechargesByUserId(long userId);
         List<Recharge> GetAllRecharges();
-        List<Payment> GetPaymentsByUserId(long userId);
+        List<int> GetPricesByUserId(long userId);
 
     }
 }

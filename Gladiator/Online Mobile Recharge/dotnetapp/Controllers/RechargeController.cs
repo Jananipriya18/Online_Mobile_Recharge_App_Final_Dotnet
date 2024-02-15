@@ -56,19 +56,15 @@ public class RechargeController : ControllerBase
         return Ok(recharges);
     }
 
-    //[Authorize(Roles = "Admin,Applicant")]
     [HttpGet("getPricesByUser/{userId}")]
     public IActionResult GetPricesByUserId(long userId)
     {
-        var payments = _rechargeService.GetPaymentsByUserId(userId);
+        var prices = _rechargeService.GetPricesByUserId(userId);
 
-        if (payments == null || payments.Count == 0)
+        if (prices == null || prices.Count == 0)
         {
-            return NotFound("No payments found for the user");
+            return NotFound("No prices found for the user");
         }
-
-        // Extracting the Price property from each payment
-        var prices = payments.Select(payment => payment.Price).ToList();
 
         return Ok(prices);
     }

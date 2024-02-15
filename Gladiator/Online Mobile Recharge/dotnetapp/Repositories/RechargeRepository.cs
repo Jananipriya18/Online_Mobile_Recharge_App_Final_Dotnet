@@ -47,5 +47,14 @@ public class RechargeRepository : IRechargeRepository
             .Include(r => r.Plan)
             .ToList();
     }
+
+    public List<int> GetPricesByUserId(long userId)
+        {
+            var recharges = _context.Recharges
+                .Where(r => r.UserId == userId)
+                .Select(r => r.Price)
+                .ToList();
+            return recharges;
+        }
 }
 }
