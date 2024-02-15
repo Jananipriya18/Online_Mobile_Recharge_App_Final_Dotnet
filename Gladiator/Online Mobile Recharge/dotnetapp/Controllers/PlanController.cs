@@ -71,7 +71,7 @@ public class PlanController : ControllerBase
         return Ok("Plan updated successfully");
     }
      
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     // DELETE: api/admin/deletePlan/{planId}
     [HttpDelete("deletePlan/{planId}")]
     public IActionResult DeletePlan(long planId)

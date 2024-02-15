@@ -18,7 +18,7 @@ public class RechargeController : ControllerBase
         _rechargeService = rechargeService;
     }
 
-    //[Authorize(Roles = "Applicant")]
+    [Authorize(Roles = "customer")]
     [HttpPost("addRecharge")]
     public IActionResult AddRecharge([FromBody] Recharge recharge)
     {
@@ -26,7 +26,7 @@ public class RechargeController : ControllerBase
         return Ok(addedRecharge);
     }
 
-    //[Authorize(Roles = "Admin,Applicant")]
+    [Authorize(Roles = "admin,customer")]
     [HttpGet("getRecharge/{rechargeId}")]
     public IActionResult GetRechargeById(long rechargeId)
     {
@@ -40,7 +40,7 @@ public class RechargeController : ControllerBase
         return Ok(recharge);
     }
 
-    //[Authorize(Roles = "Admin,Applicant")]
+    [Authorize(Roles = "admin,customer")]
     [HttpGet("getRechargesByUser/{userId}")]
     public IActionResult GetRechargesByUserId(long userId)
     {
@@ -48,7 +48,7 @@ public class RechargeController : ControllerBase
         return Ok(recharges);
     }
 
-    //[Authorize(Roles = "Admin,Applicant")]
+    [Authorize(Roles = "admin,customer")]
     [HttpGet("getAllRecharges")]
     public IActionResult GetAllRecharges()
     {
@@ -56,6 +56,7 @@ public class RechargeController : ControllerBase
         return Ok(recharges);
     }
 
+    [Authorize(Roles = "admin,customer")]
     [HttpGet("getPricesByUser/{userId}")]
     public IActionResult GetPricesByUserId(long userId)
     {
