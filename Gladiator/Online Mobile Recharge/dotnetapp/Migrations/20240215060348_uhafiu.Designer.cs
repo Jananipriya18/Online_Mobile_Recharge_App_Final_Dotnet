@@ -12,8 +12,8 @@ using dotnetapp.Data;
 namespace dotnetapp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240214080516_ygtrgefawsrd")]
-    partial class ygtrgefawsrd
+    [Migration("20240215060348_uhafiu")]
+    partial class uhafiu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

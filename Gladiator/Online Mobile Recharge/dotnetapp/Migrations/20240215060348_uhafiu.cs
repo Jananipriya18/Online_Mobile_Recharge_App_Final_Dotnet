@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace dotnetapp.Migrations
 {
-    public partial class ygtrgefawsrd : Migration
+    public partial class uhafiu : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

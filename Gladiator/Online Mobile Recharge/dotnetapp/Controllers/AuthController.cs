@@ -62,45 +62,26 @@ namespace dotnetapp.Controllers
             return BadRequest("Registration failed. Username may already exist.");
         }
 
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
-            if (request == null || string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
+            if (request == null || string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
                 return BadRequest("Invalid login request");
 
-            var token = await _userService.LoginAsync(request.Username, request.Password);
+            var token = await _userService.LoginAsync(request.Email, request.Password);
 
             if (token == null)
-                return Unauthorized("Invalid username or password");
+                return Unauthorized("Invalid email or password");
 
             // Retrieve the user from UserManager to get their roles
-            var user = await _userManager.FindByNameAsync(request.Username);
-            Console.WriteLine("role"+user);
+            var user = await _userManager.FindByEmailAsync(request.Email); // Change here
+            Console.WriteLine("role" + user);
             var roles = await _userManager.GetRolesAsync(user);
 
             return Ok(new { Token = token, Roles = roles });
-        }
+        }    
     }
 }
 
 
 
-// [HttpPost("login")]
-// public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
-// {
-//     if (request == null || string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
-//         return BadRequest("Invalid login request");
-
-//     var token = await _userService.LoginAsync(request.Email, request.Password);
-
-//     if (token == null)
-//         return Unauthorized("Invalid email or password");
-
-//     // Retrieve the user from UserManager to get their roles
-//     var user = await _userManager.FindByEmailAsync(request.Email); // Change here
-//     Console.WriteLine("role" + user);
-//     var roles = await _userManager.GetRolesAsync(user);
-
-//     return Ok(new { Token = token, Roles = roles });
-// }
