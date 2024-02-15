@@ -21,7 +21,7 @@ public class AddOnController : ControllerBase
     
     // [Authorize(Roles = "Admin")]
     // POST: api/admin/addAddon
-    [Authorize(Roles = "admin")]
+    [Authorize]
     [HttpPost("addAddon")]
     public IActionResult AddAddon([FromBody] Addon addon)
     {
