@@ -63,7 +63,26 @@ builder.Services.AddScoped<IRechargeService, RechargeServiceImpl>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewServiceImpl>();
 
+builder.Services.AddScoped<UserService>();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    // Create roles if they don't exist
+    if (!await roleManager.RoleExistsAsync("admin"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("admin"));
+    }
+
+    if (!await roleManager.RoleExistsAsync("customer"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("customer"));
+    }
+}
  
 if (app.Environment.IsDevelopment())
 {

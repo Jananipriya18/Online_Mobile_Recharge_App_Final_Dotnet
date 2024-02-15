@@ -14,7 +14,6 @@ namespace dotnetapp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-
         private readonly UserService _userService;
 
         public AuthController(UserService userService, ApplicationDbContext context, UserManager<IdentityUser> userManager)
