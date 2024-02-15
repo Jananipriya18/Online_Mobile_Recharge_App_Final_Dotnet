@@ -29,40 +29,33 @@ namespace dotnetapp.Controllers
         {
             if (user == null)
                 return BadRequest("Invalid user data");
-
-            if (user.Role == "admin" || user.Role == "Customer")
+ 
+            if (user.Role == "admin" || user.Role == "customer")
             {
-                Console.WriteLine("Role: " + user.Role);
-
-                // Check for username existence in a case-insensitive manner
-                var existingUser = await _userManager.FindByNameAsync(user.Username);
-
-                if (existingUser != null)
-                {
-                    return BadRequest("Username is already taken.");
-                }
-
+                Console.WriteLine("asd  " + user.Role);
+ 
                 var isRegistered = await _userService.RegisterAsync(user);
-
+                Console.WriteLine("status" + isRegistered);
+ 
                 if (isRegistered)
                 {
-                    var identityUser = new IdentityUser
+                    var customUser = new User
                     {
-                        UserName = user.Username,
+                        Username = user.Username,
+                        Password = user.Password,
                         Email = user.Email,
+                        MobileNumber = user.MobileNumber,
+                        Role = user.Role,
                     };
-
-                    var result = await _userManager.CreateAsync(identityUser, user.Password);
-
-                    if (result.Succeeded)
-                    {
-                        await _userManager.AddToRoleAsync(identityUser, user.Role);
-
-                        return Ok(user);
-                    }
+ 
+                    // Add the customUser to the DbSet and save it
+                    _context.Users.Add(customUser);
+                    await _context.SaveChangesAsync();
+ 
+                    return Ok(user);
                 }
             }
-
+ 
             return BadRequest("Registration failed. Username may already exist.");
         }
 
