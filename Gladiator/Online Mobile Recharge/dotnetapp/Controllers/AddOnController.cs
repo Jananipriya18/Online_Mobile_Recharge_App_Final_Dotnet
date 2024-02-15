@@ -36,7 +36,7 @@ public class AddOnController : ControllerBase
         return Ok("Addon added successfully");
     }
 
-    [Authorize(Roles = "Admin,Customer")]
+    [Authorize(Roles = "admin,Customer")]
     // GET: api/admin/getAddon
     [HttpGet("getAddon")]
     public IActionResult GetAddons()
