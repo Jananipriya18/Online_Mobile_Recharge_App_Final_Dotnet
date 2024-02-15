@@ -55,4 +55,21 @@ public class RechargeController : ControllerBase
         var recharges = _rechargeService.GetAllRecharges();
         return Ok(recharges);
     }
+
+    [HttpGet("getPaymentsByUser/{userId}")]
+    public IActionResult GetPaymentsByUserId(long userId)
+    {
+        var payments = _rechargeService.GetPaymentsByUserId(userId);
+
+        if (payments == null || payments.Count == 0)
+        {
+            return NotFound("No payments found for the user");
+        }
+
+        // Extracting the Price property from each payment
+        var prices = payments.Select(payment => payment.Price).ToList();
+
+        return Ok(prices);
+    }
+
 }

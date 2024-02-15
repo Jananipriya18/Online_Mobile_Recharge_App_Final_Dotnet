@@ -37,5 +37,11 @@ public class RechargeServiceImpl : IRechargeService
     {
         return _rechargeRepository.GetAllRecharges();
     }
+
+    public List<Payment> GetPaymentsByUserId(long userId)
+    {
+        // Assuming you have a method in your repository to get payments by user
+        return _rechargeRepository.GetPaymentsByUserId(userId);
+    }
 }
 }

@@ -6,11 +6,13 @@ using dotnetapp.Data;
 
 namespace dotnetapp.Services
 {
-public interface IRechargeService
-{
-    Recharge AddRecharge(Recharge recharge);
-    Recharge GetRechargeById(long rechargeId);
-    List<Recharge> GetRechargesByUserId(long userId);
-    List<Recharge> GetAllRecharges();
-}
+    public interface IRechargeService
+    {
+        Recharge AddRecharge(Recharge recharge);
+        Recharge GetRechargeById(long rechargeId);
+        List<Recharge> GetRechargesByUserId(long userId);
+        List<Recharge> GetAllRecharges();
+        List<Payment> GetPaymentsByUserId(long userId);
+
+    }
 }
