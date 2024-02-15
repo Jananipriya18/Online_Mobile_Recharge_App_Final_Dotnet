@@ -13,6 +13,11 @@
 // var builder = WebApplication.CreateBuilder(args);
 
 // // Add services to the container.
+// builder.Services.AddControllers();
+// builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddSwaggerGen();
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 // builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
@@ -21,6 +26,7 @@
 //     .AddRoles<IdentityRole>()
 //     .AddEntityFrameworkStores<ApplicationDbContext>()
 //     .AddDefaultTokenProviders();
+
 
 // builder.Services.AddCors(options =>
 // {
@@ -99,8 +105,9 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using dotnetapp.Models;
-using dotnetapp.Repository;
-using dotnetapp.Service;
+using dotnetapp.Repositories;
+using dotnetapp.Services;
+using dotnetapp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -109,9 +116,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
-// Add authentication services
+// Add Identity services
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Add authentication services  
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
