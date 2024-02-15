@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 [Route("api/")]
 [ApiController]
-[Authorize]
+// [Authorize]
 public class AddOnController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
