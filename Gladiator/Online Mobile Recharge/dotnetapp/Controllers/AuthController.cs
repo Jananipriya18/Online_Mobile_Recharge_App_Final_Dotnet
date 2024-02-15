@@ -5,18 +5,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using dotnetapp.Data;
-using dotnetapp.Repositories;
-using Microsoft.AspNetCore.Authorization;
 
 namespace dotnetapp.Controllers
 {
     [Route("api")]
-    [ApiController]
+    [ApiController ]
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-
         private readonly IUserService _userService;
 
         public AuthController(IUserService userService, ApplicationDbContext context, UserManager<IdentityUser> userManager)
@@ -24,7 +21,6 @@ namespace dotnetapp.Controllers
             _userManager = userManager;
             _userService = userService;
             _context = context;
-
         }
 
         [HttpPost("register")]
@@ -35,27 +31,26 @@ namespace dotnetapp.Controllers
 
             if (user.Role == "admin" || user.Role == "Customer")
             {
-                Console.WriteLine("asd  "+user.Role);
+                Console.WriteLine("Role: " + user.Role);
 
                 var isRegistered = await _userService.RegisterAsync(user);
-                Console.WriteLine("status"+isRegistered);
 
                 if (isRegistered)
                 {
-                    var customUser = new User
+                    var identityUser = new IdentityUser
                     {
-                        Username = user.Username,
-                        Password = user.Password,
+                        UserName = user.Username,
                         Email = user.Email,
-                        MobileNumber = user.MobileNumber,
-                        Role = user.Role,
                     };
 
-                    // Add the customUser to the DbSet and save it
-                    _context.Users.Add(customUser);
-                    await _context.SaveChangesAsync();
+                    var result = await _userManager.CreateAsync(identityUser, user.Password);
 
-                    return Ok(user);
+                    if (result.Succeeded)
+                    {
+                        await _userManager.AddToRoleAsync(identityUser, user.Role);
+
+                        return Ok(user);
+                    }
                 }
             }
 
@@ -73,15 +68,15 @@ namespace dotnetapp.Controllers
             if (token == null)
                 return Unauthorized("Invalid email or password");
 
-            // Retrieve the user from UserManager to get their roles
-            var user = await _userManager.FindByEmailAsync(request.Email); // Change here
-            Console.WriteLine("role" + user);
-            var roles = await _userManager.GetRolesAsync(user);
+            var user = await _userManager.FindByEmailAsync(request.Email);
 
-            return Ok(new { Token = token, Roles = roles });
-        }    
+            if (user != null)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                return Ok(new { Token = token, Roles = roles });
+            }
+
+            return Unauthorized("User not found");
+        }
     }
 }
-
-
-
