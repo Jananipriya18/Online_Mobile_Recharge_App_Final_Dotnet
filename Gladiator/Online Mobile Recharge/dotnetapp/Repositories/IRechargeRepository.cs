@@ -10,6 +10,6 @@ namespace dotnetapp.Repositories
         Recharge AddRecharge(Recharge recharge);
         Recharge GetRechargeById(long rechargeId);
         List<Recharge> GetRechargesByUserId(long userId);
-        List<Recharge> GetAllRecharges();
+        List<int> GetPricesByUserId(long userId);
     }
 }

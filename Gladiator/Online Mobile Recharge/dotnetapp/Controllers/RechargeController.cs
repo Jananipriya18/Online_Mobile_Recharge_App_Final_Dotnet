@@ -56,8 +56,9 @@ public class RechargeController : ControllerBase
         return Ok(recharges);
     }
 
-    [HttpGet("getPaymentsByUser/{userId}")]
-    public IActionResult GetPaymentsByUserId(long userId)
+    //[Authorize(Roles = "Admin,Applicant")]
+    [HttpGet("getPricesByUser/{userId}")]
+    public IActionResult GetPricesByUserId(long userId)
     {
         var payments = _rechargeService.GetPaymentsByUserId(userId);
 
