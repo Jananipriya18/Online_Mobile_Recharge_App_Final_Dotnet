@@ -16,7 +16,7 @@ namespace dotnetapp.Services
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IConfiguration _configuration;
-        private readonly ApplicationDbContext _context; // Add this field
+        private readonly ApplicationDbContext _context; 
 
 
         public UserService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration, ApplicationDbContext context)
@@ -50,7 +50,7 @@ namespace dotnetapp.Services
                     UserName = user.Username,
                 };
 
-                Console.WriteLine(identityUser.UserName);
+                Console.WriteLine(identityUser.email);
 
 
                 var result = await _userManager.CreateAsync(identityUser, user.Password);
@@ -83,15 +83,15 @@ namespace dotnetapp.Services
             }
         }
 
-        public async Task<string> LoginAsync(string username, string password)
+        public async Task<string> LoginAsync(string email, string password)
         {
              try
     {
-        var user = await _userManager.FindByNameAsync(username);
-        Console.WriteLine("User: " + user?.UserName); // Debug output
+        var user = await _userManager.FindByNameAsync(email);
+        Console.WriteLine("User: " + user?.email); // Debug output
         Console.WriteLine("Password: " + password); // Debug output
 
-        if (user == null || !(await _signInManager.CheckPasswordSignInAsync(user, password, false)).Succeeded)
+        if (user == null || !(await _signInManager.CheckPasswordSignInAsync(email, password, false)).Succeeded)
         {
             Console.WriteLine("Invalid username or password"); // Debug output
             return null; // Invalid username or password

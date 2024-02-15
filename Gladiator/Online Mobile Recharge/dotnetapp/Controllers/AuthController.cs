@@ -3,13 +3,14 @@ using dotnetapp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 using dotnetapp.Data;
 
 namespace dotnetapp.Controllers
 {
     [Route("api")]
-    [ApiController ]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -29,9 +30,17 @@ namespace dotnetapp.Controllers
             if (user == null)
                 return BadRequest("Invalid user data");
 
-            if (user.Role == "admin" || user.Role == "Customer")
+            if (user.Role == "admin" || user.Role == "applicant")
             {
                 Console.WriteLine("Role: " + user.Role);
+
+                // Check for username existence in a case-insensitive manner
+                var existingUser = await _userManager.FindByNameAsync(user.Username);
+
+                if (existingUser != null)
+                {
+                    return BadRequest("Username is already taken.");
+                }
 
                 var isRegistered = await _userService.RegisterAsync(user);
 
